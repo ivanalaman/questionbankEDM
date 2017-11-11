@@ -64,4 +64,5 @@ answerlist(format(solutions))
 %% META-INFORMATION  
 %% \extype{cloze}  
 %% \exsolution{\Sexpr{paste(solutions, collapse = "|")}}   
-%% \exclozetype{\Sexpr{paste(rep('num',5),collapse="|")}} 
+%% \exclozetype{\Sexpr{paste(rep('num',5),collapse="|")}}
+%% \extol{0.01}
