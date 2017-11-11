@@ -1,0 +1,21 @@
+<<echo=FALSE,results=hide>>= 
+@ 
+ 
+\begin{question} 
+Suponhamos que o número de graduados, pós-graduados e doutores da área de economia sejam respectivamente: 120, 200, 20, de sociologia: 110, 300, 40 e de biomedicina: 210, 400, 100. Crie uma matriz com a função 'matrix' de dimensões 3x3 no qual as colunas sejam as áreas.
+\end{question}  
+ 
+\begin{solution} 
+
+<<>>=
+economia = c(120,200,20)
+sociologia= c(110,300,40)
+biomedicina=c(210,400,100)
+matrix(c(economia,sociologia,biomedicina),ncol=3)
+@
+
+\end{solution} 
+ 
+%% META-INFORMATION 
+%% \extype{string} 
+%% \exsolution{"Aberta - texto"}  

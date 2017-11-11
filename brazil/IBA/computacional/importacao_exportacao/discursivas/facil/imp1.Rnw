@@ -1,0 +1,39 @@
+<<echo=FALSE, results=hide>>=  
+questions <- solutions <- NULL 
+type <- NULL  
+questions[1] <- "Qual o comando você utilizaria para importar os dados baixados em sua máquina?" 
+solutions[1] <- "read.table('AndersonEx26$\\\\_10$.txt', h=TRUE)"
+type[1] <- "string" 
+questions[2] <- "Partindo do princípio que os dados foram importados e armazenados em um objeto DADOS, qual é o comando para obter um resumo dos dados?" 
+solutions[2] <- "summary(DADOS)"
+type[2] <- "string"  
+questions[3] <- "Qual é o terceiro quartil da variável 'valor'?" 
+solutions[3] <- 2.212
+type[3] <- "num"  
+@ 
+ 
+\begin{question} 
+  Faça download dos dados disponíveis no seguinte site: \url{http://nbcgib.uesc.br/lec/download/R/dados/AndersonEx26_10.txt} e responda as seguintes questões:
+
+\begin{answerlist} 
+ \item \Sexpr{questions[1]} 
+ \item \Sexpr{questions[2]} 
+ \item \Sexpr{questions[3]}  
+\end{answerlist}  
+
+\end{question}  
+
+\begin{solution} 
+
+\begin{answerlist} 
+\item \Sexpr{solutions[1]} 
+\item \Sexpr{solutions[2]} 
+\item \Sexpr{solutions[3]}  
+\end{answerlist}  
+ 
+\end{solution}  
+ 
+%% META-INFORMATION  
+%% \extype{cloze}  
+%% \exsolution{\Sexpr{paste(solutions, collapse = "|")}}   
+%% \exclozetype{string|string|num} 

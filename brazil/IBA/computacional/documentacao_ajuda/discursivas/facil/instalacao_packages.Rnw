@@ -1,0 +1,33 @@
+<<echo=FALSE, results=hide>>=  
+questions <- solutions <- NULL 
+type <- NULL  
+questions[1] <- "Escreva exatamente a mensagem o output logo após o término da instalação. Dica: A mensagem deve ser como: package $\\\\cdots$ checked. " 
+solutions[1] <- "package 'fdth' successfully unpacked and MD5 sums checked" 
+type[1] <- "string" 
+questions[2] <- "Qual é o comprimento do pacote em bytes?" 
+solutions[2] <- 202808 
+type[2] <- "num"  
+@ 
+ 
+\begin{question} 
+Ao término da instalação do pacote \textbf{fdth}, aparecem algumas informações. Responda as questões a seguir.
+
+\begin{answerlist} 
+ \item \Sexpr{questions[1]} 
+ \item \Sexpr{questions[2]} 
+\end{answerlist}  
+
+\end{question}  
+
+\begin{solution} 
+
+<<echo=FALSE, results=hide, results=tex>>=  
+answerlist(format(solutions))  
+@  
+
+\end{solution}  
+
+%% META-INFORMATION  
+%% \extype{cloze}  
+%% \exsolution{\Sexpr{paste(solutions, collapse = "|")}}   
+%% \exclozetype{string|num} 

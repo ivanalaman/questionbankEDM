@@ -1,0 +1,29 @@
+<<echo=FALSE, results=hide>>=  
+ questions <- solutions <- NULL 
+ type <- NULL  
+ questions[1] <- "Coloque abaixo o comando necessário para criar um vetor." 
+ solutions[1] <- "c(1,2,3,4,5)"
+ type[1] <- "string" 
+ questions[2] <- "Crie um objeto chamado B na forma de um vetor com os elementos fornecidos. Qual comando seria necessário para extrair do objeto B os elementos maiores ou iguais a 3?" 
+ solutions[2] <- "B[B>=3]"
+ type[2] <- "string"  
+@ 
+ 
+\begin{question} 
+Considere os seguintes elementos: 1, 2, 3, 4, 5. Responda as questões a seguir.
+
+<<echo=FALSE, results=hide, results=tex>>= 
+ answerlist(questions) 
+@  
+\end{question}  
+
+\begin{solution} 
+<<echo=FALSE, results=hide, results=tex>>=  
+ answerlist(format(solutions))  
+@  
+\end{solution}  
+ 
+%% META-INFORMATION  
+%% \extype{cloze}  
+%% \exsolution{\Sexpr{paste(solutions, collapse = "|")}}   
+%% \exclozetype{string|string} 

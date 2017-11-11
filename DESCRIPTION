@@ -1,0 +1,10 @@
+Package: questionbankEDM
+Title: Question bank of the Exams Database Manager
+Version: 1.0
+Date: 2017-11-10
+Author: Ivan Bezerra Allaman <ivanalaman@gmail.com>
+Maintainer: Ivan Bezerra Allaman <ivanalaman@gmail.com>
+Description: This package contains the questions of the people who share your files for use in your exams. 
+License: GPL (>= 2)
+Depends: R (>= 3.0.3)
+NeedsCompilation: no

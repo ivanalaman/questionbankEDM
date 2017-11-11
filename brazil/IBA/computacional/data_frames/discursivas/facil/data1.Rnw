@@ -1,0 +1,20 @@
+<<echo=FALSE,results=hide>>= 
+@ 
+ 
+\begin{question} 
+Sejam os vetores A = ivan, joão e maria e o vetor B = 35, 20 e 21. Crie um objeto da classe data.frame com os vetores fornecidos.
+\end{question}  
+ 
+\begin{solution} 
+
+<<>>=
+A = c('ivan', 'joão', 'maria')
+B = c(35, 20, 21)
+dad = data.frame(A, B)
+@
+
+\end{solution} 
+ 
+%% META-INFORMATION 
+%% \extype{string} 
+%% \exsolution{"Aberta - texto"}  

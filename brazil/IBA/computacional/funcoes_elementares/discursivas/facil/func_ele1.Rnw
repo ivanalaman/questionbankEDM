@@ -1,0 +1,41 @@
+<<echo=FALSE, results=hide>>=  
+ questions <- solutions <- NULL 
+ type <- NULL  
+ questions[1] <- "Qual o comando você utilizaria para somar o vetor A?" 
+ solutions[1] <- "sum(A)"
+ type[1] <- "string" 
+ questions[2] <- "Qual o comando você utilizaria para saber quantos elementos existem em B?" 
+ solutions[2] <- "length(B)"
+ type[2] <- "string"  
+questions[3] <- "Qual o comando você utilizaria para criar uma matrix com os vetores A e B de duas colunas sem utilizar a função 'matrix'?" 
+solutions[3] <- "cbind(A,B)"
+ type[3] <- "string"  
+questions[4] <- "Qual o comando você utilizaria para calcular a média do vetor A?" 
+solutions[4] <- "mean(A)"
+ type[4] <- "string" 
+questions[5] <- "Qual o comando você utilizaria para calcular a variância do vetor A?" 
+solutions[5] <- "var(A)"
+ type[5] <- "string" 
+questions[6] <- "Qual o comando você utilizaria para calcular o desvio padrão do vetor A sem utilizar a função 'sd'?" 
+solutions[6] <- "sqrt(var(A))"
+type[6] <- "string" 
+@ 
+ 
+\begin{question} 
+Dado que você criou os vetores 1, 2, 3, 4 e 3, 4, 5, 6 com os nomes de A e B respectivamente, responda as seguintes questões.
+
+<<echo=FALSE, results=hide, results=tex>>= 
+ answerlist(questions) 
+@  
+\end{question}  
+
+\begin{solution} 
+<<echo=FALSE, results=hide, results=tex>>=  
+ answerlist(format(solutions))  
+@  
+\end{solution}  
+ 
+%% META-INFORMATION  
+%% \extype{cloze}  
+%% \exsolution{\Sexpr{paste(solutions, collapse = "|")}}   
+%% \exclozetype{string|string|string|string|string|string} 

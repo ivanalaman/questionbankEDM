@@ -1,0 +1,32 @@
+<<echo=FALSE, results=hide>>=  
+ questions <- solutions <- NULL 
+ type <- NULL  
+ questions[1] <- "As funções do pacote já estão prontas para serem utilizadas? Justifique." 
+ solutions[1] <- "Não. É necessário carregar o pacote por meio da função library(fdth) para que as funções estejam prontas para serem utilizadas." 
+ type[1] <- "string" 
+ questions[2] <- "Execute o comando 'print(fdt(seq(1,5)))'. Há quantas classes?" 
+ solutions[2] <- 4
+ type[2] <- "num"  
+questions[3] <- "Ao elaborar uma tabela de distribuição de frequências para 'seq(1,5)' utilizando a função 'fdt' e o argumento 'h=3', qual é o limite superior da última classe?" 
+solutions[3] <- 7
+ type[3] <- "num"  
+@ 
+ 
+\begin{question} 
+Suponhamos que após a instalação do pacote \textbf{fdth} o usuário esteja interessado em usá-lo. Responda as questões a seguir.
+
+<<echo=FALSE, results=hide, results=tex>>= 
+ answerlist(questions) 
+@  
+\end{question}  
+
+\begin{solution} 
+<<echo=FALSE, results=hide, results=tex>>=  
+answerlist(format(solutions))  
+@  
+\end{solution}  
+
+%% META-INFORMATION  
+%% \extype{cloze}  
+%% \exsolution{\Sexpr{paste(solutions, collapse = "|")}}   
+%% \exclozetype{string|num|num} 
