@@ -5,4 +5,3 @@ Abaixo segue informações importantes sobre os proprietários dos bancos de que
 * brazil
     * IBA - Ivan Bezerra Allaman
         * E-mail: iballaman@uesc.br
-
