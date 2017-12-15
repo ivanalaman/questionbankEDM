@@ -8,11 +8,11 @@ res <- round((1-prob) + prob*1/n,3)
 @ 
  
 \begin{question} 
-A probabilidade de que a porta de uma casa esteja trancada à chave é de \Sexpr{prob}. Há \Sexpr{n} chaves em um chaveiro. Qual a probabilidade de que um indivíduo entre na sua casa podendo utilizar, se necessário, apenas uma das chaves, tomada ao acaso do chaveiro?
+A probabilidade de que a porta de uma casa esteja trancada Ã  chave Ã© de \Sexpr{prob}. HÃ¡ \Sexpr{n} chaves em um chaveiro. Qual a probabilidade de que um indivÃ­duo entre na sua casa podendo utilizar, se necessÃ¡rio, apenas uma das chaves, tomada ao acaso do chaveiro?
 \end{question}  
  
 \begin{solution} 
-O indivíduo tem duas possibilidades de entrar na casa. A primeira se ele pegar a porta destrancada ou a segunda se ele pegar a porta trancada mais acertar qual é a chave. 
+O indivÃ­duo tem duas possibilidades de entrar na casa. A primeira se ele pegar a porta destrancada ou a segunda se ele pegar a porta trancada mais acertar qual Ã© a chave. 
 
 \end{solution} 
  

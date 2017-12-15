@@ -1,6 +1,6 @@
 <<echo=FALSE,results=hide>>= 
 library(Hmisc)
-logIDT <- round(rnorm(sample(70:90,size=1),1.22,0.32),1)
+logIDT <- round(rnorm(sample(20:30,size=1),1.22,0.32),1)
 IDT <- round(10^logIDT,1)
 @ 
 

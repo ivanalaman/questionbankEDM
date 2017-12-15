@@ -7,31 +7,31 @@
 questions <- solutions <-NULL
 
 questions[1] <- "Custo do sistema do computador pessoal."
-solutions[1] <- 'II'
+solutions[1] <- 2
 
 questions[2] <- "Número de pessoas em um domicílio."
-solutions[2] <- 'I'
+solutions[2] <- 1
 
 questions[3] <- "Valor de um automóvel."
-solutions[3] <- 'II'
+solutions[3] <- 2
 
 questions[4] <- "Número de peças produzidas em um mês."
-solutions[4] <- 'I'
+solutions[4] <- 1
 
 questions[5] <- 'Número de peças defeituosas em uma fábrica.'
-solutions[5] <- 'I'
+solutions[5] <- 1
 
 questions[6] <- 'A velocidade em km/h.'
-solutions[6] <- 'II'
+solutions[6] <- 2
 
 questions[7] <- 'O peso em kg.'
-solutions[7] <- 'II'
+solutions[7] <- 2
 
 questions[8] <- 'Número de empregados de uma empresa.'
-solutions[8] <- 'I'
+solutions[8] <- 1
 
 questions[9] <- 'A pressão de um pneu em Nw/cm2.'
-solutions[9] <- 'II'
+solutions[9] <- 2
 
 o <- sample(1:9)
 questions <- questions[o]
@@ -41,10 +41,10 @@ solutions <- solutions[o]
 \begin{question}
 Considerando a lista abaixo, faça a associação correpondente a cada uma das variáveis a seguir: 
 
-\begin{itemize}
- \item[I] Discreta
- \item[II] Contínua
-\end{itemize}
+\begin{enumerate}
+ \item Discreta
+ \item Contínua
+\end{enumerate}
  
 \begin{answerlist}
 \item \Sexpr{questions[1]}
@@ -80,4 +80,4 @@ Considerando a lista abaixo, faça a associação correpondente a cada uma das v
 %% META-INFORMATION
 %% \extype{cloze}
 %% \exsolution{\Sexpr{paste(solutions, collapse='|')}}   
-%% \exclozetype{string|string|string|string|string|string|string|string|string}
+%% \exclozetype{num|num|num|num|num|num|num|num|num}

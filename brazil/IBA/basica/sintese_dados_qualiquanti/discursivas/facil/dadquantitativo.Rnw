@@ -27,6 +27,29 @@ amo <- round(rtruncnorm(n,
 percen <- round(runif(1),2)*100
 ## QUESTION/ANSWER GENERATION
 #questions <- solutions <- rep(list(''),7)
+library(fdth)
+tab <- fdt(amo)
+tab  
+
+alta <- tab$table[,1][3]
+alta1 <- unlist(strsplit(as.character(alta),',',fixed=T))[2]
+alta2 <- round(as.numeric(strsplit(alta1,')')),3)
+
+out <- boxplot.stats(amo)$out
+
+questions <- solutions <- NULL 
+type <- NULL  
+questions[1] <- "Ao fazermos uma tabela de distribuição de frequências utilizando o critério de sturges, utilizando \\\\$X_1 - \\frac{X_1}{100}\\\\$ para cálculo do limite inferior (li) da primeira classe, \\\\$X_n + \\frac{X_n}{100}\\\\$ para cálculo do limite superior (ls) da última classe e \\\\$\\frac{(ls-li)}{k}\\\\$ para cálculo do comprimento de classe, qual é o limite superior da terceira classe?" 
+solutions[1] <- alta2  
+type[1] <- "num" 
+questions[2] <- "Há outliers? Se sim, qual(is) é(são) o(s) valor(es)?" 
+solutions[2] <- ifelse(length(out)==0,
+                       "Não",
+                       paste("Sim. O(s) valor(es) é(são): ",
+                             paste(out,
+                                   collapse=","),
+                             sep="")) 
+type[2] <- "string"  
 @
 
 \begin{question}
@@ -35,74 +58,19 @@ percen <- round(runif(1),2)*100
 <<echo=F>>=
 amo
 @
-
-Faça uma síntese dos dados e apresente um histograma. Faça um boxplot. 
-
+<<echo=FALSE, results=hide, results=tex>>= 
+answerlist(questions) 
+@  
 \end{question}
 
 \begin{solution}
-
- A variável em estudo é uma variável quantitativa cujo a escala é de proporção ou de razão. Fazendo uma síntese do dados por meio de uma tabela de distribuição de frequências.
-
-<<echo=F>>=
-library(fdth)
-tab <- fdt(amo)
-tab
-@
-
-Fazendo o histograma.
-
-<<echo=F,fig=T>>=
-plot(tab,
-     xlab='Intervalo de classes',
-     ylab='Frequência absoluta')
-@
-
-Fazendo o boxplot.
-
-<<echo=F, fig=T>>=
-gr <- boxplot(amo)
-@
-
-%Calculando todas as medidas estatísticas. Calcule apenas o percentil \Sexpr{percen}.
-
-% <<echo=F>>=
-% antes <- c(Média=mean(amo),
-%            Mediana=median(amo),
-%            Amplitude=range(amo),
-%            Variância=var(amo),
-%            Desvio   =sd(amo),
-%            CV       =sd(amo)/mean(amo),
-%            Percentil=quantile(amo,type=2,prob=percen/100),
-%            Quartis  =quantile(amo,type=2,prob=c(.25,.5,.75)))
-%  
-% if(length(gr$out)!=0){
-% 
-% 
-% amo1 <- amo[amo!=gr$out]
-% 
-% depois <- c(Média=mean(amo1),
-%             Mediana=median(amo1),
-%             Amplitude=range(amo1),
-%             Variância=var(amo1),
-%             Desvio   =sd(amo1),
-%             CV       =sd(amo1)/mean(amo1),
-%             Percentil=quantile(amo1,type=2,prob=percen/100),
-%             Quartis  =quantile(amo1,type=2,prob=c(.25,.5,.75)))
-% 
-% cbind(antes,depois)
-% 
-% } else {
-% 
-% antes
-% 
-% }
-% @
-% 
-
+<<echo=FALSE, results=hide, results=tex>>=  
+answerlist(format(solutions))  
+@  
 \end{solution}
 
 %% META-INFORMATION
-%% \extype{string}
-%% \exsolution{'Aberta'} 
+%% \extype{cloze}
+%% \exsolution{\Sexpr{paste(solutions, collapse="|")}} 
+%% \exclozetype{num|string}
 %% \exname{Dados quantitativos I.} 

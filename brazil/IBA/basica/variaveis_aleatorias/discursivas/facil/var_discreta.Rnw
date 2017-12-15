@@ -9,16 +9,16 @@ alt_b <-  2000 * (1-alt_a)
 
 questions <- solutions <- NULL 
 type <- NULL  
-questions[1] <- "Qual a probabilidade de um  pacote não ser indenizado?" 
+questions[1] <- "Qual a probabilidade de um  pacote nÃ£o ser indenizado?" 
 solutions[1] <- round(alt_a,3)
 type[1] <- "num" 
-questions[2] <- "Se o produtor vende 2000 pacotes, qual é o número esperado de pacotes que serão indenizados?" 
-solutions[2] <- round(alt_b,3) #Aberta - numérica  
+questions[2] <- "Se o produtor vende 2000 pacotes, qual Ã© o nÃºmero esperado de pacotes que serÃ£o indenizados?" 
+solutions[2] <- round(alt_b,3) #Aberta - numÃ©rica  
 type[2] <- "num"  
 @ 
  
 \begin{question} 
-Um produtor de sementes vende pacotes com \Sexpr{n} sementes cada um. Os pacotes que apresentam mais de duas sementes sem germinar são indenizados. A probabilidade de uma semente germinar é de \Sexpr{prob*100}\%.
+Um produtor de sementes vende pacotes com \Sexpr{n} sementes cada um. Os pacotes que apresentam mais de duas sementes sem germinar sÃ£o indenizados. A probabilidade de uma semente germinar Ã© de \Sexpr{prob*100}\%.
 <<echo=FALSE, results=hide, results=tex>>= 
  answerlist(questions) 
 @  

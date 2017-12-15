@@ -6,25 +6,25 @@
 questions <- solutions <- NULL
 
 questions[1] <- 'MED admensional, útil para comparar dispersão em estudos em que foram usadas diferentes escalas.'
-solutions[1] <- 'I'
+solutions[1] <- 1
 
 questions[2] <- 'MED com a mesma unidade de expressão da variável em estudo, porém, elevada ao quadrado.'
-solutions[2] <- 'VII' 
+solutions[2] <- 7 
 
 questions[3] <- 'MED com a mesma unidade de expressão da variável em estudo.'
-solutions[3] <- 'II'
+solutions[3] <- 2
  
 questions[4] <- 'MEP que divide a série em 100 partes iguais.'
-solutions[4] <- 'V' 
+solutions[4] <- 5 
  
 questions[5] <- 'MEP que divide a série em 4 partes iguais.'
-solutions[5] <- 'VI'
+solutions[5] <- 6
 
 questions[6] <- 'METC que não é afetada por valores extremos (outliers).'
-solutions[6] <- 'III'
+solutions[6] <- 3
 
 questions[7] <- 'METC que utiliza todos os valores da série, independente da posição.'
-solutions[7] <- 'IV'
+solutions[7] <- 4
 
 o <- sample(1:7)
 questions <- questions[o]
@@ -44,15 +44,15 @@ solutions <- solutions[o]
 \end{itemize}
 
  \textbf{Medida estatística} 
- \begin{itemize}
- \item[(I)] Coeficiente de variação
- \item[(II)] Desvio padrão
- \item[III] Mediana
- \item[(IV)] Média aritmética
- \item[(V)] Percentil
- \item[(VI)] Quartil
- \item[(VII)] Variância
-\end{itemize} 
+ \begin{enumerate}
+   \item Coeficiente de variação
+   \item Desvio padrão
+   \item Mediana
+   \item Média aritmética
+   \item Percentil
+   \item Quartil
+   \item Variância
+ \end{enumerate} 
 
  \textbf{Afirmativas}
 \begin{answerlist}
@@ -84,5 +84,5 @@ solutions <- solutions[o]
 %% META-INFORMATION
 %% \extype{cloze}
 %% \exsolution{\Sexpr{paste(solutions, collapse='|')}}  
-%% \exclozetype{string|string|string|string|string|string|string}
+%% \exclozetype{num|num|num|num|num|num|num}
 %% \exname{Introducao 7}  
