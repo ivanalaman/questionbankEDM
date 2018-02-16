@@ -12,7 +12,7 @@
 # mean(y)
 # 
 # 
-n <- sample(seq(30,50),1)
+n <- sample(seq(10,15),1)
 
 mu  <- round(sample(seq(0.5,0.8,l=100),1),2)
 des <- round(sample(seq(0.1,0.2,l=100),1),2)

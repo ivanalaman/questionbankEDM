@@ -3,28 +3,35 @@
 
 ## QUESTION/ANSWER GENERATION
 #questions <- solutions <- rep(list(''),7)
-questions <- solutions <- NULL
+questions <- solutions <- type <- NULL
 
 questions[1] <- 'MED admensional, útil para comparar dispersão em estudos em que foram usadas diferentes escalas.'
-solutions[1] <- 1
+solutions[1] <- 1 
+type[1] <- 'string'
 
 questions[2] <- 'MED com a mesma unidade de expressão da variável em estudo, porém, elevada ao quadrado.'
 solutions[2] <- 7 
+type[2] <- 'string'
 
 questions[3] <- 'MED com a mesma unidade de expressão da variável em estudo.'
 solutions[3] <- 2
+type[3] <- 'string'
  
 questions[4] <- 'MEP que divide a série em 100 partes iguais.'
 solutions[4] <- 5 
- 
+type[4] <- 'string'
+
 questions[5] <- 'MEP que divide a série em 4 partes iguais.'
 solutions[5] <- 6
+type[5] <- 'string'
 
 questions[6] <- 'METC que não é afetada por valores extremos (outliers).'
 solutions[6] <- 3
+type[6] <- 'string'
 
 questions[7] <- 'METC que utiliza todos os valores da série, independente da posição.'
 solutions[7] <- 4
+type[7] <- 'string'
 
 o <- sample(1:7)
 questions <- questions[o]
@@ -45,13 +52,13 @@ solutions <- solutions[o]
 
  \textbf{Medida estatística} 
  \begin{enumerate}
-   \item Coeficiente de variação
-   \item Desvio padrão
-   \item Mediana
-   \item Média aritmética
-   \item Percentil
-   \item Quartil
-   \item Variância
+   \item[1] Coeficiente de variação
+   \item[2] Desvio padrão
+   \item[3] Mediana
+   \item[4] Média aritmética
+   \item[5] Percentil
+   \item[6] Quartil
+   \item[7] Variância
  \end{enumerate} 
 
  \textbf{Afirmativas}
@@ -84,5 +91,5 @@ solutions <- solutions[o]
 %% META-INFORMATION
 %% \extype{cloze}
 %% \exsolution{\Sexpr{paste(solutions, collapse='|')}}  
-%% \exclozetype{num|num|num|num|num|num|num}
+%% \exclozetype{string|string|string|string|string|string|string}
 %% \exname{Introducao 7}  

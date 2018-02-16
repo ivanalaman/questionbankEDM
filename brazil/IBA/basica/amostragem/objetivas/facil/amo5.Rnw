@@ -29,9 +29,9 @@ solutions <- solutions[o]
 Qual das seguintes é (são) um passo fundamental na seleção de uma amostra de uma população independentemente da técnica específica a ser utilizada?
 
 \begin{enumerate}
-  \item Definir o tamanho da amostra.
-  \item Identificar a população.
-  \item Selecionar a amostra.
+  \item[1] Definir o tamanho da amostra.
+  \item[2] Identificar a população.
+  \item[3] Selecionar a amostra.
 \end{enumerate}  
 
 \begin{answerlist}
