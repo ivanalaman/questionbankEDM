@@ -1,0 +1,76 @@
+<<echo=FALSE>>=
+## Pacotes necessários
+if(!require(truncnorm)){
+ install.packages('truncnorm')
+}
+if(!require(fdth)){
+ install.packages('fdth')
+}
+
+library(truncnorm)
+library(fdth)
+
+## Programando os dados
+n <- sample(seq(20,40,5),
+            1)
+mu <- trunc(runif(1,6,13))
+sigma <- trunc(runif(1,1,7))
+
+amo <- round(rtruncnorm(n,
+                        a=0,
+                        b=Inf,
+                        mean=as.numeric(mu),
+                        sd=as.numeric(sigma)),
+             2)
+
+tab <- fdt(amo)
+
+alta <- tab$table[,1][3]
+alta1 <- unlist(strsplit(as.character(alta),',',fixed=T))[2]
+alta2 <- round(as.numeric(strsplit(alta1,')')),3)
+
+out <- boxplot.stats(amo)$out
+
+## Programando as questões
+solutions <- type <- NULL 
+
+solutions[1] <- alta2  
+type[1] <- "num" 
+ 
+solutions[2] <- round(tab$table[,6][3],2)
+type[2] <- "num" 
+
+solutions[3] <- ifelse(length(out)==0,
+                       0,
+                       1)
+type[3] <- "num"  
+@
+
+\begin{question}
+ A corrosão das barras de aço da armação é um problema sério em estruturas de concreto localizadas em ambientes afetados por condições climáticas extremas. Por esse motivo, os pesquisadores têm investigado a utilização de barras de reforço feitas de material composto. Um estudo foi executado para desenvolver diretrizes sobre a aderência de barras plásticas reforçadas com fibra de vidro ao concreto. Considere as \Sexpr{n} observações da resistência da aderência medida (dados simulados):
+
+<<echo=F, results=tex>>=
+print(xtable(matrix(amo,ncol=5)),
+      include.rownames = FALSE,
+      include.colnames = FALSE,
+      table.placement = 'H')
+@
+
+\begin{answerlist}
+ \item Ao fazermos uma tabela de distribuição de frequências utilizando o critério de sturges, utilizando $X_1 - \frac{X_1}{100}$ para cálculo do limite inferior (li) da primeira classe, $X_n + \frac{X_n}{100}$ para cálculo do limite superior (ls) da última classe e $\frac{(ls-li)}{k}$ para cálculo do comprimento de classe, qual é o limite superior da terceira classe (use duas casas após a vírgula)?
+ \item Qual a frequência acumulada percentual da terceira classe (use duas casas após a vírgula)?
+ \item Há outliers? Se sim coloque 1, caso contrário coloque 0? 
+\end{answerlist}  
+\end{question}
+
+\begin{solution}
+<<echo=FALSE, results=hide, results=tex>>=  
+answerlist(format(solutions))  
+@  
+\end{solution}
+
+%% META-INFORMATION
+%% \extype{cloze}
+%% \exsolution{\Sexpr{paste(solutions, collapse="|")}} 
+%% \exclozetype{\Sexpr{paste(type, collapse = "|")}}
+%% \exname{Dados quantitativos I.} 

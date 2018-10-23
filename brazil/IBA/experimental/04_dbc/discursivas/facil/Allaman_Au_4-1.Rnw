@@ -1,0 +1,76 @@
+<<echo=FALSE, results=hide>>=  
+## Pacotes necessários
+if(!require(xtable)){
+  install.packages(xtable)
+}
+
+## Programando os dados
+tauu = round(rnorm(4,0.50,0.1),2) * sample(c(-1,-1,1,1,1),
+					    size = 4) 
+betta = round(rnorm(5,0.10,0.05),2) * sample(c(-1,-1,1,1,1),
+                                            size = 5) 
+
+dados <- ger.design(mu     = 5.7,
+                    sigmaa = 0.4,
+                    tau    = tauu,
+                    betaa  = betta,
+                    type   = 'DBC')
+names(dados) <- c('Droga','Blocos','linf')
+
+mod <- aov(linf ~ Blocos + Droga, dados)
+res <- summary(mod)
+
+shapiro <- shapiro.test(residuals(mod))
+
+variancias <- with(dados,tapply(linf,Droga,var))
+Fmax <- max(variancias)/min(variancias)
+pvalor <- pf(Fmax,4,4,lower.tail=FALSE)
+
+## Programando as questões
+questions <- solutions <- NULL 
+type <- NULL  
+questions[1] <- "Qual é o valor do quadrado médio de blocos?" 
+solutions[1] <- round(res[[1]]$`Mean Sq`[1],
+		      3)
+type[1] <- "num" 
+questions[2] <- "Qual é o p-valor associado a estatística F de Drogas?" 
+solutions[2] <- round(res[[1]]$`Pr(>F)`[2],
+		      3)  
+type[2] <- "num" 
+questions[3] <- "Qual é o p-valor do teste de Shapiro-Wilk?" 
+solutions[3] <- round(shapiro$p.value,
+		      3)  
+type[3] <- "num" 
+questions[4] <- "Qual é o p-valor do teste de Hartley?" 
+solutions[4] <- round(pvalor,
+		      3)  
+type[4] <- "num" 
+@ 
+
+\begin{question} 
+  Conduziu-se um experimento para comparar o efeito de quatro drogas, A, B, C e um placebo (D) sob a contagem de linfócitos em ratos considerando um delineamento em blocos ao acaso com quatro ratos de cada uma das cincos ninhadas disponíveis. As ninhadas foram consideradas como blocos. A contagem de linfócitos (1000/$mm^3$ de sangue) foram:
+
+<<echo=FALSE,results=tex>>=
+print(xtable(dados),
+      include.rownames = FALSE,
+      table.placement = 'H')
+@
+
+Responda as questões abaixo e utilize três casas de aproximação para as questões numéricas.
+
+<<echo=FALSE, results=tex>>= 
+answerlist(questions) 
+@  
+
+\end{question}  
+
+\begin{solution} 
+<<echo=FALSE, results=tex>>=  
+answerlist(format(solutions))  
+@  
+
+\end{solution}  
+%% META-INFORMATION  
+%% \extype{cloze}  
+%% \exsolution{\Sexpr{paste(solutions, collapse = "|")}}  
+%% \exclozetype{\Sexpr{paste(type, collapse = "|")}}

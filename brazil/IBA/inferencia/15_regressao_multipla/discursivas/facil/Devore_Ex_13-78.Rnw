@@ -1,0 +1,143 @@
+<<echo=FALSE>>=
+library(car)
+library(MASS)
+# 
+# x1 <- rep(c(0,0.5,1,1.5),
+#           c(sample(4:8,1), 
+#             sample(4:8,1),
+#             sample(15:30,1),
+#             sample(4:8,1)))
+# 
+# x2 <- rep(c(0,50,25,40,60),
+#           c(sample(4:8,1), 
+#             sample(10:20,1),
+#             sample(4:8,1),
+#             sample(4:8,1),
+#             sample(4:8,1)))
+# 
+# n1 <- length(x1)
+# n2 <- length(x2)
+# 
+# n <- n1
+# 
+# if(n1 > n2){
+#  
+#  dif <- abs(diff(c(n1,n2)))
+#  x2 <- c(x2,sample(c(0,50,25,40,60),
+#                    size=dif,
+#                    replace=T))
+#  n <- n1
+# }
+# 
+# if(n1 < n2){
+# 
+#   dif <- abs(diff(c(n1,n2)))
+#   x1 <- c(x1,sample(c(0,0.5,1,1.5),
+#                     size=dif,
+#                     replace=T))
+#  n <- n2
+# }
+# 
+dad <- expand.grid(x1 = seq(0,1.5,0.5),
+                   x2 = c(0,25,40,50,60))
+
+mu  <- round(sample(seq(0.8,1.1,l=100),1),2)
+des <- round(sample(seq(0.01,0.1,l=100),1),2)
+ 
+dad$x3 <- round(rnorm(dim(dad)[1],mu,des),
+           3)
+
+b0 <- round(sample(seq(-0.01,-0.002,l=30),1),3)
+
+b1 <- round(sample(seq(-0.05,-0.01,l=30),1),3) 
+
+b2 <- round(sample(seq(-0.001,-0.0003,l=30),1),3)  
+
+b3 <- round(sample(seq(0.05,0.2,l=30),1),3)   
+
+dese <- round(sample(seq(0.005,0.02,l=30),1),2)
+
+y <- with(dad,
+          abs(round(b0 + b1*x1 + +b2*x2 + b3*x3 + rnorm(dim(dad)[1],sd=dese),3)))
+
+# b
+dad$y <- y
+reg <- lm(y ~ x1 + x2 + x3, dad)
+
+viff <- vif(reg)
+
+ifelse(any(viff>=5),
+       respa <- 'Sim',
+       respa <- 'Não')
+
+selec <- stepAIC(reg)
+
+betas <- round(coef(selec),4)
+
+ifelse(length(betas) < 4,
+       respb <- paste('Não, uma vez que, por meio do método de seleção stepwise com o critério AIC apenas a(s) variável(eis) ',
+                      paste(names(betas)[-1],collapse=','),
+                      ' foram importantes no modelo.',
+                      sep=''),
+       respb <- 'Sim, uma vez que, por meio do método de seleção stepwise com o critério AIC todas as variáveis foram importantes no modelo.')
+
+ifelse(length(betas)==2,
+       r2 <- summary(selec)$r.squared,
+       r2 <- summary(selec)$adj.r.squared)
+
+## QUESTION/ANSWER GENERATION
+questions <- solutions <- list()
+
+questions[[1]]<- "Há problema de multicolinearidade no modelo? Justifique sua resposta."
+solutions[[1]] <- respa
+
+questions[[2]] <- "Ajuste um modelo do tipo y=x1+x2+x3. Todas as variáveis são importantes no modelo? Justifique sua resposta."
+solutions[[2]] <- respb
+ 
+questions[[3]] <- "De acordo com suas conclusões nas alternativas a e b, apresente o modelo de regressão ajustado."
+solutions[[3]] <- paste('$y=',
+                        paste(formatC(betas,
+                                      flag='+'),
+                              names(betas),
+                              sep='',
+                              collapse=''),
+                        '$',
+                        sep='')
+
+questions[[4]] <- "A modelo ajusado explica bem a variabilidade dos dados?Justifique sua resposta." 
+solutions[[4]] <- round(r2,3)
+
+questions[[5]] <- 'Interprete o modelo ajustado.'
+solutions[[5]] <- 'Aberta-texto'
+
+@
+
+\begin{question}
+ A fibra de coco é um material amigavelmente ecológico com grande potencial para uso em construções. Os dados a seguir se refere a uma pesquise em que $x_1=$ conteúdo de fibra (\%), $x_2=$ comprimento da fibra (mm), $x_3=$ gradiente hidráulico (nenhuma unidade fornecida) e $y=$ velocidade de infiltração (cm/s).
+
+
+<<echo=F,results=tex>>=
+latex(dad,
+      rowname=NULL,
+      here=T,
+      file='')  
+@
+
+<<echo=FALSE, results=hide, results=tex>>=
+answerlist(questions)
+@
+
+\end{question} 
+
+\begin{solution}
+
+<<echo=F,results=tex>>=
+answerlist(solutions) 
+@
+
+\end{solution}
+
+%% META-INFORMATION
+%% \extype{cloze}
+%% \exsolution{\Sexpr{paste(solutions, collapse = "|")}} 
+%% \exclozetype{string|string|string|num|string} 

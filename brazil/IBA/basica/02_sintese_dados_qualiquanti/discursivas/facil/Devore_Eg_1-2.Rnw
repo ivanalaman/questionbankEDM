@@ -1,0 +1,120 @@
+<<echo=FALSE>>=
+## Pacotes necessários
+if(!require(truncnorm)){
+ install.packages('truncnorm')
+}
+if(!require(fdth)){
+ install.packages('fdth')
+}
+if(!require(xtable)){
+  install.packages('xtable')
+}
+ 
+library(truncnorm)
+library(fdth)
+library(xtable)
+ 
+## Programando os dados
+n <- sample(seq(30,50,5),
+            1)
+
+aux_mu <- seq(5.1,13.2,
+              length=20)
+mu <- sample(aux_mu,
+             1)
+
+aux_sigma <- seq(1,6.1,
+                 length=15)
+sigma <- sample(aux_sigma,
+                1)
+
+amo <- round(rtruncnorm(n,
+                        a=0,
+                        b=Inf,
+                        mean=as.numeric(mu),
+                        sd=as.numeric(sigma)),
+             2)
+
+tab <- fdt(amo)
+
+alta <- tab$table[4,]
+alta1 <- as.character(alta[,1])
+alta11 <- unlist(strsplit(alta1,'\\,'))
+alta111 <- as.numeric(gsub(')','',alta11[2]))
+
+gr <- boxplot.stats(amo) 
+
+## Programando as questões
+questions <- solutions <- type <- NULL 
+
+questions[1] <- paste("Qual foi o percentual de corpos de prova que apresentou uma resistência de até",alta111,sep=" ") 
+solutions[1] <- round(alta[,6],2)
+type[1] <- "num" 
+
+questions[2] <- "Utilizando o método de cálculo de percentis utilizado em sala de aula, qual é o valor do primeiro quartil?" 
+solutions[2] <- round(quantile(amo,prob=0.25,type=2), 2)  
+type[2] <- "num"  
+
+questions[3] <- "Utilizando o método de cálculo de percentis utilizado em sala de aula, qual é o valor do terceiro quartil?" 
+solutions[3] <- round(quantile(amo,prob=0.75,type=2), 2)  
+type[3] <- "num"  
+
+questions[4] <- "Existem outliers na amostra? Se Sim coloque 1, caso contrário coloque 0!" 
+solutions[4] <- ifelse(length(gr$out)==0,
+                       0,
+                       1)
+type[4] <- "num"  
+ 
+@
+
+\begin{question}
+  As investigações de resistência de materiais fornecem um campo fértil para a aplicação de métodos estatísticos. O artigo ``Effects of Aggregates and Microfillers on the Flexural Properties of Concrete'' relatou um estudo de propriedades de resistência de concreto de alto desempenho obtidas pela utilização de superplásticos e determinados adesivos. Uma das variáveis analisadas foi a resistência de corpos de prova cujo a amostra está na tabela a seguir:
+
+<<echo=F, results=tex>>=
+print(xtable(matrix(amo,ncol=5)),
+      include.colnames = FALSE,
+      include.rownames = FALSE,
+      table.placement = 'H')
+@
+
+Faça uma tabela de distribuição de frequências utilizando o critério de sturges e os métodos ensinado em aula e também um boxplot e responda as perguntas a seguir: 
+
+<<echo=FALSE, results=hide, results=tex>>= 
+answerlist(questions) 
+@  
+
+\end{question}
+
+\begin{solution}
+
+ A variável em estudo é uma variável quantitativa cujo a escala é de proporção ou de razão. Fazendo uma síntese do dados por meio de uma tabela de distribuição de frequências.
+
+<<echo=F>>=
+tab
+@
+
+Fazendo o histograma.
+
+<<echo=F,fig=T>>=
+plot(tab,
+     xlab='Intervalo de classes',
+     ylab='Frequência absoluta')
+@
+
+Fazendo o boxplot tem-se:
+
+<<echo=F,fig=T>>=
+boxplot(amo)
+@
+
+<<echo=FALSE, results=hide, results=tex>>=  
+answerlist(format(solutions))  
+@
+
+\end{solution}
+
+%% META-INFORMATION
+%% \extype{cloze}
+%% \exsolution{\Sexpr{paste(solutions, collapse = "|")}} 
+%% \exclozetype{\Sexpr{paste(type, collapse = "|")}}
+%% \exname{Dados quantitativos III.} 

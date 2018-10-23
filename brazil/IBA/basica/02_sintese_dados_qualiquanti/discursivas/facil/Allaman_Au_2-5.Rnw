@@ -1,0 +1,78 @@
+<<echo=FALSE>>=
+## Pacotes necessários
+if(!require(xtable)){
+ install.packages('xtable')
+}
+ 
+if(!require(fdth)){
+ install.packages('fdth')
+}
+
+library(xtable)
+library(fdth)
+
+## Programando os dados
+n <- sample(seq(30,50,5),
+            1)
+amo <- sample(c('nunca','ocasionalmente','raramente','frequentemente'),
+                      n,
+                      replace=T) 
+tab <- fdt_cat(amo,sort=FALSE,decreasing=FALSE)
+
+## Programando as questões
+questions <- solutions <- type <- NULL 
+questions[1] <- "Qual a frequência relativa da categoria raramente?" 
+solutions[1] <- round(tab[4,3],3)
+type[1] <- "num" 
+questions[2] <- "Qual a frequência relativa percentual da categoria ocasionalmente?" 
+solutions[2] <- round(tab[3,4],3)  
+type[2] <- "num"
+@
+
+\begin{question}
+ Consultados sobre se constumam comparecer às reuniões do conselho municipal de sua cidade, \Sexpr{n} moradores de uma comunidade responderam como segue:
+
+<<echo=F, results=tex>>=
+print(xtable(matrix(amo,ncol=5)),
+      include.rownames = FALSE,
+      include.colnames = FALSE,
+      table.placement = 'H')
+@
+
+Faça uma síntese completa dos dados e responda as seguintes perguntas.
+
+<<echo=FALSE, results=hide, results=tex>>= 
+answerlist(questions) 
+@  
+
+\end{question}
+
+\begin{solution}
+
+A variável em estudo é uma variável qualitativa cujo a escala é nominal. Como a variável é qualitativa, iremos fazer uma tabela de distribuição de frequências.
+
+<<echo=F>>=
+summary(tab,columns=1:4)
+@
+
+Agora vamos fazer um gráfico de barras para finalizar.
+
+<<echo=F,fig=TRUE>>=
+plot(tab,
+     type='p',
+     v=T,
+     xlab='Categorias',
+     ylab='Frequência percentual(%)')
+@
+
+<<echo=FALSE, results=hide, results=tex>>=  
+answerlist(format(solutions))  
+@  
+
+\end{solution}
+
+%% META-INFORMATION
+%% \extype{cloze}
+%% \exsolution{\Sexpr{paste(solutions, collapse = "|")}}   
+%% \exclozetype{\Sexpr{paste(type, collapse = "|")}}
+%% \exname{Dados qualitativos} 

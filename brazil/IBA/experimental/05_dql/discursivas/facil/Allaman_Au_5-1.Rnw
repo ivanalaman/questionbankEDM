@@ -1,0 +1,41 @@
+<<echo=FALSE, results=hide>>=  
+## Pacotes necessários
+
+## Programando os dados
+
+## Programando as questões
+questions <- solutions <- NULL 
+type <- NULL  
+questions[1] <- "Forneça dois tipos de delineamentos que pode ser utilizado neste experimento e, explique para cada um deles como deverá ser feito o planejamento experimental." 
+solutions[1] <- "Aberta."
+type[1] <- "string" 
+questions[2] <- "Escreva o modelo estatístico para cada delineamento citado anteriormente." 
+solutions[2] <- "Aberta."
+type[2] <- "string" 
+questions[3] <- "Com base em cada modelo estatístico descrito, faça a tabela da ANOVA indicando as fontes de variação e os graus de liberdade." 
+solutions[3] <- "Aberta."
+type[3] <- "string" 
+questions[4] <- "Explique como você investigaria a questão de que os dois sexos reagem diferentemente aos tratamentos com cálcio." 
+solutions[4] <- "Aberta."
+type[4] <- "string" 
+@ 
+
+\begin{question} 
+Um pesquisador quer fazer um experimento usando ratos como unidades experimentais. Ela vem até você para obter conselhos sobre como configurar o experimento. Aqui está a situação: ela quer comparar os efeitos da alimentação de três níveis de cálcio, digamos 0, 1, 2 unidades, em certas medições ósseas (que podem ser observadas somente depois que os camundongos foram sacrificados). Ela tem disponível 4 ninhadas de 6 ratos cada, em que, cada ninhada contêm 3 fêmeas e 3 machos. Outra observação é que, cada ninhada vem de uma raça diferente de camundongos.
+
+<<echo=FALSE, results=tex>>= 
+answerlist(questions) 
+@  
+
+\end{question}  
+
+\begin{solution} 
+<<echo=FALSE, results=tex>>=  
+answerlist(format(solutions))  
+@  
+
+\end{solution}  
+%% META-INFORMATION  
+%% \extype{cloze}  
+%% \exsolution{\Sexpr{paste(solutions, collapse = "|")}}  
+%% \exclozetype{\Sexpr{paste(type, collapse = "|")}}

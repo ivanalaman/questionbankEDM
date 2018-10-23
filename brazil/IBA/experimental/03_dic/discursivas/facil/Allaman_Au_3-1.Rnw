@@ -1,0 +1,73 @@
+<<echo=FALSE, results=hide>>=  
+## Pacotes necessários
+if(!require(xtable)){
+  install.packages(xtable)
+}
+
+## Programando os dados
+tauu = round(rnorm(5,0.10,0.05),2) * sample(c(-1,-1,1,1,1),
+					    size = 5) 
+
+dados <- ger.design(mu     = 2.55,
+		    sigmaa = 0.12,
+		    repp   = 6,
+		    tau    = tauu)
+names(dados) <- c('Carboidrato','Rep','DNA')
+
+mod <- aov(DNA ~ Carboidrato, dados)
+res <- summary(mod)
+
+shapiro <- shapiro.test(residuals(mod))
+
+variancias <- with(dados,tapply(DNA,Carboidrato,var))
+Fmax <- max(variancias)/min(variancias)
+pvalor <- pf(Fmax,5,5,lower.tail=FALSE)
+
+## Programando as questões
+questions <- solutions <- NULL 
+type <- NULL  
+questions[1] <- "Qual é o valor da estatística F?" 
+solutions[1] <- round(res[[1]]$`F value`[1],
+		      3)
+type[1] <- "num" 
+questions[2] <- "Qual é o p-valor associado a estatística F?" 
+solutions[2] <- round(res[[1]]$`Pr(>F)`[1],
+		      3)  
+type[2] <- "num" 
+questions[3] <- "Qual é o p-valor do teste de Shapiro-Wilk?" 
+solutions[3] <- round(shapiro$p.value,
+		      3)  
+type[3] <- "num" 
+questions[4] <- "Qual é o p-valor do teste de Hartley?" 
+solutions[4] <- round(pvalor,
+		      3)  
+type[4] <- "num" 
+@ 
+
+\begin{question} 
+  Um experimento foi conduzido em um laboratório seguindo um delineamento inteiramente ao acaso (DIC) no qual cinco grupos compostos de seis ratos cada foram submetidos a uma dieta com diferentes carboidratos. Ao final do experimento, determinou-se o teor de DNA (mg/g) no fígado de cada rato, gerando os seguintes resultados:
+
+<<echo=FALSE,results=tex>>=
+print(xtable(dados),
+      include.rownames = FALSE,
+      table.placement = 'H')
+@
+
+Responda as questões abaixo e utilize três casas de aproximação para as questões numéricas.
+
+<<echo=FALSE, results=tex>>= 
+answerlist(questions) 
+@  
+
+\end{question}  
+
+\begin{solution} 
+<<echo=FALSE, results=tex>>=  
+answerlist(format(solutions))  
+@  
+
+\end{solution}  
+%% META-INFORMATION  
+%% \extype{cloze}  
+%% \exsolution{\Sexpr{paste(solutions, collapse = "|")}}  
+%% \exclozetype{\Sexpr{paste(type, collapse = "|")}}

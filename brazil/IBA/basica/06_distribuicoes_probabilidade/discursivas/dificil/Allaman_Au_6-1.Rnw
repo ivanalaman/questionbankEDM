@@ -1,0 +1,28 @@
+\begin{question} 
+Se $X_i$ são variáveis aleatórias independentes com distribuição normal de probabilidade cujo a média é $\mu$ e variância $\sigma^2$, mostre que a quantidade $\sum_{i=1}^{n}(X_i - \mu)^2$ tem distribuição $\chi^2_{\phi=n}$ (qui-quadrado com n graus de liberdade).
+\end{question}  
+ 
+\begin{solution} 
+Vamos a demonstração.
+
+\begin{eqnarray*}
+\sum_{i=1}^{n}(X_i - \mu)^2 &=& (X_1 - \mu)^2 + (X_2 - \mu)^2 + \cdots + (X_n - \mu)^2 \\
+                            &=& (X_1 - \mu)^2 + (X_2 - \mu)^2 + \cdots + (X_n - \mu)^2 \cdot \frac{\sigma^2}{\sigma^2} \\
+                            &=& (\frac{(X_1 - \mu)^2}{\sigma^2} + \frac{(X_2 - \mu)^2}{\sigma^2} + \cdots + \frac{(X_n - \mu)^2}{\sigma^2}) \cdot \sigma^2 \\
+                            &=& [(\frac{X_1 - \mu}{\sigma})^2 +  (\frac{X_2 - \mu}{\sigma})^2 + \cdots +  (\frac{X_n - \mu}{\sigma})^2] \cdot \sigma^2 \\
+                            &=& [ Z_1^{2} + Z_2^{2} + \cdots + Z_n^{2} ] \cdot \sigma^2 \\
+                            &=& \chi^2_{\phi=n} \cdot \sigma^2
+\end{eqnarray*}
+
+Portanto,
+
+\[
+\frac{\sum_{i=1}^{n}(X_i - \mu)^2}{\sigma^2} = \chi^2_{\phi=n} 
+\]
+
+\end{solution} 
+ 
+%% META-INFORMATION 
+%% \extype{string} 
+%% \exsolution{"Aberta - texto"} 
+%% \exname{Demonstração Qui-quadrado}  

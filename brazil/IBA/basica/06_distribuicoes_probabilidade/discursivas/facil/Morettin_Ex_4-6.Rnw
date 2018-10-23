@@ -1,0 +1,36 @@
+<<echo=FALSE,results=hide>>= 
+## Pacotes necessários
+#---------------------
+
+## Programandos os dados
+lam = sample(seq(1,5),1)
+part = sample(seq(1,7),1)
+
+condi = sample(c('igual a', 'mais de', 'menos de'),1)
+
+if(condi == 'igual a') {
+ prob = round(dpois(part, lam),3)
+} 
+
+if(condi == 'mais de'){
+  prob = round(1 - sum(dpois(0:part,lam)),3)
+} else {
+  prob = round(sum(dpois(0:(part-1),lam)),3)
+}
+
+## Programando as questões
+#-------------------------
+@ 
+ 
+\begin{question} 
+O número de partículas gama emitidas por segundo, por certa substância radioativa, é uma variável aleatória com distribuição de Poisson com $\lambda=\Sexpr{lam}$. Se um instrumento registrador torna-se inoperante quando há \Sexpr{condi} \Sexpr{part} por segundo, qual a probabilidade de isso acontecer em qualquer dado segundo?
+\end{question}  
+ 
+\begin{solution} 
+Utilizando a função de probabilidade poisson tem-se que a probabilidade é \Sexpr{prob}.
+\end{solution} 
+ 
+%% META-INFORMATION 
+%% \extype{num} 
+%% \exsolution{\Sexpr{prob}}  
+%% \extol{0.01}

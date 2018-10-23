@@ -1,0 +1,40 @@
+<<echo=FALSE,results=hide>>= 
+@ 
+ 
+\begin{question} 
+A função de probabilidade da variável aleatória $X$ é: $P(X) = 1/5$, para $X = 1,2,3,4,5$. Calcular $E(X)$ e $E(X^2)$, e usando esses resultados, calcular: $E(X+3)^2$ e $VAR(3X - 2)$.
+\end{question}  
+ 
+\begin{solution} 
+Se todos os $X's$ tem a mesma probabilidade, então $E(X)$ é equivalente a média aritmética simples, ou seja, $E(X) = 15/5 = 3$. Para $E(X^2)$ tem-se:
+
+\begin{eqnarray*}
+ E(X^2) &=& \sum x^2 \cdot p(x) \\
+        &=& 1^2 \cdot 1/5 + 2^2 \cdot 1/5 + 3^2 \cdot 1/5 + 4^2 \cdot 1/5 + 5^2 \cdot 1/5 \\
+        &=& 11 
+\end{eqnarray*}
+
+Utilizando as propriedades de esperanças tem-se para $E(X + 3)^2$:
+
+\begin{eqnarray*}
+E(X + 3)^2 &=& [E(X + 3)] \cdot [E(X + 3)] \\
+           &=& [E(X) + 3] \cdot [E(X) + 3] \\
+           &=& [3 + 3] \cdot [3 + 3] \\
+           &=& 36  
+\end{eqnarray*}
+
+Para $VAR(3X - 2)$ tem-se:
+
+\begin{eqnarray*}
+VAR(3X - 2) &=& VAR(3X) = 3^2\cdot VAR(X) \\
+            &=& 9 \cdot [E(X^2) - \{E(X)\}^2] \\
+            &=& 9 \cdot [11 - 3^2] \\
+            &=& 18
+\end{eqnarray*}
+
+
+\end{solution} 
+ 
+%% META-INFORMATION 
+%% \extype{string} 
+%% \exsolution{"Aberta - texto"}  

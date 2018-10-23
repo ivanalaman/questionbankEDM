@@ -1,0 +1,91 @@
+<<echo=FALSE>>=
+## Pacotes necessários
+if(!require(fdth)){
+ install.packages('fdth')
+}
+if(!require(xtable)){
+ install.packages('xtable')
+}
+
+library(fdth)
+library(xtable)
+
+## Programando os dados
+n <- sample(seq(28,48,4),
+            1)
+ 
+amo <- sample(c('componentes com falha','componentes incorretos','soldas insuficientes','soldas em excesso','falta de componentes'),
+              size=n,
+              prob=c(0.21,0.36,0.11,0.09,0.23),
+              replace=T)
+
+tab <- fdt_cat(amo)
+auxa <- sample(1:5,size=1)
+alta <- tab[auxa,]
+
+auxb <- c(1/5,2/5)
+altb <- sample(auxb,size=1)
+ifelse(altb == 1/5, 
+       altb2 <- tab[1,]$'cf(%)',
+       altb2 <- tab[2,]$'cf(%)')
+
+## Programando as questões 
+questions <- solutions <- type <- NULL 
+
+questions[1] <- paste("Qual a frequência relativa percentual da categoria",alta$Category,"?",sep=" ") 
+solutions[1] <- round(alta$'rf(%)',2)
+type[1] <- "num" 
+
+questions[2] <- paste("De acordo com o princípio de pareto, ",altb*100, "\\% das causas é responsável por qual percentual dos efeitos?",sep=" ") 
+solutions[2] <- round(altb2, 2)  
+type[2] <- "num"  
+@
+
+\begin{question}
+ Um \textbf{Diagrama de Pareto} é uma variação de um histograma para dados categorizados resultantes de um estudo de controle de qualidade. Cada categoria representa um tipo diferente de não-conformidade de produto ou problema de produção. Suponha que as informações a seguir tenham sido obtidas sobre não-conformidades em pacotes de circuitos:
+
+
+<<echo=F, results=tex>>=
+print(xtable(matrix(amo,ncol=4)),
+      include.rownames = FALSE,
+      include.colnames = FALSE,
+      table.placement = 'H')
+@
+
+Faça uma síntese dos dados e responda as seguintes perguntas.
+
+<<echo=FALSE, results=hide, results=tex>>= 
+answerlist(questions) 
+@  
+
+\end{question}
+
+\begin{solution}
+
+ A variável em estudo é uma variável qualitativa cujo a escala é nominal. Fazendo uma síntese do dados por meio de uma tabela de distribuição de frequências.
+
+<<echo=F>>=
+tab
+@
+
+Fazendo o diagrama de pareto.
+
+<<echo=F,fig=T>>=
+plot(tab,
+     type='pa',
+     v=T,
+     xlab='Intervalo de classes',
+     ylab='Frequência absoluta')
+@
+
+<<echo=FALSE, results=hide, results=tex>>=  
+answerlist(format(solutions))  
+@
+
+\end{solution}
+
+%% META-INFORMATION
+%% \extype{cloze}
+%% \exsolution{\Sexpr{paste(solutions, collapse = "|")}} 
+%% \exclozetype{\Sexpr{paste(type, collapse = "|")}}
+%% \exname{Dados qualitativos II.} 

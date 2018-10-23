@@ -1,0 +1,134 @@
+<<echo=FALSE>>=
+## Pacotes necessários
+if(!require(truncnorm)){
+ install.packages('truncnorm')
+}
+if(!require(fdth)){
+ install.packages('fdth')
+}
+if(!require(xtable)){
+ install.packages('xtable')
+}
+
+library(truncnorm)
+library(fdth)
+library(xtable)
+
+## Programando os dados
+n <- sample(seq(7,9),
+            size=1) 
+
+mu_sinf <- ceiling(runif(1,min=20,max=50)) 
+sigma_sinf <- ceiling(runif(1,min=20,max=50))  
+
+mu_cinf <- ceiling(runif(1,min=80,max=120)) 
+sigma_cinf <- ceiling(runif(1,min=30,max=40))  
+ 
+
+sem_infarto <- ceiling(rtruncnorm(n,
+                        a=1,
+                        b=120,
+                        mean=as.numeric(mu_sinf),
+                        sd=as.numeric(sigma_sinf)))
+
+com_infarto <- ceiling(rtruncnorm(n,
+                                  a=21,
+                                  b=180,
+                                  mean=as.numeric(mu_cinf),
+                                  sd=as.numeric(sigma_cinf)))
+
+medi_sem <-round(c(media=mean(sem_infarto),
+             mediana=median(sem_infarto),
+             amplitude=range(sem_infarto),
+             variancia=var(sem_infarto),
+             desvio=sd(sem_infarto),
+             cv=sd(sem_infarto)/mean(sem_infarto),
+             quartis=quantile(sem_infarto,
+                              type=2,
+                              prob=c(.25,.5,.75))),2) 
+
+grsem <- boxplot.stats(sem_infarto)
+
+sem_infartoout <- sem_infarto[sem_infarto!=grsem$out]
+
+cvsemout <- ifelse(length(sem_infartoout)==0,
+                   0,
+                   medi_sem[7] - (sd(sem_infartoout)/mean(sem_infartoout)))
+
+medi_com <-round(c(media=mean(com_infarto),
+                   mediana=median(com_infarto),
+                   amplitude=range(com_infarto),
+                   variancia=var(com_infarto),
+                   desvio=sd(com_infarto),
+                   cv=sd(com_infarto)/mean(com_infarto),
+                   quartis=quantile(com_infarto,
+                              type=2,
+                              prob=c(.25,.5,.75))),2)
+grcom <- boxplot.stats(com_infarto)
+
+com_infartoout <- com_infarto[com_infarto!=grcom$out]
+
+cvcomout <- ifelse(length(com_infartoout)==0,
+                   0,
+                   medi_com[7] - (sd(com_infartoout)/mean(com_infartoout)))
+ 
+## Programando as questões
+questions <- solutions <- type <- NULL
+
+questions[1] <- 'Existe outliers na amostra dos pacientes sem infarto? Se sim, informe o(s) valor(es), caso contrário digite não.'
+solutions[1] <- ifelse(length(grsem$out)==0,
+                       'Não',
+                       round(grsem$out,3))
+type[1] <- ifelse(length(grsem$out)==0,
+                  'string',
+                  'num')
+questions[2] <- 'Existe outliers na amostra dos pacientes com infarto? Se sim, informe o(s) valor(es), caso contrário digite não.'
+solutions[2] <- ifelse(length(grcom$out)==0,
+                       'Não',
+                       round(grcom$out,3))
+type[2] <- ifelse(length(grcom$out)==0,
+                  'string',
+                  'num')
+questions[3] <- 'Se a resposta foi sim na alternativa a), retire o outlier e calcule novamente o coeficiente de variação (CV). Qual foi a diferença entre os CV da amostra com e sem outlier? Se a resposta foi não, digite simplesmente 0.'
+solutions[3] <- round(cvsemout,3)
+type[3] <- 'num'
+questions[4] <- 'Se a resposta foi sim na alternativa b), retire o outlier e calcule novamente o coeficiente de variação (CV). Qual foi a diferença entre os CV da amostra com e sem outlier? Se a resposta foi não, digite simplesmente 0.'
+solutions[4] <- round(cvcomout,3)
+type[4] <- 'num'
+@
+
+\begin{question}
+  Dos arquivos de serviço de uma unidade coronariana, tomaram-se as fichas de pacientes com diagnóstico de infarto no miocardio. Estas fichas são separadas em dois grupos: em um estão aqueles que não tiveram infarto como pode ser verificado mais tarde e em outro aqueles com diagnóstico confirmado. Descartaram-se os casos duvidosos. De cada grupo foi sorteado aleatoriamente \Sexpr{2*n} casos e registrado o valor de CPK expresso em unidades enzimáticas. Os valores obtivos foram:
+
+<<echo=F,results=tex>>=
+# Dados relativo aos que não sofreram infarto
+dados <- data.frame(grupos=rep(c('sinfarto','cinfarto'),c(n,n)),
+                    cpk=c(sem_infarto,
+                          com_infarto))
+print(xtable(dados),
+      include.rownames=FALSE,
+      table.placement='H')
+@
+
+Responda as questões abaixo.
+
+<<echo=FALSE, results=hide, results=tex>>= 
+answerlist(questions) 
+@  
+
+\end{question}
+
+\begin{solution}
+
+<<echo=FALSE, results=hide, results=tex>>=  
+answerlist(format(solutions))  
+@
+
+\end{solution}
+
+%% META-INFORMATION
+%% \extype{cloze}
+%% \exsolution{\Sexpr{paste(solutions, collapse = "|")}} 
+%% \exclozetype{\Sexpr{paste(type, collapse = "|")}}
+%% \extol{0.01}
+%% \exname{Dados quantitativos I.} 

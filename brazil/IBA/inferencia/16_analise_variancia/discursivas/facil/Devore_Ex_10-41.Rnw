@@ -1,0 +1,110 @@
+<<echo=FALSE,results=hide>>= 
+if(!require(xtable)){
+ install.packages('xtable')
+}
+library(xtable)
+
+ger.dic <- function(sigmaa   ,# é um escalar numérico
+                    n_rep    ,# é um vetor numérico
+                    trat     ,# é um vetor character
+                    mean_trat)# é um vetor numérico
+{
+  stopifnot(sigmaa     == NULL,
+            n_rep      == NULL,
+            trat       == NULL,
+            mean_trat  == NULL)
+
+ e <- rnorm(n_rep*length(trat),
+            sd = sigmaa)
+ y <- mean_trat + e
+
+ dados <- expand.grid(Tratamentos = trat,
+                      Repeticoes  = 1:n_rep)
+ dados$Resposta <- y
+
+ return(dados)
+}
+
+sigmaa <- round(sample(seq(0.3,2,l=10),
+                size=1),
+                2)
+n_rep <- sample(3:5,
+            size=1)
+trat <- factor(1:4)
+mean_trat <- round(rnorm(4,85,sigmaa),2)
+
+dados <- ger.dic(sigmaa,
+                 n_rep,
+                 trat,
+                 mean_trat)
+
+alpha <- sample(seq(0.01,0.20,0.01),
+                size=1)
+
+@ 
+ 
+\begin{question} 
+  Quatro laboratórios (1-4) são selecionados aleatoriamente de uma ampla população e cada um é solicitado a determinar \Sexpr{n_rep} porcentagens de álcool metílico em amostras de um composto extraído de um único lote. Com base nos dados a seguir, as diferenças entre os laboratórios são uma fonte de variação na porcentagem de álcool metílico? Faça uma análise de resíduos para validar a anova. Detalhe todos os cálculos para sustentar sua resposta. Utilize um nível \Sexpr{alpha} de significância.
+
+<<echo=F,results=tex>>=
+print(xtable(dados),
+      include.rownames=FALSE)
+@
+
+\end{question}  
+ 
+\begin{solution} 
+
+Vamos fazer uma análise de variâncias para verificar se houve diferenças entre os laboratórios.
+
+<<echo=FALSE,results=tex>>=
+mod <- aov(Resposta ~ Tratamentos,
+           dados)
+pvalor <- summary(mod)[[1]][1,5]
+
+ifelse(pvalor <= alpha,
+       respo <- c('menor','houve'),
+       respo <- c('maior','não houve'))
+
+print(xtable(mod),
+      table.placement='H')
+@
+
+Como o pvalor foi \Sexpr{respo[1]} que alfa, concluímos que \Sexpr{respo[2]} variação significativa entre os laboratórios.
+
+Vamos avaliar os pressupostos.
+
+Avaliando a normalidade.
+
+<<echo=FALSE, fig=TRUE>>=
+erro <- residuals(mod)
+qqnorm(erro)
+qqline(erro)
+@
+
+Utilizando o teste de shapiro-wilk.
+
+<<echo=FALSE>>=
+shapiro.test(erro)
+@
+
+Avaliando a homocedasticidade.
+
+<<echo=FALSE, fig=TRUE>>=
+plot(erro ~ fitted(mod))
+abline(h=0,col='red')
+@
+
+Utilizando o teste F-máximo de Hartley.
+
+<<echo=FALSE>>=
+variancias <- with(dados,tapply(Resposta,Tratamentos,var))
+Fmax <- max(variancias)/min(variancias)
+pf(Fmax,n_rep - 1, n_rep - 1, lower.tail=FALSE)
+@
+
+\end{solution} 
+ 
+%% META-INFORMATION 
+%% \extype{string} 
+%% \exsolution{"Aberta - texto"}  

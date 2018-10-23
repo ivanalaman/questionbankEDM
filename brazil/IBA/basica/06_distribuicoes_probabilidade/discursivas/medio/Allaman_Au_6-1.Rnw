@@ -1,0 +1,47 @@
+<<echo=FALSE,results=hide>>= 
+## Pacotes necessários
+#---------------------
+
+## Programando os dados
+alpha = trunc(runif(1,30,50))
+betaa = trunc(runif(1,2,6))
+X = trunc(runif(1,100,150))
+Ex = alpha*betaa
+varx = alpha*betaa^2
+desv = round(sqrt(varx),3)
+
+aucondi = list(c('máximo','<'),
+               c('minimo','>'))
+condi = unlist(sample(aucondi,size=1))
+
+zcalc = round((X - Ex)/desv,4)
+
+if(condi[1] == 'máximo'){
+  pvalue = round(pnorm(zcalc),3)
+} else {
+  pvalue = round(pnorm(zcalc,lower.tail=F),3)
+}
+
+## Programando as questões
+#-------------------------
+@ 
+ 
+\begin{question} 
+  Suponha que a distribuição do tempo $X$ (em horas) gasto pelos alunos de certa universidade em um projeto específico seja gama com parâmetro $\alpha = \Sexpr{alpha}$ e $\beta = \Sexpr{betaa}$. Em virtude de $\alpha$ ser grande, pode-se demonstrar que $X$ possui distribuição aproximadamente normal. Use esse fato para calcular a probabilidade de um aluno selecionado aleatoriamente gastar no \Sexpr{condi[1]} $\Sexpr{X}$ horas no projeto. Considere os seguintes fatos sobre a distribuição gama: $E(X)=\alpha \cdot \beta$ e $VAR(X)=\alpha \cdot \beta^2$.
+\end{question}  
+ 
+\begin{solution} 
+Se X é aproximadamente normal, então podemos padronizar a variável X em normal padrão. Então,
+
+\begin{eqnarray*}
+  Z &=& \frac{\Sexpr{X} - \Sexpr{Ex}}{\Sexpr{desv}} \\
+  &=& \Sexpr{zcalc}
+\end{eqnarray*}
+
+Utilizando qualquer aplicativo ou tabelas prontas temos que $P(X \Sexpr{condi[2]} \Sexpr{X}) = P(Z \Sexpr{condi[2]} \Sexpr{zcalc}) = \Sexpr{pvalue}$.
+\end{solution} 
+ 
+%% META-INFORMATION 
+%% \extype{num} 
+%% \exsolution{\Sexpr{pvalue}}  
+%% \extol{0.01}

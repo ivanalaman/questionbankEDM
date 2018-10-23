@@ -1,0 +1,44 @@
+\begin{question} 
+Representemos por $\bar{x}_{n}$ a média amostral para a amostra $x_1, \cdots, x_n$ e represente por $\bar{x}_{n+1}$ essas quantidades quando uma observação adicional $x_{n+1}$ é acrescentada a amostra. Mostre como $\bar{x}_{n+1}$ pode ser calculado a partir de $\bar{x}$ e $x_{n+1}$.
+
+\end{question}  
+ 
+\begin{solution} 
+  Vamos utilizar o método da indução para fazer a demonstração pedida. A Seja $k$ uma quantidade qualquer de elementos da amostra. Então, a média aritmética de $k$ termos é igual a:
+
+\[
+\bar{x}_{k} = \frac{\sum_{k=1}^{n}}{n}
+\]
+
+Se $k = 2$, tem-se:
+
+\[
+\bar{x}_2 = \frac{x_1 + x_2}{2}
+\]
+
+Se $k = 3$, tem-se:
+
+\[
+\bar{x}_3 = \frac{x_1 + x_2 + x_3}{3} 
+\]
+
+Se $k = n$, tem-se:
+
+\[
+\bar{x}_{n} = \frac{x_1 + x_2 + \cdots + x_n}{n} 
+\]
+
+Se $k = n+1$, tem-se:
+
+\begin{eqnarray*}
+\bar{x}_{n+1} &=& \frac{x_1 + x_2 + \cdots + x_n + x_{n+1}}{n+1}\\
+&=& \frac{(x_1 + x_2 + \cdots + x_n) \cdot (1 + \frac{x_{n + 1}}{x_1 + \cdots + x_n})}{n \cdot (1 + 1/n )} \\
+&=& \frac{x_1 + \cdots + x_n}{n} \cdot \frac{1 + \frac{x_{n+1}}{x_1 + \cdots + x_n}}{1 + 1/n} \\
+&=& \frac{n\bar{x}_n + x_{n+1}}{n+1}
+\end{eqnarray*}
+ 
+\end{solution} 
+ 
+%% META-INFORMATION 
+%% \extype{string} 
+%% \exsolution{"Aberta - texto"}  

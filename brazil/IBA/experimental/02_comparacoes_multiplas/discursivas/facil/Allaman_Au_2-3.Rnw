@@ -1,0 +1,81 @@
+<<echo=FALSE, results=hide>>=
+## Pacotes necessários
+if(!require(xtable)){
+  install.packages(xtable)
+}
+
+if(!require(multcomp)){
+  install.packages(multcomp)
+}
+
+## Programando os dados
+tauu = round(rnorm(6,0.4,0.1),2) * sample(c(-1,-1,1,1,1,1),
+					    size = 6) 
+
+dados <- ger.design(mu     = 20,
+                    sigmaa = 0.9,
+		    repp   = 6,
+		    tau    = tauu)
+names(dados) <- c('Tratamentos','Rep','GanhoD')
+levels(dados$Tratamentos) <- 1:6
+
+mod <- aov(GanhoD ~ Tratamentos, dados)
+
+testDun <- glht(mod,
+                linfct = mcp(Tratamentos = "Dunnett"))
+
+aux_res <- summary(testDun)
+res <- round(c(aux_res$test$pvalues),3)
+names(res) <- names(aux_res$test$tsta)
+
+alt2 <- sample(res,size=1)
+aux_nomealt2 <- names(alt2)
+nomealt2 <- gsub('-','versus',aux_nomealt2)
+
+alfa <- sample(seq(0.01,0.1,0.01),size=1)
+
+alt3 <- ifelse(alt2 <= alfa,'sim','não')
+
+## Programando as questões
+questions <- solutions <- NULL 
+type <- NULL  
+questions[1] <- "Qual método de comparação múltipla é o mais adequado para responder a hipótese do pesquisador? A resposta deve ser escrita/digitada exatamente como uma das seguintes alternativas:constrastes, dunnett, tukey, lsd, scott."
+solutions[1] <- 'dunnett'
+type[1] <- "string" 
+questions[2] <- paste("Qual foi o p-valor da seguinte comparação: ",
+                      nomealt2,
+                      "?")
+solutions[2] <- c(alt2)
+type[2] <- "num"  
+questions[3] <- paste("Considerando um nível de significância de ",
+                      alfa,
+                      ", a comparação da alternativa anterior foi significativa? Escreva/Digite sim ou não.")
+solutions[3] <- alt3
+type[3] <- "string"  
+@ 
+
+\begin{question} 
+  Um experimento foi conduzido para estudar o efeito da farinha de alfafa na dieta de perus machos (pintainhos). Foram seis tratamentos. O tratamento 1 foi considerado o controle e do segundo ao sexto tratamento continha farinha de alfafa de dois diferentes tipos em diferentes proporções. As unidades experimentais consistiam em 36 baias de oito aves cada. A variável resposta foi o ganho de peso médio diário (g/dia) de 7 a 14 dias de idade. Supondo que o pesquisador esteja interessado em verificar quais tratamentos de alfafa difere do controle, responda as questões abaixo. Utilize três casas de aproximação.
+
+<<echo=FALSE,results=tex>>=
+print(xtable(dados),
+      include.rownames = FALSE,
+      table.placement = 'H')
+@
+
+<<echo=FALSE, results=tex>>= 
+answerlist(questions) 
+@  
+
+\end{question}  
+
+\begin{solution} 
+<<echo=FALSE, results=tex>>=  
+answerlist(format(solutions))  
+@  
+
+\end{solution}  
+%% META-INFORMATION  
+%% \extype{cloze}  
+%% \exsolution{\Sexpr{paste(solutions, collapse = "|")}}  
+%% \exclozetype{\Sexpr{paste(type, collapse = "|")}}

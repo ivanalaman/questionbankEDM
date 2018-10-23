@@ -1,0 +1,32 @@
+<<echo=FALSE, results=hide>>=  
+## Pacotes necessários
+
+## Programando os dados
+
+## Programando as questões
+@ 
+
+\begin{question} 
+  Uma empresa farmacêutica realiza um experimento para comparar 5 medicamentos. Trinta animais estão disponíveis para o experimento. Cada droga é injetada em 6 animais selecionados aleatoriamente. Todos os animais são muito semelhantes. Após um período de tempo adequado, são recolhidas uma amostras de sangue de cada animal. A leitura de cada análise representa a observação a ser usada para a análise estatística deste experimento.
+\begin{answerlist}
+  \item Qual é o tipo de delineamento experimental utilizado?
+  \item Escreva o modelo estatístico de acordo com o delineamento adotado.
+  \item Com base no modelo estatístico descrito, faça a tabela da ANOVA indicando as fontes de variação e os graus de liberdade.
+  \item Usando a tabela da ANOVA, indique como devemos testar a hipótese de que há diferenças entre as drogas.
+\end{answerlist}
+\end{question}  
+
+\begin{solution} 
+
+\begin{answerlist}
+  \item Delineamento inteiramente ao acaso.
+  \item $y_{ik} = \mu + \tau_i + e_{ik}$.
+  \item Aberta.
+  \item QMtrats/QMerro.
+\end{answerlist}
+\end{solution}  
+
+%% META-INFORMATION  
+%% \extype{cloze}
+%% \exsolution{Aberta.|Aberta.|Aberta.|Aberta.}  
+%% \exclozetype{string|string|string|string}

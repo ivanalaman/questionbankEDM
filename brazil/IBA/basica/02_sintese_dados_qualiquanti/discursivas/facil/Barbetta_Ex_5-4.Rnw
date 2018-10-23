@@ -1,0 +1,96 @@
+<<echo=FALSE>>=
+## Pacotes necessários
+if(!require(fdth)){
+ install.packages('fdth')
+}
+if(!require(xtable)){
+ install.packages('xtable')
+}
+
+library(fdth)
+library(xtable)
+
+## Programando os dados
+n <- sample(seq(10,14),
+            1)
+
+aux_muEM <- seq(43,46,
+              length=20)
+mu <- sample(aux_muEM,
+             1)
+
+aux_sigmaEM <- seq(5,10,
+                 length=20)
+sigma <- sample(aux_sigmaEM,
+                1)
+
+EM <- ceiling(rnorm(n,
+            mu,
+            sigma))
+
+medidasEM <- round(c(mean(EM),sd(EM),sd(EM)/mean(EM)*100),2)
+
+aux_muHI <- seq(38,42,
+              length=20)
+muHI <- sample(aux_muHI,
+             1)
+
+aux_sigmaHI <- seq(5,10,
+                 length=20)
+sigmaHI <- sample(aux_sigmaHI,
+                1)
+
+HI <- ceiling(rnorm(n,
+            muHI,
+            sigmaHI))
+            
+medidasHI <- round(c(mean(HI),sd(HI),sd(HI)/mean(HI)*100),2)
+
+dad = data.frame(EM,HI) 
+
+tabs <- fdt(dad)
+
+## Programando as questões
+questions <- solutions <- NULL 
+type <- NULL  
+questions[1] <- "Utilizando o critério de Sturges e o cálculo dos limites das classes ensinado em sala de aula, qual o limite inferior da segunda classe da tabela de distribuição de frequências para o Departamento de Engenharia Mecânica?" 
+solutions[1] <- round(tabs$EM$breaks[1] + tabs$EM$breaks[3],2)
+type[1] <- "num"
+
+questions[2] <- "Utilizando o critério de Sturges e o cálculo dos limites das classes ensinado em sala de aula, qual é o comprimento de classe (h) utilizado na tabela de distribuição de frequências para o Departamento de história?"  
+solutions[2] <- round(tabs$HI$breaks[3],2)  
+type[2] <- "num" 
+@
+
+\begin{question}
+Os dados a seguir são medidas da \textit{identidade social} que os professores sentem em relação ao seu departamento de ensino. Foram observadas duas amostras de \Sexpr{n} professores: uma no Departamento de Engenharia Mecânica e a outra no Departamento de História, ambas na UFSC. Pelo instrumento utilizado, pode-se dizer que quanto maior o valor, maior é a identificação social do professor com o departamento de ensino a que pertence.
+
+<<echo=F, results=tex>>=
+print(xtable(dad,
+      caption = "Dados da engenharia mecânica (EM) e da história (HI)"),
+      table.placement = 'H',
+      include.rownames = FALSE)
+@
+
+<<echo=FALSE, results=hide, results=tex>>= 
+answerlist(questions) 
+@ 
+
+\end{question}
+
+\begin{solution}
+
+<<echo=F>>=
+tabs
+@
+
+<<echo=FALSE, results=hide, results=tex>>=  
+answerlist(format(solutions))  
+@
+
+\end{solution}
+
+%% META-INFORMATION  
+%% \extype{cloze}  
+%% \exsolution{\Sexpr{paste(solutions, collapse = "|")}}  
+%% \exclozetype{\Sexpr{paste(type, collapse = "|")}}

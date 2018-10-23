@@ -1,0 +1,70 @@
+\begin{question} 
+  Um indivíduo tem $n$ chaves, das quais somente uma abre uma porta. Ele seleciona, a cada tentativa, uma chave ao acaso sem reposição e tenta abrir a porta. Qual a probabilidade de que ele abra a porta na $k-$ésima tentativa ($k=1,2,\cdots,n$)?
+\end{question}  
+ 
+\begin{solution} 
+  Por indução matemática, vamos encontrar a probabilidade pedida. Suponha que $q$ é o número de chaves e $k$ seja o número de tentativas sem reposição. 
+ Vamos supor que nós temos $q = 2$ chaves. Então:
+ Para $k = 1$ tem-se:
+
+ \[
+   P(abrir) = \frac{1}{2}
+ \]  
+ 
+ Para $k = 2$ tem-se:
+
+ \[
+   P(abrir) = \frac{1}{1}
+ \]
+
+ Vamos supor agora que tenhamos $q = 3$ chaves. Então:
+
+ Para $k = 1$ tem-se:
+
+ \[
+   P(abrir) = \frac{1}{3}
+ \]  
+ 
+ Para $k = 2$ tem-se:
+
+ \[
+   P(abrir) = \frac{1}{2}
+ \]
+ 
+ Para $k = 3$ tem-se:
+
+ \[
+   P(abrir) = \frac{1}{1}
+ \]
+
+ Vamos supor agora que tenhamos $q = n$ chaves. Então:
+
+  Para $k = 1$ tem-se:
+
+ \[
+   P(abrir) = \frac{1}{n}
+ \]  
+ 
+ Para $k = 2$ tem-se:
+
+ \[
+   P(abrir) = \frac{1}{n-1}
+ \]
+ 
+ Para $k = 3$ tem-se:
+
+ \[
+   P(abrir) = \frac{1}{n-2}
+ \]
+ 
+ Para $k = K$ tem-se:
+
+ \[
+   P(abrir) = \frac{1}{n - K + 1}
+ \]
+
+\end{solution} 
+ 
+%% META-INFORMATION 
+%% \extype{string} 
+%% \exsolution{"Aberta - texto"}  

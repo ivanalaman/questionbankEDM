@@ -1,0 +1,45 @@
+<<echo=FALSE,results=hide>>= 
+ questions <- solutions <- NULL  
+ questions[1] <-"Diferentes tipos de rações no ganho de peso de aves." 
+ solutions[1] <- FALSE
+ questions[2] <- "Doses de nitrogênio para avaliar a produtividade de uma forrageira." 
+ solutions[2] <- FALSE
+ questions[3] <- "Diferentes  tipos de raças de vacas leiteiras para avaliar a produção de leite em kg." 
+ solutions[3] <- FALSE 
+ questions[4] <- "Diferentes tipos de granulometria de rações para avaliar o peso final de aves." 
+ solutions[4] <- FALSE
+ questions[5] <- "Nenhuma alternativa está correta." 
+ solutions[5] <- TRUE
+ o <- sample(1:5) # serve para embaralhar as alternativas 
+ questions <- questions[o] 
+ solutions <- solutions[o] 
+@ 
+ 
+\begin{question} 
+ Qual das opções abaixo \textbf{não} é considerado um \textbf{tratamento}?
+
+\begin{answerlist} 
+ \item \Sexpr{questions[1]} 
+ \item \Sexpr{questions[2]} 
+  \item \Sexpr{questions[3]} 
+  \item \Sexpr{questions[4]} 
+ \item \Sexpr{questions[5]} 
+\end{answerlist}  
+
+\end{question}  
+ 
+\begin{solution} 
+
+\begin{answerlist} 
+ \item \Sexpr{mchoice2text(solutions[1])} 
+ \item \Sexpr{mchoice2text(solutions[2])} 
+ \item \Sexpr{mchoice2text(solutions[3])} 
+ \item \Sexpr{mchoice2text(solutions[4])} 
+ \item \Sexpr{mchoice2text(solutions[5])} 
+\end{answerlist} 
+
+\end{solution} 
+ 
+%% META-INFORMATION 
+%% \extype{schoice} 
+%% \exsolution{\Sexpr{mchoice2string(solutions, single=TRUE)}}  

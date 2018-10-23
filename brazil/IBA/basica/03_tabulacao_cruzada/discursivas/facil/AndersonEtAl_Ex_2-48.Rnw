@@ -1,0 +1,139 @@
+<<echo=FALSE,results=hide>>= 
+## Pacotes necessários
+if(!require(xtable)){
+ install.packages('xtable')
+}
+if(!require(fdth)){
+ install.packages('fdth')
+}
+
+library(xtable)
+library(fdth)
+
+## Programando os dados
+n <- sample(40:60,1)
+
+ocupa <- sample(c('Advogado','Fisioterapeuta','Analista','Marceneiro'),
+                size=n,
+                prob=c(sample(seq(0.1,0.3,0.1),1),
+                       sample(seq(0.2,0.5,0.1),1),
+                       sample(seq(0.2,0.4,0.1),1),
+                       sample(seq(0.3,0.8,0.1),1)),
+                replace=T)
+
+satis  <- round(runif(n,
+                min=18,
+                max=90))
+
+fdt_cross <- function(x,y,k){
+ # x: the numeric variable
+ # y: the categorical variable
+ require(fdth)
+ if(is.numeric(x)){
+  auxx1 <- fdt(x,k = k)$breaks
+  auxx2 <- cut(x,
+               br=seq(auxx1[1],
+                      auxx1[2],
+                      auxx1[3]),
+               right=auxx1[4],
+               dig.lab=nchar(as.character(round(max(auxx1[2]),
+                                                2))))     
+ } else stop('x should be numeric!')
+
+ res <- table(y,auxx2)
+ return(res)
+} 
+
+dados <- data.frame('Ocupação'=ocupa,
+                    'Satisfação'=satis)
+
+
+tab <- fdt_cross(dados[,2],dados[,1]) 
+ptab <- prop.table(tab,margin=1)
+
+alta <- attr(ptab,"dimnames")
+alta1 <- alta[[2]][3]
+alta11 <- strsplit(alta1,',')
+alta111 <- gsub(')','',unlist(alta11)[2])
+
+altb <- addmargins(ptab[,1:2])
+altb1 <- which.max(altb[1:4,3])
+
+altc <- addmargins(ptab[,3:dim(tab)[2]])
+altc1 <- which.max(altc[1:4,6])
+
+
+
+## Programando as questões
+#-------------------------
+questions <- solutions <- type <- NULL
+questions[1] <- paste('Qual a proporção de Fisioterapeutas que apresentaram uma pontuação de até',
+                      alta111,
+                      '? Coloque a resposta em decimal')
+solutions[1] <- round(sum(ptab[3,1:3]),3)
+type[1] <- 'num'
+
+questions[2] <- 'Se grande parte (acima de 50\\%) dos profissionais apresentarem uma pontuação de até 30, podemos dizer então que tais profissionais estão insatisfeitos com a profissão. Nesta pesquisa, qual foi a profissão com maior percentual de insatisfeitos?'
+solutions[2] <- names(altb1)
+type[2] <- 'string'
+
+questions[3] <- 'Considerando o mesmo contexto da alternativa b), qual foi a profissão com maior percentual de satisfeitos?'
+solutions[3] <- names(altc1)
+type[3] <- 'string'
+@ 
+ 
+\begin{question} 
+Foi realizado um estudo a respeito da satisfação profissional de quatro ocupações. A satisfação prossional foi medida usando-se um questionário de 18 perguntas, e cada questão recebia uma pontuação de 1 a 5 para cada resposta, com as pontuações mais altas indicando maior satisfação. A soma dos pontos obtidos nas 18 questões fornece a satisfação profissional de cada indivíduo da amostra. Os dados são os seguintes:
+
+<<echo=FALSE,results=tex>>=
+print(xtable(dados),
+      table.placement = 'H',
+      tabular.environment = 'longtable',
+      floating = FALSE,
+      include.rownames = FALSE)
+@
+
+Faça uma tabulação cruzada da ocupação e do nível de satisfação profissional. Considerando a linha como referência, calcule as porcentagens de sua tabulação cruzada. Logo, responda as seguintes questões.
+
+<<echo=FALSE, results=hide, results=tex>>= 
+answerlist(questions) 
+@  
+
+\end{question}  
+ 
+\begin{solution} 
+  Usando o pacote fdth juntamente com a função abaixo, conseguimos resolver isto de letra. Segue a solução:
+
+<<echo=F>>=
+fdt_cross <- function(x,y,k){
+ # x: the numeric variable
+ # y: the categorical variable
+ require(fdth)
+ if(is.numeric(x)){
+  auxx1 <- fdt(x,k = k)$breaks
+  auxx2 <- cut(x,
+               br=seq(auxx1[1],
+                      auxx1[2],
+                      auxx1[3]),
+               right=auxx1[4],
+               dig.lab=nchar(as.character(round(max(auxx1[2]),
+                                                2))))     
+ } else stop('x should be numeric!')
+
+ res <- table(y,auxx2)
+ return(res)
+} 
+ 
+ptab
+@
+
+<<echo=FALSE, results=hide, results=tex>>=  
+answerlist(format(solutions))  
+@  
+
+\end{solution} 
+  
+%% META-INFORMATION
+%% \extype{cloze}
+%% \exsolution{\Sexpr{paste(solutions, collapse = "|")}}   
+%% \exclozetype{\Sexpr{paste(type, collapse = "|")}}

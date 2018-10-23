@@ -1,0 +1,59 @@
+<<echo=FALSE,results=hide>>= 
+questions <- solutions <- NULL  
+questions[1] <- "Os experimentos fatoriais são delineamentos e não formas de montar e analisar experimentos. " 
+solutions[1] <- FALSE 
+questions[2] <- "Em função de serem delineamentos não se pode estudar mais de um fator." 
+solutions[2] <- FALSE 
+questions[3] <- " Podem ser executados em qualquer um dos delineamentos (DIC, DBC, DQL, etc) onde se estudam simultaneamente dois ou mais fatores." 
+solutions[3] <- TRUE 
+questions[4] <- " São mais eficientes do que os experimentos simples, com um só conjunto de tratamentos, permitindo retirar conclusões mais abrangentes." 
+solutions[4] <- TRUE
+questions[5] <- "Cada nível de um fator se combina com cada nível(eis) do(s) outro(s) fator(es), constituindo um tratamento." 
+solutions[5] <- TRUE 
+questions[6] <- "Efeito principal é o efeito de cada fator independentemente da influência do(s) outro(s) fator(es)." 
+solutions[6] <- TRUE
+questions[7] <- "Efeito da interação é a resposta não diferencial da combinação de tratamentos que se deve aos efeitos principais. Ocorre interação quando a resposta, ou efeitos, dos níveis de um fator não são modificados pelos níveis do(s) outro(s) fator(es)."
+solutions[7] <- FALSE 
+questions[8] <- "A grande vantagem dos experimentos fatoriais é a possibilidade do estudo das interações, embora apresente pouca versatilidade, em função de ser um delineamento experimental que apresenta restrições na casualização."
+solutions[8] <- FALSE 
+questions[9] <- "Um fatorial $3^1 \\\\times 2^2$ se caracteriza pela combinação de 3 fatores (soma dos expoentes),  sendo um fator com 3 níveis e os outros dois fatores com 2 níveis, resultando assim em 12 combinações que constituem os tratamentos. Estes devem ser repetidos tantas vezes quanto for necessário de acordo com o planejamento do experimento."
+solutions[9] <- TRUE
+
+o <- sample(1:9) # serve para embaralhar as alternativas 
+questions <- questions[o] 
+solutions <- solutions[o] 
+@ 
+ 
+\begin{question} 
+Considerando o assunto \textbf{experimentos fatoriais}, assinale (X) nas alternativas verdadeiras.
+ 
+\begin{answerlist} 
+\item \Sexpr{questions[1]} 
+\item \Sexpr{questions[2]} 
+\item \Sexpr{questions[3]} 
+\item \Sexpr{questions[4]} 
+\item \Sexpr{questions[5]} 
+\item \Sexpr{questions[6]} 
+\item \Sexpr{questions[7]} 
+\item \Sexpr{questions[8]} 
+\item \Sexpr{questions[9]} 
+\end{answerlist}  
+\end{question}  
+ 
+\begin{solution} 
+\begin{answerlist} 
+\item \Sexpr{mchoice2text(solutions[1])} 
+\item \Sexpr{mchoice2text(solutions[2])} 
+\item \Sexpr{mchoice2text(solutions[3])} 
+\item \Sexpr{mchoice2text(solutions[4])} 
+\item \Sexpr{mchoice2text(solutions[5])} 
+\item \Sexpr{mchoice2text(solutions[6])} 
+\item \Sexpr{mchoice2text(solutions[7])} 
+\item \Sexpr{mchoice2text(solutions[8])} 
+\item \Sexpr{mchoice2text(solutions[9])} 
+\end{answerlist} 
+\end{solution} 
+ 
+%% META-INFORMATION 
+%% \extype{mchoice} 
+%% \exsolution{\Sexpr{mchoice2string(solutions, single=FALSE)}}  
