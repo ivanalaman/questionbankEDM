@@ -4,18 +4,30 @@ if(!require(xtable)){
   install.packages(xtable)
 }
 
+if(!require(gexp)){
+  install.packages(gexp)
+}
+ 
 ## Programando os dados
-tauu = round(rnorm(4,0.50,0.1),2) * sample(c(-1,-1,1,1,1),
-					    size = 4) 
-betta = round(rnorm(5,0.10,0.05),2) * sample(c(-1,-1,1,1,1),
-                                            size = 5) 
+mu <- round(runif(1,min=4.8,max=6.1),2)
+sig <- round(runif(1,min=0.2,max=1.1),2)
+r <- trunc(runif(1,min=1,max=3))
+tauu <- trunc(runif(4, min=-3,max=3))
+betta <- trunc(runif(4,min=-2,max=2))
+err <- matrix(rnorm(r*length(tauu)*length(betta),
+                    sd=sig),
+              ncol=1) 
 
-dados <- ger.design(mu     = 5.7,
-                    sigmaa = 0.4,
-                    tau    = tauu,
-                    betaa  = betta,
-                    type   = 'DBC')
-names(dados) <- c('Droga','Blocos','linf')
+dad <- gexp(mu    = mu,
+            err   = err,
+            r     = r,
+            fe    = list(f1=tauu),
+            blke  = betta,
+            fl    = list(Droga = c('A','B','C','D')),
+            type  = 'RCBD')
+dados <- dad$dfm
+
+names(dados) <- c('Droga','Rep','Blocos','linf')
 
 mod <- aov(linf ~ Blocos + Droga, dados)
 res <- summary(mod)
@@ -24,7 +36,7 @@ shapiro <- shapiro.test(residuals(mod))
 
 variancias <- with(dados,tapply(linf,Droga,var))
 Fmax <- max(variancias)/min(variancias)
-pvalor <- pf(Fmax,4,4,lower.tail=FALSE)
+pvalor <- pf(Fmax,9,9,lower.tail=FALSE)
 
 ## Programando as questões
 questions <- solutions <- NULL 

@@ -1,0 +1,14 @@
+<<echo=FALSE,results=hide>>= 
+@ 
+ 
+\begin{question} 
+O que você entende por \textbf{delineamento experimental} e quais são os principais?
+\end{question}  
+ 
+\begin{solution} 
+Delineamento experimental é a forma como distribuímos os tratamentos nas unidades experimentais. Os principais delineamentos utilizados são: delineamento inteiramente ao acaso, delineamento em blocos ao acaso e delineamento em quadrado latino.
+\end{solution} 
+ 
+%% META-INFORMATION 
+%% \extype{string} 
+%% \exsolution{"Aberta - texto"}  

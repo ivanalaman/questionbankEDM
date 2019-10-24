@@ -1,21 +1,29 @@
 <<echo=FALSE, results=hide>>=
 ## Pacotes necessários
 if(!require(xtable)){
-  install.packages(xtable)
+  install.packages('xtable')
 }
 
 if(!require(TukeyC)){
-  install.packages(TukeyC)
+  install.packages('TukeyC')
+}
+
+if(!require(gexp)){
+  install.packages('gexp')
 }
 
 ## Programando os dados
-tauu = round(rnorm(5,0.4,0.1),2) * sample(c(-1,-1,1,1,1),
-					    size = 5) 
+mu <- round(runif(1,min=2.51,max=2.73),2)
+sigma <- round(runif(1,min=0.11,max=0.21),2)
+r <- trunc(runif(1,min=3,max=5))
+tauu  <- trunc(runif(5,min=-3,max=3))
+erro <- matrix(rnorm(r*length(tauu),sd=sigma),ncol=1)
 
-dados <- ger.design(mu     = 2.61,
-                    sigmaa = 0.2,
-		    repp   = 5,
-		    tau    = tauu)
+dad <- gexp(mu    = mu,
+              err   = erro,
+              r     = r,
+              fe    = list(f1=tauu))
+dados <- dad$dfm
 names(dados) <- c('Raças','Rep','Soro')
 
 mod <- aov(Soro ~ Raças, dados)
@@ -61,7 +69,7 @@ type[5] <- "string"
 @ 
 
 \begin{question} 
-  Considere o experimento para estudar a mobilidade de proteína no soro de animais de uma determinada espécie. Os tratamentos foram constituídos de cinco raças e foram usados 5 animais por raça.
+  Considere o experimento para estudar a mobilidade de proteína no soro de animais de uma determinada espécie. Os tratamentos foram constituídos de cinco raças e foram usados \Sexpr{r} animais por raça.
 
 <<echo=FALSE,results=tex>>=
 print(xtable(dados),

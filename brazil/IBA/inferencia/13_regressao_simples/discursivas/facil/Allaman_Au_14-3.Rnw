@@ -1,0 +1,14 @@
+<<echo=FALSE,results=hide>>= 
+@ 
+ 
+\begin{question} 
+Qual medida estatística tem uma relação direta com o coeficiente de determinação ($r^2$) de uma regressão linear simples?
+\end{question}  
+ 
+\begin{solution} 
+É o coeficiente de correlação de pearson ($r$).
+\end{solution} 
+ 
+%% META-INFORMATION 
+%% \extype{string} 
+%% \exsolution{"Aberta - texto"}  

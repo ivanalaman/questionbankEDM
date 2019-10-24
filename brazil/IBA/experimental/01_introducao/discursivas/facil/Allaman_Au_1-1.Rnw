@@ -1,0 +1,14 @@
+<<echo=FALSE,results=hide>>= 
+@ 
+ 
+\begin{question} 
+Quais são os princípios básico da experimentação? Discorra sobre cada um deles.
+\end{question}  
+ 
+\begin{solution} 
+Os três princípios básicos da experimentação são: repetição, casualização e controle local.
+\end{solution} 
+ 
+%% META-INFORMATION 
+%% \extype{string} 
+%% \exsolution{"Aberta - texto"}  

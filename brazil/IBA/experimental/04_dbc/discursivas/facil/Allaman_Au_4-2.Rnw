@@ -1,0 +1,128 @@
+<<echo=FALSE, results=hide>>=  
+## Pacotes necessários
+if(!require(xtable)){
+  install.packages("xtable")
+  library("xtable")
+}
+
+if(!require(gexp)){
+  install.packages("gexp")
+  library("gexp")
+}
+
+if(!require(nortest)){
+  install.packages("nortest")
+  library("nortest")
+}
+ 
+## Programando os dados
+alpha <- round(runif(1,min=0.01,max=0.1),2)*100
+
+sig <- round(runif(1,min=0.2,max=1.1),2)
+r <- trunc(runif(1,min=1,max=3))
+
+tauu <- c(runif(1,min=40,max=90),rep(0,6))
+tauu[2:3] <- trunc(runif(2,min=0,max=4))
+betta <- trunc(runif(4,min=1,max=3))
+err <- matrix(rnorm(r*length(tauu)*length(betta),
+                    sd=sig),
+              ncol=1) 
+
+dad <- gexp(mu    = NULL,
+            err   = err,
+            r     = r,
+            fe    = list(f1=tauu),
+            blke  = betta,
+            blkl  = list(Blocos=paste('B',1:4,sep='')),
+            fl    = list(Densidades = ordered(c(0,4,8,16,32,64,128))),
+            contrasts=list(f1=contr.poly(7),
+                           Blocos=diag(4)),
+            type  = 'RCBD')
+dados <- dad$dfm[,1:3]
+Y1 <- round(dad$X%*%c(tauu[1],betta,tauu[-1]) + err,2)
+dados$Y1 <- Y1
+dados$Densidades <- as.ordered(dados$Densidades)
+
+mod <- aov(Y1 ~ Blocos + Densidades, dados)
+
+shapiro <- shapiro.test(residuals(mod))
+lillie <- lillie.test(residuals(mod))
+
+variancias <- with(dados,tapply(Y1,Densidades,var))
+Fmax <- max(variancias)/min(variancias)
+pvalor <- pf(Fmax,
+             (length(betta)*r)-1,
+             (length(betta)*r)-1,
+             lower.tail=FALSE)
+
+## Programando as questões
+#+------------------------
+@ 
+
+\begin{question} 
+  Um experimento foi conduzido para avaliar a habilidade competitiva da cevada e mensurar a partir de qual densidade de azevém há comprometimento da altura (cm) da cultura. O delineamento utilizado foi o DBC, sendo quatro blocos. Os tratamentos consistiram de diferentes densidades de azevém, sendo estas de 0, 4, 8, 16, 32, 64 e 128 plantas por $m^2$. Faça uma análise completa dos dados considerando um nível de significância de \Sexpr{alpha}\%.
+
+
+<<echo=FALSE,results=tex>>=
+print(xtable(dados),
+      include.rownames = FALSE,
+      table.placement = 'H')
+@
+
+\end{question}  
+
+\begin{solution} 
+
+  Primeiramente vamos fazer uma análise de resíduos. Graficamente temos:
+
+<<echo=FALSE, fig=TRUE>>=
+par(mfrow=c(2,2))
+plot(mod)
+@
+
+Inferencialmente temos:
+
+<<echo=FALSE,results=tex>>=
+tab <- t(as.matrix(c(shapiro$p.value,lillie$p.value,pvalor)))
+colnames(tab) <- c('Shapiro','Lilliefors','Bartley')
+rownames(tab) <- 'P-valor'
+print(xtable(tab),
+      table.placement='H')
+@
+
+Dado que os pressupostos foram satisfeitos, vamos aos resultados.
+
+<<echo=FALSE,results=tex>>=
+res <- summary(mod,
+               split=list('Densidades'=list('L'=1,'Q'=2,'Desvios'=3:6)))
+
+
+ifelse(round(res[[1]]$`Pr(>F)`,4)[4] < alpha/100,
+       regg <- 'quadrático',
+       regg <- 'linear')
+
+print(xtable(res),
+      table.placement='H')
+@
+
+Como podemos observar no quadro da ANOVA, houve efeito \Sexpr{regg} significativo. Vamos então ao ajuste da equação.
+
+<<echo=FALSE,results=tex>>=
+mediaY1 <- with(dados,tapply(Y1,Densidades,mean))
+densi <- as.numeric(names(mediaY1))
+
+if(regg == 'quadrático'){
+  reg <- lm(mediaY1 ~ poly(densi,2))
+  print(xtable(reg),
+        table.placement='H')
+}else{
+  reg <- lm(mediaY1 ~ poly(densi,1))
+  print(xtable(reg),
+        table.placement='H') 
+}
+@
+
+\end{solution}  
+%% META-INFORMATION  
+%% \extype{string}  
+%% \exsolution{"Aberta-texto"}  

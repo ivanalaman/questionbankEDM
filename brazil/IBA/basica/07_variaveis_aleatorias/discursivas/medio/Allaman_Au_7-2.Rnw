@@ -1,0 +1,44 @@
+<<echo=FALSE, results=hide>>= 
+## Pacotes necessários
+#---------------------
+
+## Programando os dados
+#----------------------
+
+## Programando as questões 
+#----------------------
+@ 
+ 
+\begin{question} 
+  Se X é uma variável aleatória com distribuição Bernoulli, mostre que $E(X) = p$ e $VAR(X) = pq$.
+
+\end{question}  
+ 
+\begin{solution} 
+  Se X é uma variável aleatória discreta, então podemos utilizar a forma geral para cálculo de esperança matemática. Ainda, como X é uma variável Bernoulli, apenas dois valores é possível para tal variável. O valor de 0 no caso de fracasso e 1 no caso de sucesso. Seja então \textbf{p} a probabilidade de sucesso e \textbf{q} a probabilidade de fracasso, tem-se:
+
+  \begin{equation}
+    E(X) = \sum x\cdot p(x)\\
+    = 0 \cdot q + 1 \cdot p\\
+    = p
+  \end{equation}
+
+  Para calcular a variância, precisamos primeiro calcular $E(X^2)$.
+
+  \begin{equation}
+    E(X^2) = \sum x^2\cdot p(x)\\
+    = 0^2 \cdot q + 1^2 \cdot p\\
+    = p
+  \end{equation}
+
+  Logo,
+
+  \begin{equation}
+   VAR(X) = E(X^2) - \{E(X)\}^2\\
+   = p - p^2 = p\cdot(1-p) = p\cdot q
+  \end{equation}
+  
+\end{solution}  
+%% META-INFORMATION  
+%% \extype{string}  
+%% \exsolution{"Aberta-texto"}   

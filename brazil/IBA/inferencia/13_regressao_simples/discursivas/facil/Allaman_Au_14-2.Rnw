@@ -1,0 +1,14 @@
+<<echo=FALSE,results=hide>>= 
+@ 
+ 
+\begin{question} 
+Para calcularmos a variância do erro ($S^2_{erro}$) de uma análise de regressão utilizamos no denominador a quantidade \textbf{n-2} ao invés de \textbf{n-1}. Porquê?
+\end{question}  
+ 
+\begin{solution} 
+Por que já estimamos dois parâmetros, \textbf{a (coeficiente angular)} e \textbf{b (coeficiente linear)}.
+\end{solution} 
+ 
+%% META-INFORMATION 
+%% \extype{string} 
+%% \exsolution{"Aberta - texto"}  

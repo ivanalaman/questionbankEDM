@@ -12,7 +12,7 @@ w     <- colSums(omega)
 freq=table(w)
 prob=prop.table(freq)
 resp <- names(prob)[3]
-resp1 <- round(prob[3],4)
+resp1 <- round(prob[3],3)
 
 ## Programando as questões
 #-------------------------
@@ -35,4 +35,4 @@ Logo, a probabilidade de W = \Sexpr{resp} é de \Sexpr{resp1}.
 %% META-INFORMATION 
 %% \extype{num} 
 %% \exsolution{\Sexpr{resp1}}  
-%% \extol{0.01}
+%% \extol{0.001}

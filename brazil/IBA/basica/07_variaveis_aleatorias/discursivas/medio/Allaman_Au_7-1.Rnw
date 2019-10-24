@@ -1,0 +1,34 @@
+<<echo=FALSE, results=hide>>= 
+## Pacotes necessários
+#---------------------
+
+## Programando os dados
+#----------------------
+
+## Programando as questões 
+#----------------------
+@ 
+ 
+\begin{question} 
+  Seja $\bar{x}$ a média aritmética, mostre que $E(\bar{x}) = \mu$.
+
+\end{question}  
+ 
+\begin{solution} 
+  Tomando $\bar{x}$ como:
+
+  \begin{equation}
+    \bar{x} = \frac{\sum x}{n}
+  \end{equation} 
+
+  Tem-se:
+
+  \begin{equation}
+    E\left(\frac{\sum x}{n} \right) = \frac{1}{n} \cdot E(\sum x) \\
+      = \frac{1}{n} \cdot \sum E(x) = \frac{1}{n} \cdot \sum \mu\\
+      = \frac{1}{n} \cdot n \cdot \mu = \mu
+  \end{equation}
+\end{solution}  
+%% META-INFORMATION  
+%% \extype{string}  
+%% \exsolution{"Aberta-texto"}   

@@ -1,0 +1,92 @@
+<<echo=FALSE,results=hide>>= 
+## Pacotes necessários
+if(!require(xtable)){
+  install.packages('xtable')
+}
+if(!require(truncnorm)){
+  install.packages('truncnorm')
+}
+
+## Programando os dados
+n <- 4:6
+
+cv <- function(x)sd(x)/mean(x)
+
+tA <- round(rtruncnorm(sample(n,1), 
+                 a=0,
+                 mean=as.numeric(sample(4:6,1)),
+                 sd=as.numeric(sample(1:2,1))),2)
+tB <- round(rtruncnorm(sample(n,1), 
+                 a=0,
+                 mean=as.numeric(sample(5:6,1)),
+                 sd=as.numeric(sample(2:4,1))),2)
+tC <- round(rtruncnorm(sample(n,1), 
+                 a=0,
+                 mean=as.numeric(sample(5:9,1)),
+                 sd=as.numeric(sample(1:5,1))),2)
+
+cva <- cv(tA)
+cvb <- cv(tB)
+cvc <- cv(tC)
+
+cvs <- c(cva,cvb,cvc)
+names(cvs) <- c('turma A','turma B', 'turma C')
+
+## Programando as questões
+questions <- solutions <- type <- NULL 
+questions[1] <- "Qual é a média da turma A?" 
+solutions[1] <- round(mean(tA),
+                      3)
+type[1] <- "num" 
+
+questions[2] <- "Qual é a mediana da turma B?" 
+solutions[2] <- round(median(tB),
+                      3)
+type[2] <- "num"  
+
+questions[3] <- "Qual é a variância da turma C?" 
+solutions[3] <- round(var(tC),
+                      3)
+type[3] <- "num"   
+
+questions[4] <- "Que número equivale ao percentil 32 na turma A?" 
+solutions[4] <- round(quantile(tA, prob=0.32, type=2),3)
+type[4] <- "num"   
+
+questions[5] <- "Qual das turmas foi mais homogênea (semelhante)? Justifique sua resposta!!" 
+solutions[5] <- paste("A ",
+                      names(cvs[cvs==min(cvs)]),
+                      " foi a mais homogênea pois apresentou menor CV.",
+                      sep="")
+type[5] <- "string"   
+@ 
+ 
+\begin{question} 
+Considerem as notas de três turmas de estudantes de uma determinada escola.
+ 
+<<echo=FALSE, results=tex>>=
+dados <- data.frame(Turmas = rep(LETTERS[1:3],c(length(tA),length(tB),length(tC))),
+                    Notas = c(tA, tB, tC))
+print(xtable(dados),
+      include.rownames = FALSE,
+      table.placement = 'H')
+@
+
+Responda as seguintes alternativas:
+
+<<echo=FALSE, results=hide, results=tex>>= 
+answerlist(questions) 
+@  
+\end{question}  
+ 
+\begin{solution} 
+<<echo=FALSE, results=hide, results=tex>>=  
+answerlist(format(solutions))  
+@  
+\end{solution} 
+
+%% META-INFORMATION 
+%% \extype{cloze}  
+%% \exsolution{\Sexpr{paste(solutions, collapse = "|")}}   
+%% \exclozetype{\Sexpr{paste(type, collapse = "|")}}
+%% \extol{0.01}

@@ -1,21 +1,29 @@
 <<echo=FALSE, results=hide>>=
 ## Pacotes necessários
 if(!require(xtable)){
-  install.packages(xtable)
+  install.packages('xtable')
 }
 
 if(!require(multcomp)){
-  install.packages(multcomp)
+  install.packages('multcomp')
+}
+
+if(!require(gexp)){
+  install.packages('gexp')
 }
 
 ## Programando os dados
-tauu = round(rnorm(6,0.4,0.1),2) * sample(c(-1,-1,1,1,1,1),
-					    size = 6) 
+mu <- round(runif(1,min=19.8,max=20.3),2)
+sigma <- round(runif(1,min=0.7,max=1),2)
+r <- trunc(runif(1,min=3,max=5))
+tauu  <- trunc(runif(6,min=-3,max=3))
+erro <- matrix(rnorm(r*length(tauu),sd=sigma),ncol=1)
 
-dados <- ger.design(mu     = 20,
-                    sigmaa = 0.9,
-		    repp   = 6,
-		    tau    = tauu)
+dad <- gexp(mu    = mu,
+              err   = erro,
+              r     = r,
+              fe    = list(f1=tauu))
+dados <- dad$dfm
 names(dados) <- c('Tratamentos','Rep','GanhoD')
 levels(dados$Tratamentos) <- 1:6
 
@@ -55,7 +63,7 @@ type[3] <- "string"
 @ 
 
 \begin{question} 
-  Um experimento foi conduzido para estudar o efeito da farinha de alfafa na dieta de perus machos (pintainhos). Foram seis tratamentos. O tratamento 1 foi considerado o controle e do segundo ao sexto tratamento continha farinha de alfafa de dois diferentes tipos em diferentes proporções. As unidades experimentais consistiam em 36 baias de oito aves cada. A variável resposta foi o ganho de peso médio diário (g/dia) de 7 a 14 dias de idade. Supondo que o pesquisador esteja interessado em verificar quais tratamentos de alfafa difere do controle, responda as questões abaixo. Utilize três casas de aproximação.
+  Um experimento foi conduzido para estudar o efeito da farinha de alfafa na dieta de perus machos (pintainhos). Foram seis tratamentos. O tratamento 1 foi considerado o controle e do segundo ao sexto tratamento continha farinha de alfafa de dois diferentes tipos em diferentes proporções. As unidades experimentais consistiam em \Sexpr{r*length(tauu)} baias de oito aves cada. A variável resposta foi o ganho de peso médio diário (g/dia) de 7 a 14 dias de idade. Supondo que o pesquisador esteja interessado em verificar quais tratamentos de alfafa difere do controle, responda as questões abaixo. Utilize três casas de aproximação.
 
 <<echo=FALSE,results=tex>>=
 print(xtable(dados),

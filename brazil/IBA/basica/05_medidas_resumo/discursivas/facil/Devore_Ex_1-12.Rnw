@@ -1,0 +1,81 @@
+<<echo=FALSE,results=hide>>= 
+## Pacotes necessários
+if(!require(xtable)){
+  install.packages('xtable')
+}
+if(!require(fdth)){
+ install.packages('fdth')
+}
+
+library(xtable)
+library(fdth)
+
+## Programando os dados
+n <- sample(seq(6,10,1),
+            1)
+mu <- sample(seq(0.40,0.50,0.01),
+             1)
+sigmaa <- sample(seq(0.02,0.1,0.01),
+                 1)
+vari <- rnorm(n,
+              mu,
+              sigmaa)
+
+medidas <- round(c(media=mean(vari),
+             mediana=median(vari),
+             desvio=sd(vari),
+             cv=sd(vari)/mean(vari)),3)
+
+## Programando as questões
+questions <- solutions <- type <- NULL 
+
+questions[1] <- "Qual o valor da média?" 
+solutions[1] <- round(medidas[1],3)
+type[1] <- "num"                
+ 
+questions[2] <- "Qual o valor da mediana?" 
+solutions[2] <- round(medidas[2],3)
+type[2] <- "num" 
+
+questions[3] <- "Qual o valor do desvio padrão?" 
+solutions[3] <- round(medidas[3],3)
+type[3] <- "num"
+
+questions[4] <- "Qual o valor do coeficiente de variação?" 
+solutions[4] <- round(medidas[4],3)
+type[4] <- "num"
+@ 
+
+\begin{question} 
+
+Os valores seguintes de densidade para diversos tipos de madeira usados em construções foram informados no artigo ``Bolted connection design values based on european yield model'':
+
+<<echo=FALSE, results=tex>>=
+dad = matrix(round(vari,4),ncol=5)
+print(xtable(dad,digits=4),
+       include.rownames=FALSE,
+       include.colnames=FALSE,
+       table.placement= 'H')
+@
+
+Responda as seguintes questões (utilize três casas após a vírgula):
+
+<<echo=FALSE, results=hide, results=tex>>= 
+answerlist(questions) 
+@  
+
+\end{question}  
+ 
+\begin{solution} 
+
+<<echo=FALSE, results=hide, results=tex>>=  
+answerlist(format(solutions))  
+@
+
+\end{solution} 
+ 
+%% META-INFORMATION 
+%% \extype{cloze}
+%% \exsolution{\Sexpr{paste(solutions, collapse = "|")}} 
+%% \exclozetype{\Sexpr{paste(type, collapse = "|")}}
+%% \extol{0.01}

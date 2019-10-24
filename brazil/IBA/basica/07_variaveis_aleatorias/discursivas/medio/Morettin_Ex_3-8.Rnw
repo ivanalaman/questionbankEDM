@@ -1,0 +1,76 @@
+<<echo=FALSE, results=hide>>= 
+## Pacotes necessários
+#---------------------
+
+## Programando os dados
+paga <- trunc(runif(1,min=1,max=5))
+ganha <- trunc(runif(1,min=15,max=20))
+ganha2 <- trunc(runif(1,min=40,max=50))
+
+X = c(-paga, 0, (-paga+ganha), (-paga+ganha2))
+px = c(79/108,5/54,1/6,1/108)
+Ex = round(sum(X*px),3)
+Ex2 = round(sum(X^2*px),3)
+varx = round((Ex2 - (Ex)^2),3)
+
+#----------------------
+
+## Programando as questões 
+questions <- solutions <- type <- NULL 
+questions[1] <- " Distribuição de probabilidade de X" 
+solutions[1] <- "Aberta - texto" 
+type[1] <- "string" 
+questions[2] <- "E(X)" 
+solutions[2] <-  Ex   
+type[2] <- "num"  
+questions[3] <- "VAR(X)" 
+solutions[3] <-  varx  
+type[3] <- "num" 
+@ 
+ 
+\begin{question} 
+  Um jogador A paga R\$ \Sexpr{paga} a B e lança um dado. Se sair face 3, ganha R\$ \Sexpr{ganha}. Se sair faces 4, 5 ou 6, perde. Se sair faces 1 ou 2, tem o direito de jogar novamente. Desta vez lança dois dados. Se sair duas faces 6, ganha R\$ \Sexpr{ganha2}. Se sair uma face 6, recebe o dinheiro pago de volta. Nos demais casos, perde. Seja X o lucro líquido do jogador A nesse jogo. Determinar:
+
+<<echo=FALSE, results=hide, results=tex>>= 
+answerlist(questions) 
+@  
+\end{question}  
+ 
+\begin{solution} 
+
+  Se X é o lucro líquido, então esta variável pode assumir os seguintes valores: -\Sexpr{paga} (quando ele perde), 0 (quando o dinheiro é devolvido), \Sexpr{X[3]} (-\Sexpr{paga} + \Sexpr{ganha}) quando sair a face 3 e \Sexpr{X[4]} (-\Sexpr{paga} + \Sexpr{ganha2}) caso saia duas faces 6 no segundo lançamento. Diante disto, precisamos determinar a probabilidade de cada um dos possíveis valores da variável aleatória X.
+
+\begin{itemize}  
+  \item Quando X = -\Sexpr{paga}. Neste caso temos duas situação que iremos denominar de A e B. 
+   \begin{itemize}
+     \item Situação A - Ocorre quando sair 4, 5 ou 6. Logo, tal probabilidade é de $1/6 + 1/6 + 1/6 = 3/6$.
+     \item Situação B - Ocorre quando sair as faces 1 ou 2 \textbf{E} quando não sair a face 6 em ambos os dados na segunda tentativa do lançamento. Logo, tem-se a seguinte probabilidade: $(1/6 + 1/6) \cdot (5/6 \cdot 5/6) = 25/108$.
+  \end{itemize}    
+    \item Quando X = 0. Neste caso temos apenas uma situação. Ocorre quando sair as faces 1 ou 2 no primeiro lançamento \textbf{E} quando sair apenas uma face 6 em um dos dois dados no segundo lançamento. Logo, tem-se a seguinte probabilidade: $(1/6 + 1/6) \cdot (2\cdot (1/6 \cdot 5/6)) = 5/54$.
+    \item Quando X = \Sexpr{X[3]}. Ocorre apenas quando a face for 3. Neste caso a probabilidade é de $1/6$.
+    \item Quando X = \Sexpr{X[4]}. Também temo apenas uma situação. Ocorre quando sair as faces 1 ou 2 \textbf{E} quando sair a face 6 em ambos os dados na segunda tentativa do lançamento. Logo, tem-se a seguinte probabilidade: $(1/6 + 1/6) \cdot (1/6 \cdot 1/6) = 1/108$.  
+\end{itemize}
+
+Portanto tem-se a seguinte distribuição de probabilidade da variável aleatória X.
+
+\begin{itemize}
+  \item[a)]
+\begin{tabular}{|c|c|}
+  \hline
+  X   &    P(X) \\
+  \hline
+  \Sexpr{X[1]} & 79/108 \\
+  \Sexpr{X[2]} & 5/54 = 10/108 \\
+  \Sexpr{X[3]} & 1/6  = 18/108\\
+  \Sexpr{X[4]} & 1/108 \\
+  \hline
+\end{tabular}
+ \item[b)] E(X) = $\Sexpr{X[1]}\cdot79/108 + \Sexpr{X[2]}\cdot10/108 + \Sexpr{X[3]}\cdot18/108 + \Sexpr{X[4]}\cdot1/108 = \Sexpr{Ex}$.
+ \item[c)] VAR(X) = $E(X^2) + \{E(X)\}^2 = \Sexpr{varx}$.
+\end{itemize}   
+
+\end{solution}  
+%% META-INFORMATION  
+%% \extype{cloze}  
+%% \exsolution{\Sexpr{paste(solutions, collapse = "|")}}   
+%% \exclozetype{string|num|num}                       

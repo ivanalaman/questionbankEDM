@@ -1,12 +1,12 @@
 <<echo=FALSE,results=hide>>= 
  questions <- solutions <- NULL  
- questions[1] <-"Diferenças genéticas entre os seres vivos." 
+ questions[1] <-"Diferentes tipos de rações no ganho de peso de aves." 
  solutions[1] <- FALSE
- questions[2] <- "Pequenas diferenças de fertilidade do solo." 
+ questions[2] <- "Doses de nitrogênio para avaliar a produtividade de uma forrageira." 
  solutions[2] <- FALSE
- questions[3] <- "Pequenas variações nas condições ambientais." 
+ questions[3] <- "Diferentes  tipos de raças de vacas leiteiras para avaliar a produção de leite em kg." 
  solutions[3] <- FALSE 
- questions[4] <- "Ligeiras variações na distribuição de rações." 
+ questions[4] <- "Diferentes tipos de granulometria de rações para avaliar o peso final de aves." 
  solutions[4] <- FALSE
  questions[5] <- "Nenhuma alternativa está correta." 
  solutions[5] <- TRUE
@@ -16,7 +16,7 @@
 @ 
  
 \begin{question} 
- Qual das opções abaixo \textbf{não} pode ser considerada como variações ao acaso em um experimento?
+ Qual das opções abaixo \textbf{não} é considerado um \textbf{tratamento}?
 
 \begin{answerlist} 
  \item \Sexpr{questions[1]} 
@@ -24,8 +24,8 @@
   \item \Sexpr{questions[3]} 
   \item \Sexpr{questions[4]} 
  \item \Sexpr{questions[5]} 
-\end{answerlist} 
- 
+\end{answerlist}  
+
 \end{question}  
  
 \begin{solution} 

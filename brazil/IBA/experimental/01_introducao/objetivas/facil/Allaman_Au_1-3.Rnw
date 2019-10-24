@@ -1,22 +1,22 @@
 <<echo=FALSE,results=hide>>= 
  questions <- solutions <- NULL  
- questions[1] <-"Controle local." 
- solutions[1] <- FALSE
- questions[2] <- "Repetição." 
+ questions[1] <-"Estimar o erro experimental." 
+ solutions[1] <- TRUE
+ questions[2] <- "Estimar a soma de quadrado de tratamentos." 
  solutions[2] <- FALSE
- questions[3] <- "Casualização." 
+ questions[3] <- "Calcular a estatística F." 
  solutions[3] <- FALSE 
- questions[4] <- "Independência." 
+ questions[4] <- "Serve apenas para calcular a média." 
  solutions[4] <- FALSE
  questions[5] <- "Nenhuma alternativa está correta." 
- solutions[5] <- TRUE
+ solutions[5] <- FALSE
  o <- sample(1:5) # serve para embaralhar as alternativas 
  questions <- questions[o] 
  solutions <- solutions[o] 
 @ 
  
 \begin{question} 
- Qual das opções abaixo \textbf{não é} um princípio fundamental da experimentação?
+ Qual a finalidade \textbf{primordial} da repetição em um experimento?
 
 \begin{answerlist} 
  \item \Sexpr{questions[1]} 
@@ -24,12 +24,12 @@
   \item \Sexpr{questions[3]} 
   \item \Sexpr{questions[4]} 
  \item \Sexpr{questions[5]} 
-\end{answerlist} 
- 
+\end{answerlist}  
+
 \end{question}  
  
-\begin{solution}
- 
+\begin{solution} 
+
 \begin{answerlist} 
  \item \Sexpr{mchoice2text(solutions[1])} 
  \item \Sexpr{mchoice2text(solutions[2])} 

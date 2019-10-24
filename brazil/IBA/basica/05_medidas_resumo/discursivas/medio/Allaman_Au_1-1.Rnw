@@ -1,0 +1,27 @@
+<<echo=FALSE, results=hide>>= 
+## Pacotes necessários
+#---------------------
+
+## Programando os dados 
+#----------------------
+
+## Programando as questões
+#-------------------------
+@ 
+
+\begin{question} 
+  Demonstre matematicamente que $\sum_{i=1}^{n}(x_i - \bar{x}) = 0$.
+
+\end{question}  
+
+\begin{solution} 
+
+<<echo=FALSE, results=hide, results=tex>>=  
+answerlist(format(solutions))  
+@  
+
+\end{solution}  
+
+%% META-INFORMATION  
+%% \extype{string}  
+%% \exsolution{"Aberta-texto"}   

@@ -1,0 +1,203 @@
+<<echo=FALSE,results=hide>>= 
+## Pacotes necessários
+if(!require(fdth)){
+ install.packages('fdth')
+ library(fdth)
+}
+if(!require(xtable)){
+ install.packages('xtable')
+ library(xtable)
+}
+
+library(fdth)
+library(xtable)
+
+## Programando os dados
+n <- sample(seq(10,15),size=1)
+
+brix <- round(rnorm(n, 10.87, 3),2)
+ph <- round(rnorm(n, 3.11, 0.2),2)
+docu <- sample(c('doce','neutro','azedo'),
+              replace=TRUE,
+              prob=c(0.40,0.35,0.25),
+              size=n)
+
+conf <- sample(seq(0.90,0.99,0.01),size=1)*100              
+
+dados <- data.frame(brix = brix, ph=ph, docura=docu) 
+
+#a)
+ita <- fdt(dados$brix) 
+
+#b)
+itb <- round(with(dados,c(media=mean(ph),desvio=sd(ph),cv=sd(ph)/mean(ph))),3) 
+
+#c)
+itc <- round(with(dados,cor(brix,ph)),3) 
+
+#d)
+#e) 
+me <- abs(qt((1-conf/100)/2,n-1))*itb[2]/sqrt(n)
+ite <- round(c(li = itb[1]-me,lss = itb[1]+me),3)
+
+#f)
+pazedo <- sum(dados$docura == "azedo")/n
+mep <- abs(qnorm((1-conf/100)/2))*sqrt(pazedo*(1-pazedo)/n)
+itf <- round(c(li = pazedo-mep, lss = pazedo+mep),3)
+
+#g)
+estbrix <-  round(with(dados,c(media=mean(brix),desvio=sd(brix),cv=sd(brix)/mean(brix))),3) 
+errpadbrix <- estbrix[2]/sqrt(n)
+tcalc  <- (estbrix[1]-9.62)/errpadbrix
+pvalor <- pt(abs(tcalc),n-1,lower.tail=FALSE)*2
+itg <- c(estpontual = estbrix[1],
+            erropadrao = errpadbrix,
+            tcalc      = tcalc,
+            pvalor     = pvalor)
+
+#h)  
+reg <- lm(ph ~ brix, dados)         
+ith <- paste("y = ",round(coef(reg)[2],3), "x + ",
+                   round(coef(reg)[1],3),sep="")
+
+#i)
+iti <- summary(reg)$r.squared
+
+#j)
+tcalcbeta1 <- round(summary(reg)$coefficients[2,3],3)
+pvalorbeta <- round(summary(reg)$coefficients[2,4],4)
+itj <- c(tcalc = tcalcbeta1, pvalor = pvalorbeta)
+ 
+## Programando as questões 
+questions <- solutions <- NULL 
+type <- NULL  
+questions[1] <- "Faça uma tabela de distribuição de frequências para a variável brix." 
+solutions[1] <- "Aberta - texto" 
+type[1] <- "string" 
+questions[2] <- "Calcule a média, desvio padrão e o coeficiente de variação para a variável ph." 
+solutions[2] <- "Aberta - texto"
+type[2] <- "string"  
+questions[3] <- "Calcule a correlação entre as variáveis brix e ph." 
+solutions[3] <- "Aberta - texto"
+type[3] <- "string"
+questions[4] <- "Desenhe um boxplot para a variável brix." 
+solutions[4] <- "Aberta - texto"
+type[4] <- "string"
+questions[5] <- paste("Calcule um intervalo de confiança de ",
+                      conf,
+                      "\\% para a variável ph.",sep="")
+solutions[5] <- "Aberta - texto"
+type[5] <- "string"
+questions[6] <- paste("Calcule um intervalo de confiança de ",
+                      conf,
+                      "\\% para a variável docura, cujo interesse está na categoria azedo.", sep="")
+solutions[6] <- "Aberta - texto"
+type[6] <- "string"
+questions[7] <- paste("Teste a hipótese de que o brix encontrado na amostra dos alunos difere de 9.62, considerando um grau de confinaça de  ",
+                      conf,
+                      "\\%",sep="")
+solutions[7] <- "Aberta - texto"
+type[7] <- "string"
+questions[8] <- "Estime a equação de regressão entre as variáveis brix e ph, considerando a variável brix como independente."
+solutions[8] <- "Aberta - texto"
+type[8] <- "string"
+questions[9] <- "Calcule o coeficiente de determinação da equação estimada na alternativa h)."
+solutions[9] <- "Aberta - texto"
+type[9] <- "string"
+questions[10] <- paste("Teste a hipótese do coeficiente angular ser diferente de zero considerando uma confiança de ", 
+                       conf, 
+                       "\\%",sep="")
+solutions[10] <- "Aberta - texto"
+type[10] <- "string"
+@
+ 
+\begin{question} 
+Os alunos do curso de Engenharia Química fizeram um trabalho para avaliar as seguintes variáveis no maracujá: graux brix, ph e doçura. Os dados se encontram na tabela abaixo.
+
+<<echo=FALSE, results=tex>>=
+print(xtable(dados),
+      include.rownames=FALSE)
+
+@
+
+Portanto, responda as seguintes perguntas (Utilize TRÊS casas após a vírgula para todos os cálculos):
+
+<<echo=FALSE, results=hide, results=tex>>= 
+ answerlist(questions) 
+@ 
+\end{question}  
+ 
+\begin{solution} 
+ 
+a)
+<<echo=F, results=tex>>=
+sanittext <- function(x){
+  mgsub(c('\\[','\\)'),c('$\\[','\\)$'),x)
+}
+print(xtable(ita$table),
+      sanitize.text.function = sanittext,
+      sanitize.colnames.function = function(x)names(x) <- c('Categoria','Fa','Fr','Fr(\\%)','Fc','Fc(\\%)'),
+      include.rownames = FALSE,
+      table.placement = 'H')
+@
+
+b)
+<<echo=F, results=tex>>=
+print(xtable(as.matrix(itb)),
+      table.placement = 'H')
+@
+
+c)
+<<echo=F,results=tex>>=
+print(xtable(as.matrix(c(correlacao=itc))),
+      table.placement = 'H')
+@
+
+d)
+<<echo=F,fig=T>>=
+with(dados,boxplot(brix),
+     table.placement = 'H')
+@
+
+e)
+<<echo=F,results=tex>>=
+print(xtable(as.matrix(ite)),
+      table.placement = 'H')
+@
+
+f)
+<<echo=F,results=tex>>=
+print(xtable(as.matrix(itf)),
+      table.placement = 'H') 
+@
+
+g)
+<<echo=F,results=tex>>=
+print(xtable(as.matrix(itg)),
+      table.placement = 'H') 
+@
+
+h)
+<<echo=F,results=tex>>=
+print(xtable(as.matrix(ith)),
+      include.rownames = FALSE,
+      table.placement = 'H')
+@
+
+i)
+<<echo=F,results=tex>>=
+print(xtable(as.matrix(c(r2=iti))),
+      table.placement = 'H')
+@
+
+j)
+<<echo=F,results=tex>>=
+print(xtable(as.matrix(itj)))
+@
+
+\end{solution} 
+ 
+%% META-INFORMATION 
+%% \extype{cloze}
+%% \exsolution{\Sexpr{paste(solutions, collapse = "|")}} 
+%% \exclozetype{string|string|string|string|string|string|string|string|string|string} 

@@ -4,14 +4,22 @@ if(!require(xtable)){
   install.packages(xtable)
 }
 
-## Programando os dados
-tauu = round(rnorm(5,0.10,0.05),2) * sample(c(-1,-1,1,1,1),
-					    size = 5) 
+if(!require(gexp)){
+  install.packages(gexp)
+}
 
-dados <- ger.design(mu     = 2.55,
-		    sigmaa = 0.12,
-		    repp   = 6,
-		    tau    = tauu)
+## Programando os dados
+mu <- round(runif(1,min=2.4,max=2.7),2)
+sigmaa <- round(runif(1,min=0.1,max=0.3),2)
+tauu <- trunc(runif(5,min=-3,max=3))
+r <- sample(4:6,size=1)
+error <- rnorm(length(tauu)*r,sd = sigmaa)
+
+dad <- gexp(mu    = mu,
+              err   = as.matrix(error),
+              r     = r,
+              fe    = list(f1=tauu))
+dados <- dad$dfm
 names(dados) <- c('Carboidrato','Rep','DNA')
 
 mod <- aov(DNA ~ Carboidrato, dados)

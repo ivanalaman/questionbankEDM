@@ -1,0 +1,14 @@
+<<echo=FALSE,results=hide>>= 
+@ 
+ 
+\begin{question} 
+O que é uma unidade experimental e qual a condição primordial para sua definição?
+\end{question}  
+ 
+\begin{solution} 
+Uma unidade experimental é aquela no qual os tratamentos são atribuídos. Uma condição primordial para definirmos uma unidade experimental é que estas sejam independentes entre si. Logo, podemos ter um animal ou um conjuntos de animais como unidade experimental, desde que, estes e sejam independentes entre si.
+\end{solution} 
+ 
+%% META-INFORMATION 
+%% \extype{string} 
+%% \exsolution{"Aberta - texto"}  

@@ -1,0 +1,40 @@
+<<echo=FALSE,results=hide>>= 
+## Pacotes necessários
+if(!require(xtable)){
+ install.packages('xtable') 
+ library(xtable)
+}
+library(xtable)
+
+## Programando os dados
+x <- 1:5
+y <- 0.2 + 2.1*x + rnorm(5)
+
+reg <- lm(y ~ x)
+yest <- fitted(reg)
+
+dad  <- round(rbind(y,yest),2)
+erro <- y - yest
+sqerro <- sum(erro^2)
+sqtotal <- sum( (y - mean(y))^2)
+r2 <- round(1 - sqerro/sqtotal,3)
+@ 
+ 
+\begin{question} 
+Em uma determinada pesquisa, buscou-se avaliar a relação funcional entre as variáveis \textbf{x} e \textbf{y}. Os valores observados (y) e estimados (yest) por meio de uma regressão linear simples se encontram na tabela abaixo.
+
+<<echo=F,results=tex>>=
+print(xtable(dad),
+         table.placement='H')      
+@
+
+Qual o valor do coeficiente de determinação ($r^2$)?
+\end{question}  
+ 
+\begin{solution} 
+O valor é \Sexpr{r2}.
+\end{solution} 
+ 
+%% META-INFORMATION 
+%% \extype{num} 
+%% \exsolution{\Sexpr{r2}}  
