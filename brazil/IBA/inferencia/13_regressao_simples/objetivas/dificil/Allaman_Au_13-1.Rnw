@@ -1,0 +1,65 @@
+<<echo=FALSE,results=hide>>= 
+## DATA GENERATION
+#options(OutDec=',')
+if(!require(xtable)){
+ install.packages('xtable')
+}
+library(xtable)
+
+niv <- sample(seq(3,5),size=1) 
+x  <-  seq(0,30,by=niv)
+y  <-  0.6 + 0.3*x + rnorm(length(x),sd=0.3)
+reg <- lm(y ~ x)
+yestimado <- fitted(reg)
+beta1chap <- round( (diff(yestimado)/niv)[1],3)
+dad <- round(rbind(x,yestimado),3)
+
+## QUESTION/ANSWER GENERATION
+questions <- solutions <- NULL
+questions <- solutions <- NULL  
+questions[1] <- beta1chap
+solutions[1] <- TRUE
+questions[2] <- round(diff(yestimado)[1],3)
+solutions[2] <- FALSE 
+questions[3] <- beta1chap+0.1 
+solutions[3] <- FALSE 
+questions[4] <- round(diff(yestimado)[1],3)+0.1
+solutions[4] <- FALSE 
+questions[5] <- "Não é possível calcular apenas com os dados fornecidos!"
+solutions[5] <- FALSE 
+o <- sample(1:5) # serve para embaralhar as alternativas 
+questions <- questions[o] 
+solutions <- solutions[o] 
+@ 
+ 
+\begin{question} 
+Um estudo que utilizou regressão linear simples para estimar o ganho médio diário de peso em função do aumento crescente nos níveis de proteína bruta na ração obteve os seguintes valores estimados:
+
+<<echo=F, results=tex>>=
+print(xtable(dad),include.colnames=FALSE)
+@
+
+Podemos afirmar que o valor do coeficiente angular estimado foi de:
+
+\begin{answerlist} 
+ \item \Sexpr{questions[1]} 
+ \item \Sexpr{questions[2]} 
+  \item \Sexpr{questions[3]} 
+  \item \Sexpr{questions[4]} 
+ \item \Sexpr{questions[5]} 
+\end{answerlist}  
+\end{question}  
+ 
+\begin{solution} 
+\begin{answerlist} 
+ \item \Sexpr{mchoice2text(solutions[1])} 
+ \item \Sexpr{mchoice2text(solutions[2])} 
+ \item \Sexpr{mchoice2text(solutions[3])} 
+ \item \Sexpr{mchoice2text(solutions[4])} 
+ \item \Sexpr{mchoice2text(solutions[5])} 
+\end{answerlist} 
+\end{solution} 
+ 
+%% META-INFORMATION 
+%% \extype{schoice} 
+%% \exsolution{\Sexpr{mchoice2string(solutions, single=TRUE)}}  
