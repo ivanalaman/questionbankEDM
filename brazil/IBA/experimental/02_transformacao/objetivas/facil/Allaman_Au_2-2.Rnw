@@ -1,0 +1,126 @@
+<<echo=FALSE,results=hide>>=
+## Pacotes necessários
+if(!require(xtable)){
+  install.packages('xtable') 
+ library(xtable)
+}
+if(!require(MASS)){
+  install.packages('MASS') 
+ library(MASS)
+}
+if(!require(gexp)){
+  install.packages('gexp') 
+ library(gexp)
+}
+
+library(xtable)
+library(MASS)
+library(gexp)
+
+## Programando os dados
+# e_binom <- as.matrix(rbinom(n = 15,
+#   size = 5,
+#   prob = 0.1))
+
+e_pois <- as.matrix(rpois(n = 15,
+   lam = 5))
+
+crd_bin <- gexp(mu = 20,
+ err = e_pois,
+ r = 5,
+ fe = list(f1 = c(1, 4, 1)))
+
+dad <- crd_bin$dfm
+mod <- lm(Y1 ~ X1,dad)
+gr <- boxcox(mod,seq(-5,5,l=100),plotit=FALSE)
+pos <- which.max(gr$y)
+lammax <- round(gr$x[pos],2)
+logmax <- gr$y
+lam <- gr$x
+
+vary <- round(dad[sample(1:nrow(dad),1),3],2)
+boxy <- round((vary^lammax - 1)/lammax,2)
+
+#gerando uma regressão falsa
+lamfalso <- seq(lammax-3*sd(lam),lammax+0.1,l=50)
+yregfalso <- mean(logmax) + 0.3*lamfalso
+
+b <- -0.1
+
+a <- -b/(2*abs(lammax))
+yregfalso2 <- mean(logmax) +b*lamfalso + a*lamfalso^2
+
+questions <- solutions <- NULL
+questions[1] <- paste0(boxy, " utilizando o gráfico 1 como o correto.")
+solutions[1] <-FALSE
+questions[2] <- paste0(boxy, " utilizando o gráfico 2 como o correto.")
+solutions[2] <-TRUE
+questions[3] <- paste0(boxy, " utilizando o gráfico 3 como o correto.")
+solutions[3] <- FALSE
+questions[4] <- paste0(round(vary^lammax,2), " utilizando o gráfico 3 como o correto")
+solutions[4] <- FALSE
+questions[5] <- paste0(round(vary^lammax,2), " utilizando o gráfico 2 como o correto")
+solutions[5] <- FALSE
+o <- sample(1:5)
+questions <- questions[o]
+solutions <- solutions[o]
+@ 
+
+   
+\begin{question}
+ Um pesquisador precisou utilizar a transformação box-cox após constatar que houve violação de pelo menos um dos pressupostos ao realizar uma análise de variância. Supondo que um dos valores da variável resposta tenha sido de \Sexpr{vary} no experimento, utilizando um dos gráficos corretos abaixo, o valor da variável transformada é de:
+
+<<echo=FALSE,fig=TRUE,results=hide, width=4,height=4>>=
+par(mfrow=c(1,3))
+plot(yregfalso ~ lamfalso,type='l',
+ xlim=c(min(lamfalso),max(lamfalso)+2),main='Gráfico 1',
+ ylim=c(min(logmax)-(min(logmax)*0.2),max(logmax)+(max(logmax)*0.2)),
+ xlab='Lambda',
+ ylab='log-Likelihood',
+ col ='red')
+arrows(lammax,max(yregfalso),lammax,min(yregfalso),len=0.08)
+text(lammax,min(yregfalso)-0.5,round(lammax,2),cex=0.8)
+
+plot(logmax ~ lam,type='l',col='red',
+     xlim=c(min(lam),max(lam)),main='Gráfico 2',
+     ylim=c(min(logmax)-(min(logmax)*0.01),max(logmax)+(max(logmax)*0.01)),
+     xlab='Lambda',
+     ylab='log-Likelihood')
+arrows(lammax,max(logmax),lammax,min(logmax)+0.2,len=0.08)
+text(lammax-0.01,min(logmax)-0.02,round(lammax,2),cex=0.8)
+
+plot(yregfalso2 ~ lamfalso,type='l',
+ xlim=c(min(lamfalso),max(lamfalso)+2),main='Gráfico 3',
+ ylim=c(min(yregfalso2)-(min(yregfalso2)*0.2),max(yregfalso2)+(max(yregfalso2)*0.01)),
+ xlab='Lambda',
+ ylab='log-Likelihood',
+ col='red')
+arrows(lammax,min(yregfalso2),lammax,min(yregfalso2)-(min(yregfalso2)*0.1),len=0.08)
+text(lammax-0.01,min(yregfalso2)-(min(yregfalso2)*0.12),round(lammax,2),cex=0.8)
+@
+
+
+\begin{answerlist}
+\item \Sexpr{questions[1]}
+\item \Sexpr{questions[2]}
+\item \Sexpr{questions[3]}
+\item \Sexpr{questions[4]}
+\item \Sexpr{questions[5]}
+\end{answerlist}
+\end{question}
+   
+
+\begin{solution}
+\begin{answerlist}
+\item \Sexpr{mchoice2text(solutions[1])}
+\item \Sexpr{mchoice2text(solutions[2])}
+\item \Sexpr{mchoice2text(solutions[3])}
+\item \Sexpr{mchoice2text(solutions[4])}
+\item \Sexpr{mchoice2text(solutions[5])}
+\end{answerlist}
+\end{solution}
+   
+
+%% META-INFORMATION
+%% \extype{schoice}
+%% \exsolution{\Sexpr{mchoice2string(solutions,single=TRUE)}}

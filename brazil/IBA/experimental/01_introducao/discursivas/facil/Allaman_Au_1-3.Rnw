@@ -1,6 +1,3 @@
-<<echo=FALSE,results=hide>>= 
-@ 
- 
 \begin{question} 
 O que você entende por \textbf{delineamento experimental} e quais são os principais?
 \end{question}  

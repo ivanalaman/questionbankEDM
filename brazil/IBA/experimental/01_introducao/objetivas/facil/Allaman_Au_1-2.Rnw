@@ -7,9 +7,9 @@
  questions[3] <- "Casualização." 
  solutions[3] <- FALSE 
  questions[4] <- "Independência." 
- solutions[4] <- FALSE
+ solutions[4] <- TRUE
  questions[5] <- "Nenhuma alternativa está correta." 
- solutions[5] <- TRUE
+ solutions[5] <- FALSE
  o <- sample(1:5) # serve para embaralhar as alternativas 
  questions <- questions[o] 
  solutions <- solutions[o] 

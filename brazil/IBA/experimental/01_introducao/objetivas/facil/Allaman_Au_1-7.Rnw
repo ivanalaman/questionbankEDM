@@ -1,0 +1,44 @@
+<<echo=FALSE,results=hide>>=
+questions <- solutions <- NULL
+questions[1] <- "Observacional, pois será coletado uma amostra aleatória simples para fazer a pesquisa."
+solutions[1] <-FALSE
+questions[2] <- "Observacional, pois será feito um levantamento das informações requeridas na pesquisa."
+solutions[2] <-TRUE
+questions[3] <- "Experimental, pois será coletado uma amostra aleatória simples, constituindo-se assim um delineamaento."
+solutions[3] <- FALSE
+questions[4] <- "Experimental, pois as granjas serão amostradas de forma probabilística da população."
+solutions[4] <- FALSE
+questions[5] <- "Nenhuma está correta."
+solutions[5] <- FALSE
+o <- sample(1:5)
+questions <- questions[o]
+solutions <- solutions[o]
+@ 
+  
+\begin{question}
+O professor Carrijo irá realizar uma pesquisa cujo o intuito é conhecer a produção média de ovos e as linhagens das galinhas dos produtores de ovos do munícipio de Terenos, Mato Grosso do Sul. Segundo a cooperativa há 26 granjas produtoras de ovos. Como o professor Carrijo tem somente 2 estagiários, ele irá coletar uma amostra aleatória simples de 5 granjas para realizar a pesquisa. Com base nestas informações, podemos afirmar que a pequisa é do tipo:
+
+\begin{answerlist}
+\item \Sexpr{questions[1]}
+\item \Sexpr{questions[2]}
+\item \Sexpr{questions[3]}
+\item \Sexpr{questions[4]}
+\item \Sexpr{questions[5]}
+\end{answerlist}
+\end{question}
+   
+
+\begin{solution}
+\begin{answerlist}
+\item \Sexpr{mchoice2text(solutions[1])}
+\item \Sexpr{mchoice2text(solutions[2])}
+\item \Sexpr{mchoice2text(solutions[3])}
+\item \Sexpr{mchoice2text(solutions[4])}
+\item \Sexpr{mchoice2text(solutions[5])}
+\end{answerlist}
+\end{solution}
+   
+
+%% META-INFORMATION
+%% \extype{schoice}
+%% \exsolution{\Sexpr{mchoice2string(solutions,single=TRUE)}}

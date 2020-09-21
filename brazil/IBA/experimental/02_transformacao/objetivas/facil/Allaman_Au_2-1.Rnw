@@ -1,0 +1,97 @@
+<<echo=FALSE,results=hide>>=
+## Pacotes necessários
+if(!require(xtable)){
+ install.packages('xtable') 
+ library(xtable)
+}
+if(!require(gexp)){
+ install.packages('gexp') 
+ library(gexp)
+}
+
+library(xtable)
+library(gexp)
+
+## Progamando os dados
+effecttrat <- round(runif(4,min=1,max=5))
+expi <- gexp(fe = list(f1=effecttrat),
+             fl = list(Tratamentos = letters[1:4]))
+dad <- expi$dfm
+desvorig <- round(with(dad, tapply(Y1,Tratamentos,sd)),2)
+
+dad$raizy <- sqrt(dad$Y1)
+meanraiz <- round(with(dad, tapply(raizy,Tratamentos,mean)),2)
+desvraizy <- round(with(dad,tapply(Y1,Tratamentos,sd)),2)
+modraizy <- aov(raizy ~ Tratamentos, dad)
+qmeraizy <- round(sigma(modraizy)^2,3)
+epmraizy <- round(sqrt(qmeraizy/5),3)
+
+meany <- round(meanraiz^2,2)
+epm <- round(sqrt((sum(desvorig^2)/4)/5),3)
+tab <- data.frame(Tratamentos = LETTERS[1:4],
+ "Médias (escala RQ)" = meanraiz, 
+ "Desvio-padrão (escala RQ)" = desvraizy,
+ "QME" = rep(qmeraizy,4),
+ "Desvio-padrão (escala original)" = desvorig)
+names(tab) <- c("Tratamentos", "Médias (escala RQ)","DP (escala RQ)","QME","DP (escala original)")
+
+indt <- sample(1:4,1)
+tratesc <- LETTERS[1:4][indt]
+
+alta <- paste0("$",meanraiz[indt]," \\\\pm ",desvraizy[indt],"$")
+altb <- paste0("$",meanraiz[indt]," \\\\pm ",epmraizy,"$")
+altc <- paste0("$",meany[indt]," \\\\pm ",desvorig[indt],"$")
+altd <- paste0("$",meany[indt]," \\\\pm ",round(sqrt((desvorig[indt]^2)^2/5),3),"$")
+alte <- paste0("$",meany[indt]," \\\\pm ",epm,"$")
+
+questions <- solutions <- NULL
+questions[1] <- alta
+solutions[1] <-FALSE
+questions[2] <- altb
+solutions[2] <-FALSE
+questions[3] <- altc
+solutions[3] <- FALSE
+questions[4] <- altd
+solutions[4] <- FALSE
+questions[5] <- alte
+solutions[5] <- TRUE
+o <- sample(1:5)
+questions <- questions[o]
+solutions <- solutions[o]
+@ 
+
+   
+\begin{question}
+ Os valores médios, o desvio-padrão (DP) e o quadrado médio do erro (QME) da anova dos dados transformados na escala raiz quadrada (RQ), bem como, o DP na escala original de um experimento com 4 tratamentos e 5 repetições estão na tabela abaixo. Qual das apresentações abaixo está correta para ser apresentado em um artigo científico considerando neste caso o tratamento \Sexpr{tratesc}. 
+
+<<echo=FALSE,results=tex>>=
+print(xtable(tab,digits=3),
+ table.placement="H",
+ include.rownames=FALSE,
+ caption.placement="top")
+@
+
+\begin{answerlist}
+\item \Sexpr{questions[1]}
+\item \Sexpr{questions[2]}
+\item \Sexpr{questions[3]}
+\item \Sexpr{questions[4]}
+\item \Sexpr{questions[5]}
+\end{answerlist}
+\end{question}
+   
+
+\begin{solution}
+\begin{answerlist}
+\item \Sexpr{mchoice2text(solutions[1])}
+\item \Sexpr{mchoice2text(solutions[2])}
+\item \Sexpr{mchoice2text(solutions[3])}
+\item \Sexpr{mchoice2text(solutions[4])}
+\item \Sexpr{mchoice2text(solutions[5])}
+\end{answerlist}
+\end{solution}
+   
+
+%% META-INFORMATION
+%% \extype{schoice}
+%% \exsolution{\Sexpr{mchoice2string(solutions,single=TRUE)}}

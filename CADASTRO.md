@@ -5,3 +5,7 @@ Abaixo segue informações importantes sobre os proprietários dos bancos de que
 * brazil
     * IBA - Ivan Bezerra Allaman
         * E-mail: iballaman@uesc.br
+        * Version: 0.2
+    * MPM - Mauro de Paula Moreira
+	* E-mail: mpmoreira@uesc.br
+	* Version: 0.1
