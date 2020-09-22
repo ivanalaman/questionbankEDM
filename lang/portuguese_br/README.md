@@ -16,7 +16,7 @@ Este repositório é um anexo do pacote [EDM](https://github.com/ivanalaman/EDM)
 Quando você cria um banco de questões por meio do pacote [EDM](https://github.com/ivanalaman/EDM), ocorre uma padronização na formação do diretório e subdiretórios que ficam organizados da seguinte forma:
 
 
-![exes_br](https://github.com/ivanalaman/questionbankEDM/master/images/exes_br.jpg)
+![exes_br](https://github.com/ivanalaman/questionbankEDM/blob/master/images/descr_br.jpg)
 
 É importante que esta padronização seja mantida.
 
