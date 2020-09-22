@@ -16,40 +16,39 @@ Este repositório é um anexo do pacote [EDM](https://github.com/ivanalaman/EDM)
 Quando você cria um banco de questões por meio do pacote [EDM](https://github.com/ivanalaman/EDM), ocorre uma padronização na formação do diretório e subdiretórios que ficam organizados da seguinte forma:
 
 
-![exes_br](https://github.com/ivanalaman/questionbankEDM/blob/master/images/descr_br.jpg)
+![exes_br](https://github.com/ivanalaman/questionbankEDM/blob/master/images/exes_br.jpg)
 
 É importante que esta padronização seja mantida.
-
 
 ## Padronizando o nome dos arquivos
 Para que o seu banco de questões seja compartilhado com outros usuários, é necessário que haja uma padronização no nome dos arquivos. Esta padronização é importante, pois permitirá ao usuário indentificar a fonte da questão elaborada. Abaixo, seguem algumas imagens de sugestões de como os arquivos devem ser nomeados.
 
 Caso a sua questão seja extraída de um livro, com capítulo e seção, então uma sugestão seria:
 
-![ex1](https://github.com/ivanalaman/questionbankEDM/master/images/ex1_br.jpg)
+![ex1](https://github.com/ivanalaman/questionbankEDM/blob/master/images/ex1_br.jpg)
 
 Se o livro não tiver seção, apenas capítulo, então o nome do arquivo pode ter o seguinte formato:
 
-![ex2](https://github.com/ivanalaman/questionbankEDM/master/images/ex2_br.jpg)
+![ex2](https://github.com/ivanalaman/questionbankEDM/blob/master/images/ex2_br.jpg)
 
 Caso o livro tenha mais de um autor, então:
 
-![ex3](https://github.com/ivanalaman/questionbankEDM/master/images/ex3_br.jpg)
+![ex3](https://github.com/ivanalaman/questionbankEDM/blob/master/images/ex3_br.jpg)
 
 Se a questão for extraída de um simulado ou algo do gênero, então a sugestão seria:
 
-![ex4](https://github.com/ivanalaman/questionbankEDM/master/images/ex4_br.jpg)
+![ex4](https://github.com/ivanalaman/questionbankEDM/blob/master/images/ex4_br.jpg)
 
 Se a questão elaborada for de autoria própria, então teríamos:
 
-![ex5](https://github.com/ivanalaman/questionbankEDM/master/images/ex5_br.jpg)
+![ex5](https://github.com/ivanalaman/questionbankEDM/blob/master/images/ex5_br.jpg)
 
 ## Formando o banco de questões
 Quando você cria um banco de questões por meio do aplicativo ([EDM](https://github.com/ivanalaman/EDM)), este é gravado dentro da pasta padrão criada pelo software [R](https://www.r-project.org/) ao instalar um pacote externo pela primeira vez. Se você não lembra ou não sabe onde está pasta, digite no console do [R](https://www.r-project.org/) o comando `.libPaths()`. No sistema operacional Windows por exemplo, geralmente a pasta é criada em **C:\Usuários\Seunome\Documentos\R\win-library\4.0\EDM\questionbank\país\seubanco**. 
 
 Para começar a formar seu banco de questões, copie a pasta criada no diretório padrão do [R](https://www.r-project.org/), conforme já dito no parágrafo anterior, para outro diretório. Este procedimento é importante pois resguardará seu banco de questões contra qualquer __bug__ que por ventura o software possa apresentar. Como sugestão, crie uma pasta no seu diretório de trabalho chamada __banco_de_questao__ e dentro dela cole a pasta copiada (seu banco de questão). Ainda, dentro da pasta __banco_de_questao__ crie um arquivo chamado __DESCRIPTION.md__ conforme imagem abaixo.
 
-![descrbr](https://github.com/ivanalaman/questionbankEDM/master/images/descr_br.jpg)
+![descrbr](https://github.com/ivanalaman/questionbankEDM/blob/master/images/descr_br.jpg)
 
 Os passos anteriores irá manter seu banco de questões organizado e bem documentado. Toda vez que você fizer uma alteração no seu banco de questões, mude a numeração do item __Version__ no arquivo __DESCRIPTION.md__.
 
