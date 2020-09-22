@@ -1,13 +1,14 @@
-# questionbankEDM - Banco de questões para o pacote EDM
+# Banco de questões para o pacote EDM
 
 <p align="center">
   <a href="https://github.com/ivanalaman/questionbankEDM">English</a>
 </p>
 
-- [Introdução](https://github.com/ivanalaman/questionbankEDM#Introdução)
-- [Padronização do nome dos diretórios do banco de questões](https://github.com/ivanalaman/questionbankEDM#Padronização-do-nome-dos-diretórios-do-banco-de-questões)
-- [Formando o banco de questões](https://github.com/ivanalaman/questionbankEDM#Formando-o-banco-de-questões)
-  - [Fluxo de trabalho](https://github.com/ivanalaman/questionbankEDM#Fluxo-de-trabalho)
+- [Introdução](https://github.com/ivanalaman/questionbankEDM/blob/master/lang/portuguese_br#Introdução)
+- [Padronização do nome dos diretórios do banco de questões](https://github.com/ivanalaman/questionbankEDM/blob/master/lang/portuguese_br#Padronização-do-nome-dos-diretórios-do-banco-de-questões)
+- [Padronizando o nome dos arquivos](https://github.com/ivanalaman/questionbankEDM/blob/master/lang/portuguese_br#Padronizando-o-nome-dos-arquivos)
+- [Formando o banco de questões](https://github.com/ivanalaman/questionbankEDM/blob/master/lang/portuguese_br#Formando-o-banco-de-questões)
+  - [Fluxo de trabalho](https://github.com/ivanalaman/questionbankEDM/blob/master/lang/portuguese_br#Fluxo-de-trabalho)
 
 ## Introdução
 Este repositório é um anexo do pacote [EDM](https://github.com/ivanalaman/EDM) do sofware [R](https://www.r-project.org/). O objetivo é um local de armazenamento de banco de questões para que os usuários possam constantemente compartilhar e atualizar suas avaliações (provas). Aconselhamos que ao baixar o pacote [EDM](https://github.com/ivanalaman/EDM), seja utilizado a interface gráfica para criar seu banco de questões com o intuito de deixar padronizado entre os usuários e para que o aplicativo possa ler corretamente tais arquivos.
