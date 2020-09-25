@@ -1,0 +1,101 @@
+<<echo=FALSE, results=hide>>=
+## Pacotes necessários
+if(!require(xtable)){
+  install.packages('xtable')
+  library(xtable)
+}
+
+if(!require(gmodels)){
+  install.packages('gmodels')
+  library(gmodels)
+}
+
+if(!require(gexp)){
+  install.packages('gexp')
+  library(gexp)
+}
+
+## Programando os dados
+mu <- round(runif(1,min=10.58,max=11.33),2)
+sigma <- round(runif(1,min=0.62,max=1.1),2)
+r <- trunc(runif(1,min=3,max=5))
+tauu  <- trunc(runif(4,min=-3,max=3))
+erro <- matrix(rnorm(r*length(tauu),sd=sigma),ncol=1)
+
+dad <- gexp(mu    = mu,
+ err   = erro,
+ r     = r,
+ fe    = list(f1 = tauu))
+dados <- dad$dfm
+names(dados) <- c('Rep','Hormonios','GanhoP')
+levels(dados$Hormonios) <- c('Controle',
+                             '24dietilest',
+                             '10estradiol',
+                             '20estradiol')
+
+cmat <- rbind('controle vs demais' = c( 3, -1, -1, -1 ),   # Define a matriz dos contrastes ortogonais
+              'Dietil vs Estradiol' = c( 0,  2,  -1, -1),
+              '10est. vs 20est.'   = c( 0,  0, 1, -1))
+
+mod <- aov(GanhoP ~ Hormonios,
+           data=dados,
+           contrasts=list(Hormonios=make.contrasts(cmat)))  # make.contrasts (gmodels): gera matriz dos contrastes
+
+#effects(mod)[1:4]#identificando os efeitos
+
+res <- summary(mod, # ANOVA com a SQDtra e GLtra desdobrados em contrastes ortogonais
+               split=list(Hormonios=list('cont. vs. demais' = 1,
+                                         'dietil vs. estra.'= 2,
+                                         '10est. vs 20est.' =3)))
+
+## Programando as questões
+questions <- solutions <- NULL 
+type <- NULL  
+questions[1] <- "Qual é o p-valor do contraste I?" 
+solutions[1] <- round(res[[1]]$`Pr(>F)`[2],
+                      3)  
+type[1] <- "num" 
+questions[2] <- "Qual é o p-valor do contraste II?" 
+solutions[2] <- round(res[[1]]$`Pr(>F)`[3],
+                      3)   
+type[2] <- "num" 
+questions[3] <- "Qual é o p-valor do contraste III?" 
+solutions[3] <- round(res[[1]]$`Pr(>F)`[4],
+                      3)    
+type[3] <- "num" 
+@ 
+
+\begin{question} 
+  Um experimento foi conduzido seguindo um delineamento inteiramente ao acaso com o proposto de estudar os efeitos de implantação de hormônios nos ganhos de peso médios de perus na faixa de 15 a 20 semanas de idade. Os tratamentos em estudo foram os seguintes: Controle, 24mg de dietilestilbestrol, 10mg de estradiol e 20mg de estradiol. Utilizou-se \Sexpr{r} repetições por tratamento. Os dados foram: 
+
+<<echo=FALSE,results=tex>>=
+print(xtable(dados),
+      include.rownames = FALSE,
+      table.placement = 'H')
+@
+
+Supondo que o pesquisador deseja estudar os seguintes contrastes:
+\begin{itemize}
+  \item[I] Controle versus tratamentos experimentais (todos os outros) - Contraste I;
+  \item[II] Dietilestilbestrol versus Estradiol - Contraste II;
+  \item[III] 10mg versus 20mg de estradiol - Contraste III.
+\end{itemize}
+
+Responda as perguntas abaixo e utilize três casas de aproximação.
+
+<<echo=FALSE, results=tex>>= 
+answerlist(questions) 
+@  
+
+\end{question}  
+
+\begin{solution} 
+<<echo=FALSE, results=tex>>=  
+answerlist(format(solutions))  
+@  
+
+\end{solution}  
+%% META-INFORMATION  
+%% \extype{cloze}  
+%% \exsolution{\Sexpr{paste(solutions, collapse = "|")}}  
+%% \exclozetype{\Sexpr{paste(type, collapse = "|")}}

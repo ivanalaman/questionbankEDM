@@ -1,0 +1,40 @@
+<<echo=FALSE, results=hide>>=  
+ questions <- solutions <- NULL 
+ type <- NULL  
+ questions[1] <- "A área do sedimentador" 
+ solutions[1] <- 23
+ type[1] <- "num" 
+questions[2] <- "O tempo de residência da partícula no sedimentador" 
+solutions[2] <- 3  
+type[2] <- "num"  
+questions[3] <- "A velocidade horizontal" 
+solutions[3] <- 12  
+type[3] <- "num"  
+@ 
+
+\begin{question} 
+Dimensionamento de um decantador convencional: 
+\begin{itemize}
+\item Vazão: $1,0 m^{3}/s$
+\item Número de unidades de sedimentação: 4 (quatro)
+\item Velocidade de sedimentação das partículas sólidas: $1,67m/h$ (valor obtido de um estudo prévio)
+ \item Profundidade da lâmina líquida: $H=4,5 m$.
+\item $\rho_{f} = 1000 kg/m^{3}$ e $\mu_{f} = 1 cP$
+\end{itemize}
+
+Pede-se para calcular:
+
+<<echo=FALSE, results=hide, results=tex>>= 
+ answerlist(questions) 
+@  
+\end{question}  
+
+\begin{solution} 
+<<echo=FALSE, results=hide, results=tex>>=  
+ answerlist(format(solutions))  
+@  
+\end{solution}  
+%% META-INFORMATION  
+%% \extype{cloze}  
+%% \exsolution{\Sexpr{paste(solutions, collapse = "|")}}   
+%% \exclozetype{num|num|num} 

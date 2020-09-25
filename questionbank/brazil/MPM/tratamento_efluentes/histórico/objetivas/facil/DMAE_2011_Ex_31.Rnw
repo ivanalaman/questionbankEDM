@@ -1,0 +1,45 @@
+<<echo=FALSE,results=hide>>=
+questions <- solutions <- NULL
+questions[1] <- 'Incremento da concentração de nutrientes em águas naturais decorrente de um processo de intensificação do fornecimento de nutrientes (principalmente nitratos e fosfatos), o que acelera o crescimento de algas e outros vegetais, e a deterioração da qualidade das águas. Embora seja um processo natural de maturação de uma massa d’água, pode ser causado ou intensificado pela ação humana (lançamento de esgotos e outros efluentes, lixiviação de fertilizantes do solo, etc.).' 
+solutions[1] <- 3
+questions[2] <- 'Capacidade apresentada por um corpo de água de, após receber uma carga de agentes poluidores, recuperar, através de processos naturais de caráter físico, químico e biológico, as suas qualidades ecológicas e sanitárias.' 
+solutions[2] <- 1
+questions[3] <- 'Aumento da concentração de elementos e substâncias tóxicas nos organismos ao longo dos níveis tróficos de uma cadeia alimentar, podendo chegar a teores letais nas espécies do topo da cadeia alimentar.' 
+solutions[3] <- 2
+o <- sample(1:3)
+questions <- questions[o]
+solutions <- solutions[o]
+@
+
+\begin{question}
+Relacione as colunas a seguir:
+
+\begin{itemize}
+
+\item[1.]Autodepuração
+\item[2.]Bioacumulação
+\item[3.]Eutrofização
+\end{itemize}
+       
+
+\begin{answerlist}
+\item \Sexpr{questions[1]}
+\item \Sexpr{questions[2]}
+\item \Sexpr{questions[3]}
+\end{answerlist}
+\end{question}  
+     
+\begin{solution} 
+     
+\begin{answerlist}
+\item \Sexpr{solutions[1]}
+\item \Sexpr{solutions[2]}
+\item \Sexpr{solutions[3]}
+\end{answerlist}
+\end{solution}
+     
+
+%% META-INFORMATION
+%% \extype{cloze}
+%% \exsolution{\Sexpr{paste(solutions,collapse="|")}}
+%% \exclozetype{num|num|num}

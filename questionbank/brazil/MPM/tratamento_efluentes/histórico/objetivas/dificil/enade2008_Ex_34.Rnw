@@ -1,0 +1,59 @@
+<<echo=FALSE,results=hide>>=
+questions <- solutions <- NULL
+questions[1] <- "P"
+solutions[1] <-FALSE
+questions[2] <- "Q"
+solutions[2] <-TRUE
+questions[3] <- "R"
+solutions[3] <- FALSE
+questions[4] <- "S"
+solutions[4] <- FALSE
+questions[5] <- "T"
+solutions[5] <- FALSE
+o <- sample(1:5)
+questions <- questions[o]
+solutions <- solutions[o]
+@ 
+
+   
+\begin{question}
+A Resolução CONAMA no 357/05 dispõe sobre a classificação dos corpos de água e diretrizes ambientais para o seu enquadramento, bem como estabelece as condições e padrões de lançamento de efluentes. Suponha que a condição da água de um córrego, para utilização em sistemas de abastecimento à população, possa ser definida com apenas quatro parâmetros: demanda bioquímica de oxigênio (DBO), avaliada durante 5 dias a 20 ºC, oxigênio dissolvido (OD), pH e turbidez. A tabela abaixo apresenta os resultados das análises de amostras de águas obtidas em cinco córregos diferentes.
+\begin{table}[H]
+\begin{tabular}{lllll}
+\hline
+Córrego & DBO (mg/L) & OD(mg/L) & pH  & Turbidez \\
+\hline
+P       & 6          & 6        & 6,8 & 24       \\
+Q       & 20         & 4        & 6,7 & 87       \\
+R       & 4,2        & 5,8      & 5,1 & 165      \\
+S       & 10         & 6        & 8   & 50       \\
+T       & 60         & 3        & 7,2 & 32       \\
+\hline
+\end{tabular}
+\end{table}
+Para qual dos cursos d’água poderia ser utilizada a tecnologia de filtração direta para tratamento da água de abastecimento? 
+
+\begin{answerlist}
+\item \Sexpr{questions[1]}
+\item \Sexpr{questions[2]}
+\item \Sexpr{questions[3]}
+\item \Sexpr{questions[4]}
+\item \Sexpr{questions[5]}
+\end{answerlist}
+\end{question}
+   
+
+\begin{solution}
+\begin{answerlist}
+\item \Sexpr{mchoice2text(solutions[1])}
+\item \Sexpr{mchoice2text(solutions[2])}
+\item \Sexpr{mchoice2text(solutions[3])}
+\item \Sexpr{mchoice2text(solutions[4])}
+\item \Sexpr{mchoice2text(solutions[5])}
+\end{answerlist}
+\end{solution}
+   
+
+%% META-INFORMATION
+%% \extype{schoice}
+%% \exsolution{\Sexpr{mchoice2string(solutions,single=TRUE)}}
