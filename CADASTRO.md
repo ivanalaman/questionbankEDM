@@ -2,10 +2,7 @@
 
 Abaixo segue informações importantes sobre os proprietários dos bancos de questões.
 
-* brazil
-    * IBA - Ivan Bezerra Allaman
-        * E-mail: iballaman@uesc.br
-        * Version: 0.2
-    * MPM - Mauro de Paula Moreira
-        * E-mail: mpmoreira@uesc.br
-      	* Version: 0.1
+| pais   | autor                  | sigla | email             | versao |
+|--------|------------------------|-------|-------------------|--------|
+| brazil | Ivan Bezerra Allaman   | IBA   | iballaman@uesc.br | 0.2    |
+| brazil | Mauro de Paula Moreira | MPM   | mpmoreira@uesc.br | 0.1    |
