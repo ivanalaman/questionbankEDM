@@ -1,0 +1,46 @@
+<<echo=FALSE,results=hide>>=
+questions <- solutions <- NULL
+questions[1] <- "Reator de manta de lodo, lagoas facultativas e lagoas de maturação."
+solutions[1] <-FALSE
+questions[2] <- "Reator de manta de lodo, filtro biológico aerado e flotação por ar dissolvido"
+solutions[2] <-FALSE
+questions[3] <- "Lagoas aeradas, lagoas facultativas e Lagoas de maturação."
+solutions[3] <- FALSE
+questions[4] <- "Lodos ativados convencionais, valos de oxidação e lodos ativados por batelada."
+solutions[4] <- TRUE
+questions[5] <- "Reator de manta de lodo, wetlands e sedimentação"
+solutions[5] <- FALSE
+o <- sample(1:5)
+questions <- questions[o]
+solutions <- solutions[o]
+@ 
+
+   
+\begin{question}
+Assinale a opção que contém tecnologias que caracterizam processos puramente aeróbios no tratamento
+de esgotos.
+
+\begin{answerlist}
+\item \Sexpr{questions[1]}
+\item \Sexpr{questions[2]}
+\item \Sexpr{questions[3]}
+\item \Sexpr{questions[4]}
+\item \Sexpr{questions[5]}
+\end{answerlist}
+\end{question}
+   
+
+\begin{solution}
+\begin{answerlist}
+\item \Sexpr{mchoice2text(solutions[1])}
+\item \Sexpr{mchoice2text(solutions[2])}
+\item \Sexpr{mchoice2text(solutions[3])}
+\item \Sexpr{mchoice2text(solutions[4])}
+\item \Sexpr{mchoice2text(solutions[5])}
+\end{answerlist}
+\end{solution}
+   
+
+%% META-INFORMATION
+%% \extype{schoice}
+%% \exsolution{\Sexpr{mchoice2string(solutions,single=TRUE)}}
