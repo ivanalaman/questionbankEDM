@@ -31,8 +31,8 @@ Um produtor de sementes vende pacotes com \Sexpr{n} sementes cada um. Os pacotes
 \end{question}  
 
 \begin{solution} 
-<<echo=FALSE, results=hide>>=  
-answerlist(format(solutions))  
+<<echo=FALSE, results=tex>>=  
+answerlist(format(solutions))
 @  
 \end{solution}  
 

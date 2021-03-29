@@ -1,7 +1,7 @@
 Package: questionbankEDM
 Title: Question bank of the Exams Database Manager
-Version: 1.3
-Date: 2020-09-25
+Version: 0.3
+Date: 2021-03-29
 Author: Ivan Bezerra Allaman <ivanalaman@gmail.com>
 Maintainer: Ivan Bezerra Allaman <ivanalaman@gmail.com>
 Description: This package contains the questions of the people who share your files for use in your exams. 

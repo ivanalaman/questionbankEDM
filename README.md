@@ -44,7 +44,7 @@ If the question elaborated is of its own authorship, then we would have:
 
 ![ex5](https://github.com/ivanalaman/questionbankEDM/blob/master/inst/images/ex5_en.jpg)
 
-## Forming the question bank
+## Building the question bank
 When you create a question bank through the application ([EDM](https://github.com/ivanalaman/EDM)), it is saved inside the standard folder created by the software [R](https://www.r-project.org/) when installing an external package for the first time. If you don't remember or don't know where the folder is, type in the [R](https://www.r-project.org/) console the command `.libPaths()`. In the Windows operating system, for example, the folder is usually created in **C:\Users\Yourname\Documents\R\win-library\4.0\EDM\questionbank\country\yourbank**.
 
 To start forming your question bank, copy the folder created in the standard [R](https://www.r-project.org/) directory, as already mentioned in the previous paragraph, to another directory. This procedure is important because it will protect your bank of questions against any __bug__ that the software may present. As a suggestion, create a folder in your working directory called __question_bank__ and inside it paste the copied folder (your question bank). Also, inside the folder __question_bank__ create a file called __DESCRIPTION.md__ as shown in the image below.

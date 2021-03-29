@@ -2,6 +2,7 @@
 ## Pacotes necessários
 if(!require(Ryacas)){
  install.packages('Ryacas')
+ library(Ryacas)
 }
  
 library(Ryacas)
@@ -15,13 +16,14 @@ fu <- paste("Integrate(x,",
             ",",
             ls,
             ")k*x^2") 
-int <- yacas(fu)
+int <- yac_symbol(fu)
 
-k <- Sym("k")
+k <- ysym("k")
 int1 <- paste("Solve(",
               int,
               " == 1, k)")
-res <- yacas(int1)
+res <- yac_str(int1)
+res <- sub("==","=",res)
 res1 <- unlist(eval(parse(text=as.character(res))))
 
 res2 <- round(as.numeric(paste(unlist(regmatches(res1, gregexpr("[[:digit:]]+", res1))),

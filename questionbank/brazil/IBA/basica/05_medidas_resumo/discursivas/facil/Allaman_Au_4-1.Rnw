@@ -2,9 +2,11 @@
 ## Pacotes necessários
 if(!require(xtable)){
   install.packages('xtable')
+  library(xtable)
 }
 if(!require(truncnorm)){
   install.packages('truncnorm')
+  library(truncnorm)
 }
 
 ## Programando os dados
