@@ -1,18 +1,18 @@
 <<echo=FALSE,results=hide>>= 
- questions <- solutions <- NULL  
- questions[1] <-"A variância é normalmente maior do que o desvio padrão." 
- solutions[1] <- TRUE 
- questions[2] <- "O desvio padrão é normalmente maior do que a variância." 
- solutions[2] <- FALSE  
- questions[3] <- "A variância e o desvio padrão são iguais em tamanho." 
- solutions[3] <- FALSE
- questions[4] <- "A variação interquartil é normalmente maior do que a amplitude." 
- solutions[4] <- FALSE
- %questions[5] <- "Todos os  itens." 
- %solutions[5] <- TRUE
- o <- sample(1:4) # serve para embaralhar as alternativas 
- questions <- questions[o] 
- solutions <- solutions[o] 
+questions <- solutions <- NULL  
+questions[1] <-"A variância é normalmente maior do que o desvio padrão." 
+solutions[1] <- TRUE 
+questions[2] <- "O desvio padrão é normalmente maior do que a variância." 
+solutions[2] <- FALSE  
+questions[3] <- "A variância e o desvio padrão são iguais em tamanho." 
+solutions[3] <- FALSE
+questions[4] <- "A variação interquartil é normalmente maior do que a amplitude." 
+solutions[4] <- FALSE
+#questions[5] <- "Todos os  itens." 
+#solutions[5] <- TRUE
+o <- sample(1:4) # serve para embaralhar as alternativas 
+questions <- questions[o] 
+solutions <- solutions[o] 
 @ 
  
 \begin{question} 
@@ -21,8 +21,8 @@ Qual das declarações a seguir é a mais verdadeira sobre o tamanho relativo da
 \begin{answerlist} 
  \item \Sexpr{questions[1]} 
  \item \Sexpr{questions[2]} 
-  \item \Sexpr{questions[3]} 
-  \item \Sexpr{questions[4]} 
+ \item \Sexpr{questions[3]} 
+ \item \Sexpr{questions[4]} 
 % \item \Sexpr{questions[5]} 
 \end{answerlist}  
 \end{question}  
