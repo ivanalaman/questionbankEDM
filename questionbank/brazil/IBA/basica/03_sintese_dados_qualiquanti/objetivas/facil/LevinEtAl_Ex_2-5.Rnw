@@ -23,7 +23,6 @@ Qual dos itens a seguir é empregado ao se comparar uma nota em uma prova final 
  \item \Sexpr{questions[2]} 
  \item \Sexpr{questions[3]} 
  \item \Sexpr{questions[4]} 
-% \item \Sexpr{questions[5]} 
 \end{answerlist}  
 \end{question}  
  
@@ -33,7 +32,6 @@ Qual dos itens a seguir é empregado ao se comparar uma nota em uma prova final 
  \item \Sexpr{mchoice2text(solutions[2])} 
  \item \Sexpr{mchoice2text(solutions[3])} 
  \item \Sexpr{mchoice2text(solutions[4])} 
- %\item \Sexpr{mchoice2text(solutions[5])} 
 \end{answerlist} 
 \end{solution} 
  
