@@ -1,0 +1,42 @@
+<<echo=FALSE,results=hide>>= 
+ questions <- solutions <- NULL  
+ questions[1] <-"Ponto médio." 
+ solutions[1] <- FALSE 
+ questions[2] <- "Intervalo de classe." 
+ solutions[2] <- FALSE  
+ questions[3] <- "Limites de classe." 
+ solutions[3] <- FALSE 
+ questions[4] <- "Classificação percentil." 
+ solutions[4] <- TRUE 
+ %questions[5] <- "Todos os  itens." 
+ %solutions[5] <- TRUE
+ o <- sample(1:4) # serve para embaralhar as alternativas 
+ questions <- questions[o] 
+ solutions <- solutions[o] 
+@ 
+ 
+\begin{question} 
+Qual dos itens a seguir é empregado ao se comparar uma nota em uma prova final e a distribuição inteira de notas em uma classe?
+ 
+\begin{answerlist} 
+ \item \Sexpr{questions[1]} 
+ \item \Sexpr{questions[2]} 
+  \item \Sexpr{questions[3]} 
+  \item \Sexpr{questions[4]} 
+% \item \Sexpr{questions[5]} 
+\end{answerlist}  
+\end{question}  
+ 
+\begin{solution} 
+\begin{answerlist} 
+ \item \Sexpr{mchoice2text(solutions[1])} 
+ \item \Sexpr{mchoice2text(solutions[2])} 
+ \item \Sexpr{mchoice2text(solutions[3])} 
+ \item \Sexpr{mchoice2text(solutions[4])} 
+ %\item \Sexpr{mchoice2text(solutions[5])} 
+\end{answerlist} 
+\end{solution} 
+ 
+%% META-INFORMATION 
+%% \extype{schoice} 
+%% \exsolution{\Sexpr{mchoice2string(solutions, single=TRUE)}}  
