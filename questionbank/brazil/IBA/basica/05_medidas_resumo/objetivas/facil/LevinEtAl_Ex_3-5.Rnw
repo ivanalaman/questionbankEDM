@@ -16,7 +16,7 @@ solutions <- solutions[o]
 @ 
  
 \begin{question} 
-O desvio indica__________de qualquer escore bruto da média.
+O desvio indica$\cdots\cdots\cdots$de qualquer escore bruto da média.
  
 \begin{answerlist} 
  \item \Sexpr{questions[1]} 
