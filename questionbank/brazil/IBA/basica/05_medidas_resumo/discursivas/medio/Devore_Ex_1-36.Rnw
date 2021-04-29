@@ -3,8 +3,6 @@
 #---------------------
 
 ## Programando os dados 
-is.discreta <- function(x) x %% 1 == 0 
-
 n <- sample(20:30,size=1)
 x <- round(rnorm(n,370.69,13))
 maxi <- max(x)
@@ -12,17 +10,13 @@ mul <- sample(900:1000,size=1)
 
 mediana <- median(x)
 
-x1 <- sort(x)
-x2 <- x1[x1>=median(x1)] 
-
-if(is.discreta(mediana) & any(x2 == median(x1))){
-  x3<- x1[x1<median(x1)]
-  x2[2:length(x2)] <- x2[2:length(x2)]+1
-  var <- c(x3,x2)
-  mediana <- median(var)
-  maxi <- max(var)
-}  else {
-  var <- x1 
+#verificando se o n gerado é par ou ímpar
+if(n%%2 == 0){
+  x1 <- sort(x)
+  pos <- length(x1)/2 + 1
+  val <- x1[pos]
+}else{
+  val <- mediana
 }
 
 ## Programando as questões
@@ -35,7 +29,7 @@ questions[2] <- paste("Em quanto o valor de ", maxi," pode ser aumentado sem afe
 solutions[2] <- "Pode ser aumentado infinitamente que nada acontecerá com a mediana, uma vez que, tal medida leva apenas em consideração o(s) valor(es) central(is)."
 type[2] <- "string"
 questions[3] <- paste("Em quanto o valor de ", maxi," pode ser diminuído sem afetar o valor da mediana amostral?",sep="")
-solutions[3] <- paste("Ele pode ser diminuído até o valor da mediana, ou seja, ", mediana, " pois abaixo deste valor a posição dos número se altera e consequentemente a mediana irá se alterar.",sep="")
+solutions[3] <- paste("Ele pode ser diminuído até o valor ", val, " pois abaixo deste valor a posição dos número se altera e consequentemente a mediana irá se alterar.",sep="")
 type[3] <- "string"
 @ 
 
