@@ -3,7 +3,7 @@
 #---------------------
 
 ## Programando os dados
-trials <- round(runif(1,40,160),1)
+trials <- round(runif(1,40,160))
  
 prob <- round(runif(1,0.2,0.8),1)
          

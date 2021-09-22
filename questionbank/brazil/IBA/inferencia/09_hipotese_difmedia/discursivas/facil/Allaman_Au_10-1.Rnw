@@ -1,4 +1,4 @@
-<<echo=FALSE>>=
+<<echo=FALSE, results=hide>>=
 if(!require(truncnorm)){
  install.packages('truncnorm')
 } 
@@ -76,22 +76,21 @@ dados
 @
  
 Formule as hipóteses adequadamente e as teste ao nível de \Sexpr{alfa*100}\% de significância. Qual foi a conclusão do estudo?
-
 \end{question} 
 
 \begin{solution}
 Tem-se um caso típico de amostras independentes. Primeiramente precisamos elaborar as hipóteses. Primeiro vamos elaborar para a variável renda.
 
  \begin{eqnarray*}
-  H_0: \mu_{Ilhéus} - \mu_{Itabuna} = 0 \\
-  H_a: \mu_{Ilhéus} - \mu_{Itabuna} \neq 0
+  H_0: \mu_{Ilheus} - \mu_{Itabuna} = 0 \\\\
+  H_a: \mu_{Ilheus} - \mu_{Itabuna} \neq 0
  \end{eqnarray*}
 
 Agora para a variável grau de escolaridade.
 
 \begin{eqnarray*}
- H_0: \pi_{Ilhéus} - \pi_{Itabuna} = 0 \\
- H_a: \pi_{Ilhéus} - \pi_{Itabuna} \neq 0
+ H_0: \pi_{Ilheus} - \pi_{Itabuna} = 0 \\
+ H_a: \pi_{Ilheus} - \pi_{Itabuna} \neq 0
 \end{eqnarray*}
  
 Iremos usar direto a função t.test do R para a variável renda.

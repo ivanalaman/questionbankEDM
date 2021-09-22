@@ -9,7 +9,7 @@ questions <- solutions <- NULL
 questions[1] <- "A probabilidade de que a empresa não irá mudar seu procedimento de entrega."
 solutions[1] <- FALSE
 
-questions[2] <- "O pvalor > $\\\\alpha$."
+questions[2] <- "O pvalor $> \\\\alpha$."
 solutions[2] <- FALSE
 
 questions[3] <- "A probabilidade de que os clientes estejam errados."
