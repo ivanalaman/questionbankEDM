@@ -1,0 +1,52 @@
+<<echo=FALSE,results=hide>>=
+fv <- function(v) v*1/5 - v*abs(v)/25
+Ev <- integrate(fv,-5,5)
+
+fv2 <- function(v) v^2*1/5 - v^2*abs(v)/25
+Ev2 <- integrate(fv2,-5,5)
+varV <- Ev2$value - Ev$value^2
+
+massa <- round(runif(1,min=2,max=8),1)
+den <- trunc(runif(1,min=2,max=5))
+temp <- round(runif(1,min=2,max=8),1) 
+
+respqa <- round(massa*1/den*Ev2$value,2)
+respqb <- round(temp^2*varV)
+
+questions <- solutions <- NULL
+questions[1] <- paste0('Calcule o valor esperado de energia cinética $W=m\\\\frac{V^2}{',den,'}$')
+solutions[1] <- respqa
+questions[2] <- paste0('O objeto permanece com velocidade V durante ',temp,' segundos, percorrendo $X=',temp,'V$ metros. Calcule a variância de X.')
+solutions[2] <- respqb
+@
+
+\begin{question}
+Seja V a velocidade, medida em m\/s, de um objeto de massa m$=\Sexpr{massa}$kg em movimento retilíneo. Suponha que V é uma variável aleatória contínua com densidade,
+
+
+\begin{eqnarray*}
+f(x) = \begin{cases}
+\frac{1}{5} - \frac{\lvert v \lvert }{25}, \quad -5 < v < 5,\\
+0, \text{caso contrário}
+\end{cases}
+\end{eqnarray*}
+
+\begin{answerlist}
+\item \Sexpr{questions[1]}
+\item \Sexpr{questions[2]}
+\end{answerlist}
+\end{question}  
+	
+\begin{solution} 
+	
+\begin{answerlist}
+\item $\Sexpr{solutions[1]}$
+\item $\Sexpr{solutions[2]}$
+\end{answerlist}
+\end{solution}
+	
+
+%% META-INFORMATION
+%% \extype{cloze}
+%% \exsolution{\Sexpr{paste(solutions,collapse="|")}}
+%% \exclozetype{num|num}

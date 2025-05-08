@@ -59,11 +59,11 @@ questions[3] <- "Utilizando o método de cálculo de percentis utilizado em sala
 solutions[3] <- round(quantile(amo,prob=0.75,type=2), 2)  
 type[3] <- "num"  
 
-questions[4] <- "Existem outliers na amostra? Se Sim coloque 1, caso contrário coloque 0!" 
-solutions[4] <- ifelse(length(gr$out)==0,
-                       0,
-                       1)
-type[4] <- "num"  
+#questions[4] <- "Existem outliers na amostra? Se Sim coloque 1, caso contrário coloque 0!" 
+#solutions[4] <- ifelse(length(gr$out)==0,
+#                       0,
+#                       1)
+#type[4] <- "num"  
  
 @
 
@@ -77,7 +77,7 @@ print(xtable(matrix(amo,ncol=5)),
       table.placement = 'H')
 @
 
-Faça uma tabela de distribuição de frequências utilizando o critério de sturges e os métodos ensinado em aula e também um boxplot e responda as perguntas a seguir: 
+Faça uma tabela de distribuição de frequências utilizando o critério de sturges e os métodos ensinado em aula e responda as perguntas a seguir: 
 
 <<echo=FALSE, results=hide, results=tex>>= 
 answerlist(questions) 

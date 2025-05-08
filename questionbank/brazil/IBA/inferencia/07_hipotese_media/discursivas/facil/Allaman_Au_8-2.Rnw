@@ -10,7 +10,7 @@ n <- sample(seq(40,60),
 mu <- sample(seq(9,30),
              1)
 
-sigma <- sample(seq(1,15),
+sigma <- sample(seq(5,15),
                 1)
 
 amo <- round(rtruncnorm(n,
@@ -20,8 +20,7 @@ amo <- round(rtruncnorm(n,
                         sd=as.numeric(sigma)),
              2)
 
-mu0 <- round(sample(seq(10,30,l=10),
-                    1),
+mu0 <- round(mu+2,
              2)
 
 alfa <- round(sample(seq(0.001,0.2,
@@ -75,16 +74,23 @@ ifelse(pvalor <= alfa,
        deci2 <- 'não rejeita-se'
        )       
 
-resp <- paste('Portanto,', deci2, 'H0 com ',(1-alfa)*100,'\\\\% de confiança',sep=' ')       
+resp <- paste('Portanto,', deci2, 'H0 com ',(1-alfa)*100,'\\\\% de confiança',sep=' ')  
+     
 @
 
 \begin{question}
- O prefeito de Ilhéus solicitou um estudo sobre a situação de desemprego na cidade. Uma amostra de \Sexpr{n} habitantes desempregados de Ilhéus incluiu dados sobre o número de semanas em que estavam sem emprego. Realize um teste de hipóteses para determinar se a duração média do desemprego em Ilhéus é \Sexpr{hipo} que a duração média nacional de \Sexpr{mu0} semanas. Use um nível de significância de \Sexpr{alfa}. Qual a sua conclusão?
+ O prefeito de Ilhéus solicitou um estudo sobre a situação de desemprego na cidade. Uma amostra de \Sexpr{n} habitantes desempregados de Ilhéus incluiu dados sobre o número de semanas em que estavam sem emprego. Realize um teste de hipóteses para determinar se a duração média do desemprego em Ilhéus é \Sexpr{hipo} que a duração média nacional de \Sexpr{mu0} semanas. Use um nível de significância de \Sexpr{alfa}. Responda as anternativas abaixo.
 
 <<echo=FALSE>>=
 amo
 @
 
+\begin{answerlist}
+  \item Qual é o valor hipotético, ou seja, aquele que queremos testar?
+  \item Qual é o erro padrão da média?
+  \item Qual é o valor da estatística de teste?
+  \item Qual é o p-valor?
+\end{answerlist}
 \end{question} 
 
 \begin{solution}
@@ -111,9 +117,18 @@ amo
 
  E portanto, o pvalor é igual a \Sexpr{pvalor}. Logo, como o pvalor é \Sexpr{deci1} do que \Sexpr{alfa}, \Sexpr{deci2} $H_0$ com \Sexpr{(1-alfa)*100}\%. 
 
+\begin{answerlist}
+  \item \Sexpr{mu0}.
+  \item \Sexpr{sxbarra}.
+  \item \Sexpr{tcalc}.
+  \item \Sexpr{pvalor}.
+\end{answerlist}
+
 \end{solution}
 
 %% META-INFORMATION
-%% \extype{string}
-%% \exsolution{\Sexpr{resp}}
-%% \exname{Teste de hipotese para media: var desconhecida} 
+%% \extype{cloze}
+%% \exsolution{\Sexpr{mu0}|\Sexpr{sxbarra}|\Sexpr{tcalc}|\Sexpr{pvalor}}   
+%% \exclozetype{num|num|num|num} 
+%% \exname{Th média}  
+%% \extol{0.05}

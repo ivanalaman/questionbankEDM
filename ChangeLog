@@ -1,3 +1,9 @@
+2025-05-08 vs 2.1 - Ivan Bezerra Allaman <ivanalaman@gmail.com>
+  * Many question added.
+2023-11-08 vs. 2.0 - Ivan Bezerra Allaman <ivanalaman@gmail.com>
+  * Corrected inference files.
+2023-10-11 vs. 1.9 - Ivan Bezerra Allaman <ivanalaman@gmail.com>
+  * New files (question) added in questionbank
 2021-09-22 vs. 1.8 - Ivan Bezerra Allaman <ivanalaman@gmail.com>
   * Corrected Allaman_Au_6-1.Rnw question. 
   * Corrected Morettin_Ex_12-5.Rnw question.  
@@ -5,16 +11,12 @@
 2021-05-08 vs. 1.7 - Ivan Bezerra Allaman <ivanalaman@gmail.com>
   * Corrected Devore_Ex_3-94.Rnw question. Change algorithm of logica. 
   * Add new copyright question about correlation.
-
 2021-04-29 vs. 1.6 - Ivan Bezerra Allaman <ivanalaman@gmail.com>
   * Corrected Devore_Ex_1-36.Rnw question. Change algorithm of logica. 
-
 2021-04-15 vs. 1.5 - Ivan Bezerra Allaman <ivanalaman@gmail.com>
   * Corrected Allaman_Au_4-4.Rnw question. Change assimetria by simetria/assimetria. 
-
 2021-04-11 vs. 1.4 - Ivan Bezerra Allaman <ivanalaman@gmail.com>
   * Add question from Estatística para Ciências humanas 
-
 2020-09-25 vs. 1.3 - Ivan Bezerra Allaman <ivanalaman@gmail.com>
   * Add Mauro Moreira questionbank to repositories.
   * Changed structure of folder and add lang and images folders.

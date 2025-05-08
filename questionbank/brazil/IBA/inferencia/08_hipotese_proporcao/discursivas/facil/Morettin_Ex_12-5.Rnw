@@ -53,7 +53,14 @@ if(deci3=='não' & pvalor<=alfa){
 @
 
 \begin{question}
-  Lança-se uma moeda \Sexpr{trials} vezes e observa-se que ocorreram \Sexpr{suces} caras. Baseado nesse resultado, podemos afirmar, ao nível de \Sexpr{alfa*100}\% significância, que a moeda \Sexpr{deci3} é honesta? Apresente \textbf{todos} os cálculos que subsidiam sua resposta.
+  Lança-se uma moeda \Sexpr{trials} vezes e observa-se que ocorreram \Sexpr{suces} caras. Baseado nesse resultado, podemos afirmar, ao nível de \Sexpr{alfa*100}\% significância, que a moeda \Sexpr{deci3} é honesta? Responda as alternativas abaixo.
+  
+\begin{answerlist}
+  \item Qual é o valor hipotético, ou seja, aquele que queremos testar?
+  \item Qual é o erro padrão da proporção?
+  \item Qual é o valor da estatística de teste?
+  \item Qual é o p-valor?
+\end{answerlist}    
 
 \end{question} 
 
@@ -81,9 +88,17 @@ Logo, a estatística Z é calculada como:
 
  E portanto, o pvalor é igual a \Sexpr{pvalor}. Logo, como o pvalor é \Sexpr{deci1[1]} do que \Sexpr{alfa}, \Sexpr{deci1[2]} $H_0$ com \Sexpr{(1-alfa)*100}\%. Ou seja, a moeda \Sexpr{deci1[3]} é honesta!
 
+\begin{answerlist}
+  \item 0.5.
+  \item \Sexpr{sigmap}.
+  \item \Sexpr{Z}.
+  \item \Sexpr{pvalor}.
+\end{answerlist}
 \end{solution}
 
 %% META-INFORMATION
-%% \extype{string}
-%% \exsolution{\Sexpr{resp}}
-%% \exname{Teste de hipotese para proporção}  
+%% \extype{cloze}
+%% \exsolution{0.5|\Sexpr{sigmap}|\Sexpr{Z}|\Sexpr{pvalor}}   
+%% \exclozetype{num|num|num|num} 
+%% \exname{Th prop}  
+%% \extol{0.05}

@@ -1,0 +1,105 @@
+<<echo=FALSE,results=hide>>= 
+## Pacotes necessarios
+if(!require(xtable)){
+  install.packages(xtable)
+}
+if(!require(gmodels)){
+  install.packages('gmodels') 
+}
+if(!require(gexp)){
+  install.packages(gexp)
+}
+library(xtable)
+library(gmodels)
+library(gexp)
+
+## Programando os dados
+alpha <- sample(seq(0.01,0.1,by=0.01),size=1)
+fe <- trunc(rnorm(5,mean=1,sd=5))
+rowe <- trunc(rnorm(5,mean=1,sd=2))
+cole <- trunc(rnorm(5,mean=1,sd=2)) 
+
+lsd01 <- gexp(mu = 5,
+              r = 1,
+              fe = list(f1 = fe),
+              rowe = rowe,
+              cole = cole, 
+              fl = list(Trat = LETTERS[1:5]),
+              rowl = list(Batch = paste('r',
+                                      1:5,
+                                      sep = '')),
+              coll = list(Day = paste('c',
+                                      1:5,
+                                      sep = '')),
+              round = 0,
+              design = 'LSD')
+dados <- lsd01$dfm
+dados$Trat <- factor(dados$Trat)
+mod <- aov(Y1 ~ Batch + Day + Trat,dados)
+
+cmat <- rbind('A vs D' = c( 1, 0, 0, -1, 0), #Define a matriz dos contrastes ortogonais
+              'BC vs E'= c( 0,  1, 1,  0, -2))
+
+mod12 <- aov(Y1 ~ Batch + Day + Trat,
+            data=dados,
+            contrasts=list(Trat=make.contrasts(cmat)))  # make.contrasts (gmodels): gera matriz dos contrastes
+res <- summary(mod12,
+               split=list(Trat=list('A vs. D'=1,
+                                    'BC vs. E'=2)))
+## Programando as questões
+questions <- NULL
+questions[1] <- "Show the table of ANOVA."
+questions[2] <- "Show the residual analysis graphs. What's your conclusion?"
+questions[3] <- "If there are significant differences between treatments, make two contrasts: the first to compare treatments A vs D and the second to compare treatments BC vs E. Show the anova picture with such contrasts."
+questions[4] <- "If the researcher wanted to add a third contrast to the two previous ones to compare D vs E, would that be possible? Justify by proving your arguments!"
+solutions <- rep('Text',4)
+@ 
+ 
+\begin{question} 
+  The effect of five different ingredients (A,B,C,D,E) on the reaction time of a chemical process is being studied. Each batch of new material is only large enough to permit five runs to be made. Furthermore, each run requires approximately 1,5 horas, so only five runs can be made in one day. The experimenter decides to run the experiment as a Latin square so that day and batch effects may be systematically controlled. She obtains the data that follow. Analyze the data from this experiment (use $\alpha=$\Sexpr{alpha}) and answer as alternatives below.
+
+<<echo=FALSE,results=tex>>=
+print(xtable(dados),
+      include.rownames = FALSE,
+      table.placement = 'H')
+@
+
+<<echo=FALSE, results=tex>>= 
+answerlist(questions) 
+@  
+
+\end{question}  
+ 
+\begin{solution} 
+  \begin{itemize}
+  \item[a]
+
+<<echo=FALSE,results=tex>>=
+print(xtable(summary(mod)),
+      include.rownames = T,
+      table.placement = 'H') 
+@
+  
+  \item[b]
+
+<<echo=FALSE,fig=T>>=
+par(mfrow=c(1,2))
+plot(mod,which=1:2)
+@
+
+  \item[c]
+
+<<echo=FALSE,results=tex>>=
+print(xtable(res),
+      include.rownames = T,
+      table.placement = 'H') 
+@ 
+  
+  \item[d] Não seria possível, pois o contraste não seria ortogonal. Basta verificar a ortogonalidade do contraste 2 versus o 3.
+  \end{itemize}
+\end{solution} 
+ 
+%% META-INFORMATION 
+%% \extype{cloze} 
+%% \exsolution{\Sexpr{paste(solutions, collapse = "|")}} 
+%% \exclozetype{string|string|string|string}

@@ -1,0 +1,86 @@
+<<echo=FALSE>>=
+## DATA GENERATION
+#options(OutDec=',')
+## QUESTION/ANSWER GENERATION
+mu <- round(sample(runif(10,1.20,1.4),1),2)
+sigmaa <- round(sample(runif(10,0.01,0.07),1),2) 
+
+lia <- round(mu - sample(runif(10,2.2,4),1)*sigmaa,2)
+lsa <- round(mu - sample(runif(10,0.1,2),1)*sigmaa,2)
+lib <- round(mu + sample(runif(10,0.1,2),1)*sigmaa,2)  
+lsb <- round(mu + sample(runif(10,2.2,4),1)*sigmaa,2)  
+
+probb <- round(sample(runif(10,0.2,0.7),1),2)
+pz <- (1-probb)/2
+qz <- abs(qnorm(pz))
+menorc <- round(mu - qz*sigmaa,3)
+maiorc <- round(mu + qz*sigmaa,3)
+
+n <- trunc(runif(1,10,20))
+
+
+#questions <- solutions <- rep(list(''),7)
+questions <- solutions <- NULL 
+type <- NULL
+
+questions[1] <- paste('Entre ', lia, ' e ', lsa, sep=' ')
+solutions[1] <- round(pnorm(lsa,mu,sigmaa)-pnorm(lia,mu,sigmaa),3)
+type[1] <- 'num'
+
+questions[2] <- paste('Entre ', lib, ' e ', lsb, sep=' ')
+solutions[2] <- round(pnorm(lsb,mu,sigmaa)-pnorm(lib,mu,sigmaa),3)
+type[2] <- 'num'
+
+questions[3] <- paste('Entre que dois valores (simetricamente distribuídos em torno da média aritmética) estarão ',probb*100,'\\% das bolas de pingue-pongue? Coloque o MENOR destes dois valores',sep=' ')
+solutions[3] <- menorc
+type[3] <- 'num'
+
+questions[4] <- paste('Entre que dois valores (simetricamente distribuídos em torno da média aritmética) estarão ',probb*100,'\\% das bolas de pingue-pongue? Coloque o MAIOR destes dois valores',sep=' ')
+solutions[4] <- maiorc
+type[4] <- 'num'
+     
+questions[5] <- paste('Se muitas amostras aleatórias de ',n,' bolas de pingue-pongue forem selecionadas, qual seria a média aritmética esperada?')
+solutions[5] <- mu
+type[5] <- 'num'
+
+questions[6] <- paste('Se muitas amostras aleatórias de ',n,' bolas de pingue-pongue forem selecionadas, qual seria o desvio padrão esperado?')
+solutions[6] <- round(sigmaa/sqrt(n),3)
+type[6] <- 'num'
+
+questions[7] <- paste('Se muitas amostras aleatórias de ',n,' bolas de pingue-pongue forem selecionadas, que proporção das médias aritméticas das amostras estaria entre ', lia, ' e ', lsa, ' polegada?')
+solutions[7] <- round(pnorm(lsa,mu,sigmaa/sqrt(n))-pnorm(lia,mu,sigmaa/sqrt(n)),3)
+type[7] <- 'num'
+ 
+questions[8] <- paste('Se muitas amostras aleatórias de ',n,' bolas de pingue-pongue forem selecionadas, que proporção das médias aritméticas das amostras estaria entre ', lib, ' e ', lsb, ' polegada?')
+solutions[8] <- round(pnorm(lsb,mu,sigmaa/sqrt(n))-pnorm(lib,mu,sigmaa/sqrt(n)),3)
+type[8] <- 'num'   
+
+questions[9] <- paste(probb*100,' \\% das médias aritméticas das amostras estariam entre que dois valores? Coloque o MENOR destes dois valores')
+solutions[9] <- round(mu - qz*sigmaa/sqrt(n),3)
+type[9] <- 'num'         
+@  
+
+\begin{question}
+O diâmetro das bolas de pingue-pongue fabricadas por uma grande fábrica é supostamente distribuído de maneira aproximadamente normal com uma média aritmética de \Sexpr{mu} polegada e um desvio padrão de \Sexpr{sigmaa} polegada. Qual é a probabildade de que uma bola de pingue-pongue escolhida aleatoriamente tenha um diâmetro:
+
+<<echo=FALSE, results=hide, results=tex>>=
+ answerlist(questions)
+@
+
+\end{question}
+
+\begin{solution}
+
+<<echo=FALSE, results=hide, results=tex>>=
+answerlist(format(solutions)) 
+@
+
+\end{solution}
+
+%% META-INFORMATION
+%% \extype{cloze}
+%% \exsolution{\Sexpr{paste(solutions, collapse = "|")}} 
+%% \exclozetype{num|num|num|num|num|num|num|num|num} 
+%% \exname{Distribuição amostral} 
+%% \extol{0.005} 
+  

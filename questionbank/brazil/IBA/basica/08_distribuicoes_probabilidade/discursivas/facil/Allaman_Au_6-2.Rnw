@@ -32,25 +32,25 @@ results1g <-  pnorm(question1g)
 ## Programando as questões
 questions <- solutions <- NULL
 
-questions[1] <- paste("P(",question1a[1], '< Z <', question1a[2] ,")")
+questions[1] <- paste("P(",question1a[1],"$\\leq", 'Z',"\\leq$", question1a[2] ,")")
 solutions[1] <- round(results1a,3)
 
-questions[2] <- paste("P(",question1b[1], '< Z <', 0 ,")")
+questions[2] <- paste("P(",question1b[1], "$\\leq", 'Z',"\\leq$", 0 ,")")
 solutions[2] <- round(results1b,3)
 
-questions[3] <- paste("P(",0, '< Z <', question1c[2] ,")")
+questions[3] <- paste("P(",0, "$\\leq", 'Z',"\\leq$", question1c[2] ,")")
 solutions[3] <- round(results1c,3)
 
-questions[4] <- paste("P(Z >",question1d,")")
+questions[4] <- paste("P(Z ","$\\geq$",question1d,")")
 solutions[4] <- round(results1d,3)
 
-questions[5] <- paste("P(Z >",question1e,")")
+questions[5] <- paste("P(Z ","$\\geq$",question1e,")")
 solutions[5] <- round(results1e,3)
 
-questions[6] <- paste("P(Z <",question1f,")")
+questions[6] <- paste("P(Z ","$\\leq$",question1f,")")
 solutions[6] <- round(results1f,3)
 
-questions[7] <- paste("P(Z <",question1g,")")
+questions[7] <- paste("P(Z ","$\\leq$",question1g,")")
 solutions[7] <- round(results1g,3)
 @
 

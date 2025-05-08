@@ -1,0 +1,74 @@
+<<echo=FALSE>>=
+n <- trunc(runif(1,25,30))
+
+mu <- runif(1,20,30)
+sigmaa <- runif(1,1,6)
+
+amo <- round(rnorm(n,mu,sigmaa),1)
+
+xbarra <- mean(amo)
+samo <- sd(amo)
+erropad <- samo/sqrt(n)
+
+alfa <- round(runif(1,0.01,0.1),2)
+conf <- 1-alfa
+
+me <- abs(qt(alfa/2,n-1)) * erropad
+
+li <- xbarra - me
+lss <- xbarra + me
+
+#questions <- solutions <- rep(list(''),7)
+questions <- solutions <- NULL 
+type <- NULL
+
+questions[1] <- 'Qual é a média amostral?'
+solutions[1] <- round(xbarra,3)
+type[1] <- 'num'
+
+questions[2] <- 'Qual é o desvio padrão amostral?'
+solutions[2] <- round(samo,3)
+type[2] <- 'num'
+
+questions[3] <- paste('Considerando uma confiança de', conf*100,'\\%, qual é a margem de erro?', sep=' ')
+solutions[3] <- round(me, 3)
+type[3] <- 'num'
+
+questions[4] <- paste('Considerando uma confiança de',conf*100,' \\%, qual é o limite inferior do intervalo de confiança para média populacional?', sep=' ')
+solutions[4] <- round(li ,3)
+type[4] <- 'num'
+
+questions[5] <- paste('Considerando uma confiança de',conf*100,' \\%, qual é o limite superior do intervalo de confiança para média populacional?', sep=' ')
+solutions[5] <- round(lss ,3)
+type[5] <- 'num'
+     
+@ 
+
+\begin{question}
+O diretor de qualidade de uma grande organização de assistência à saúde deseja avaliar o tempo de espera dos pacientes, em uma concessionária local. Uma amostra aleatória de \Sexpr{n} pacientes é selecionada, a partir do prontuário. O tempo de espera é definido como o tempo medido desde a chegada do paciente até que ele seja atendido pelo médico. Os dados a seguir representam os tempos de espera (em minutos): 
+
+<<>>= 
+amo
+@ 
+
+<<echo=FALSE, results=hide, results=tex>>=
+ answerlist(questions)
+@
+
+\end{question}
+
+\begin{solution}
+
+<<echo=FALSE, results=hide, results=tex>>=
+answerlist(format(solutions)) 
+@
+
+\end{solution}
+
+%% META-INFORMATION
+%% \extype{cloze}
+%% \exsolution{\Sexpr{paste(solutions, collapse = "|")}} 
+%% \exclozetype{num|num|num|num|num} 
+%% \exname{Intervalo de confiança}  
+%% \extol{0.005} 
+         

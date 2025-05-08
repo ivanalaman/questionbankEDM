@@ -49,4 +49,5 @@ Tem-se que o tamanho da amostra é de \Sexpr{namo}.
  
  %% META-INFORMATION 
  %% \extype{num} 
- %% \exsolution{\Sexpr{namo}}   
+ %% \exsolution{\Sexpr{namo}} 
+ %% \extol{2}   

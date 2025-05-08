@@ -3,13 +3,12 @@
 #---------------------
 
 ## Programando os dados
-EY   <- sample(10:14,1)
-varY <- sample(2:6,1)
+n <- sample(10:20,size=1)
+qq <- sample(seq(0,1,by=0.01),size=1)
 
-q     <- round(varY/EY,2)
-p     <- round(1 - q,2)
-
-n     <- round(EY/p)
+p <- 1-qq
+EY   <- n*p
+varY <- round(n*p*qq,2)
 
 EZ    <- round((EY - 6)/3,2)
 varZ  <- round(varY/9,2)
@@ -20,16 +19,16 @@ questions <- solutions <- NULL
 questions[1] <- paste(paste(n,p,EZ,sep=', '),varZ,sep=' e ')
 solutions[1] <- TRUE
 
-questions[2] <- paste(paste(n+2,q,EY,sep=', '),varZ,sep=' e ')
+questions[2] <- paste(paste(n+2,qq,EY,sep=', '),varZ,sep=' e ')
 solutions[2] <- FALSE 
 
-questions[3] <- paste(paste(n,q,EZ,sep=', '),varZ, sep=' e ')
+questions[3] <- paste(paste(n,qq,EZ,sep=', '),varZ, sep=' e ')
 solutions[3] <- FALSE
  
 questions[4] <- paste(paste(n+2,p,EZ,sep=', '),varY,sep=' e ')
 solutions[4] <- FALSE 
  
-questions[5] <- paste(paste(n+2,q,EZ,sep=', '),varZ,sep=' e ')
+questions[5] <- paste(paste(n+2,qq,EZ,sep=', '),varZ,sep=' e ')
 solutions[5] <- FALSE
 
 o <- sample(1:5)

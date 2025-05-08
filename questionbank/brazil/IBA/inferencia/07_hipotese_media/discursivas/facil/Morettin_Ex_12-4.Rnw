@@ -38,8 +38,14 @@ ifelse(pvalor <= alfa,
 @
 
 \begin{question}
-  Os indivíduos de um país apresentam altuma média de \Sexpr{mu} cm e desvio padrão de \Sexpr{sigma} cm. A altura tem distribuição normal. Uma amostra de \Sexpr{amo} indivíduos apresentou média de \Sexpr{xbarra} cm. Podemos afirmar, ao nível de \Sexpr{alfa*100}\%, que essa amostra é formada por indivíduos daquele país? Apresente \textbf{todos} os cálculos que subsidiam sua resposta.
-
+  Os indivíduos de um país apresentam altuma média de \Sexpr{mu} cm e desvio padrão de \Sexpr{sigma} cm. A altura tem distribuição normal. Uma amostra de \Sexpr{amo} indivíduos apresentou média de \Sexpr{xbarra} cm. Podemos afirmar, ao nível de \Sexpr{alfa*100}\%, que essa amostra é formada por indivíduos daquele país? Responda as alternativas abaixo.
+  
+\begin{answerlist}
+  \item Qual é o valor hipotético, ou seja, aquele que queremos testar?
+  \item Qual é o erro padrão da média?
+  \item Qual é o valor da estatística de teste?
+  \item Qual é o p-valor?
+\end{answerlist}  
 \end{question} 
 
 \begin{solution}
@@ -66,9 +72,17 @@ Logo, a estatística Z é calculada como:
 
  E portanto, o pvalor é igual a \Sexpr{pvalor}. Logo, como o pvalor é \Sexpr{deci1[1]} do que \Sexpr{alfa}, \Sexpr{deci1[2]} $H_0$ com \Sexpr{(1-alfa)*100}\%. Ou seja, a amostra \Sexpr{deci1[3]} aos indivíduos daquele país.
 
+\begin{answerlist}
+  \item \Sexpr{mu}.
+  \item \Sexpr{sigmaxbarra}.
+  \item \Sexpr{Z}.
+  \item \Sexpr{pvalor}.
+\end{answerlist}
 \end{solution}
 
 %% META-INFORMATION
-%% \extype{string}
-%% \exsolution{'Aberta - texto'}
-%% \exname{Teste de hipotese para media: var conhecida} 
+%% \extype{cloze}
+%% \exsolution{\Sexpr{mu}|\Sexpr{sigmaxbarra}|\Sexpr{Z}|\Sexpr{pvalor}}   
+%% \exclozetype{num|num|num|num} 
+%% \exname{Th média}  
+%% \extol{0.05}

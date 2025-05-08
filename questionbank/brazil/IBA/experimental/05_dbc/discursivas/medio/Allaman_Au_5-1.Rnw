@@ -1,0 +1,49 @@
+<<echo=FALSE, results=hide>>=  
+## Pacotes necessários
+if(!require(xtable)){
+  install.packages("xtable")
+}
+
+if(!require(gexp)){
+  install.packages("gexp")
+}
+library(xtable)
+library(gexp)
+
+## Programando os dados
+nblk <- sample(3:6,size=1)
+
+rcbd <- gexp(mu = 0,
+             r = 1,
+             fe = list(f1 = c(5, 1)),
+             fl = list(TR = LETTERS[1:2]),
+             blke = 1:nblk,
+             blkl = list(BLK = paste('B',
+                                     1:nblk,
+                                     sep = '')),
+             round = 1,
+             design = 'RCBD')
+dados <- rcbd$dfm
+
+## Programando as questões
+#+------------------------
+@ 
+
+\begin{question} 
+  Um experimento foi conduzido utilizando um delineamento em blocos ao acaso para testar dois tratamentos. Mostre sua equivalência essencial ao teste t pareado.
+
+<<echo=FALSE,results=tex>>=
+print(xtable(dados),
+      include.rownames = FALSE,
+      table.placement = 'H')
+@
+
+\end{question}  
+
+\begin{solution} 
+A estatística t elevada ao quadrado é equivalente a estatística F com um graus de liberdade. Isso só é válido quando não temos repetição dentro de bloco.
+\end{solution} 
+ 
+%% META-INFORMATION  
+%% \extype{string}  
+%% \exsolution{"Aberta-texto"}  

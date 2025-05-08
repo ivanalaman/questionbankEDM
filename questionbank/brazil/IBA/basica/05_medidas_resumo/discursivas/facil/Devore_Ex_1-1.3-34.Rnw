@@ -1,0 +1,57 @@
+<<echo=FALSE,results=hide>>=
+library(xtable)
+
+n <- sample(15:25,size=1)
+dad <- round(rnorm(n, mean=46.8, sd=10),2)
+iqr <- quantile(dad,prob=0.75) - quantile(dad,prob=0.25)
+outinf <- quantile(dad,prob=0.25) - 1.5*(iqr) - 5
+outsup <- quantile(dad,prob=0.75) + 1.5*(iqr) + 5
+dados <- c(sample(c(outinf,outsup),size=1),dad)
+dadaparado <- sort(dados)[-c(1,n+1)]
+
+media <- mean(dados)
+mediana <- median(dados)
+mediapa <- mean(dadaparado)
+
+questions <- solutions <- NULL
+questions[1] <- 'Determine o valor da média amostral.' 
+solutions[1] <- round(media,2)
+questions[2] <- 'Determine o valor da mediana amostral.' 
+solutions[2] <- round(mediana,2)
+questions[3] <- 'Calcule a média aparada, excluindo a menor e a  maior observação.'
+solutions[3] <- round(mediapa,2)
+questions[4] <- "Qual é a porcentagem de truncamento correspondente?" 
+solutions[4] <-  round(1/(n+1),2)
+@
+
+\begin{question}
+Considere as observações a seguir sobre resistência ao cisalhamento (MPa) de uma junta soldada de uma determinada forma (de um gráfico no artigo “Diffusion of Silicon Nitride to Austenitic Stainless Steel without Interlayers,” Metallurgical Trans., 1993, p. 1835-1843):
+
+<<echo=FALSE,results=tex>>=
+print(xtable(as.data.frame(dados)),
+      include.rownames=FALSE)
+@
+
+\begin{answerlist}
+\item \Sexpr{questions[1]}
+\item \Sexpr{questions[2]}
+\item \Sexpr{questions[3]}
+\item \Sexpr{questions[4]}
+\end{answerlist}
+\end{question}  
+	
+\begin{solution} 
+	
+\begin{answerlist}
+\item \Sexpr{solutions[1]}
+\item \Sexpr{solutions[2]}
+\item \Sexpr{solutions[3]}
+\item \Sexpr{solutions[4]}
+\end{answerlist}
+\end{solution}
+	
+
+%% META-INFORMATION
+%% \extype{cloze}
+%% \exsolution{\Sexpr{paste(solutions,collapse="|")}}
+%% \exclozetype{num|num|num|num}

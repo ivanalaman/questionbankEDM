@@ -1,0 +1,55 @@
+<<echo=FALSE>>=
+probc <- round(runif(1,0.53,0.56),2) 
+
+n <- trunc(runif(1,80,150))
+
+pia <- round(runif(1,0.501,0.520),3)
+pib <- round(runif(1,0.59,0.62),3)
+pic <- round(runif(1,0.41,0.49),3)
+
+erropa <- sqrt(pia*(1-pia)/sqrt(n))
+erropb <- sqrt(pib*(1-pib)/sqrt(n))
+erropc <- sqrt(pic*(1-pic)/sqrt(n))
+ 
+#questions <- solutions <- rep(list(''),7)
+questions <- solutions <- NULL 
+type <- NULL
+
+questions[1] <- paste('Seu verdadeiro percentual de votos for de ', pia*100,' \\%?', sep=' ')
+solutions[1] <- round(1-(pnorm(probc,pia,erropa)) ,3)
+type[1] <- 'num'
+
+questions[2] <- paste('Seu verdadeiro percentual de votos for de ', pib*100,' \\%?', sep=' ')
+solutions[2] <- round(1-(pnorm(probc,pib,erropb)) ,3)
+type[2] <- 'num'
+
+questions[3] <- paste('Seu verdadeiro percentual de votos for de ', pic*100,' \\%?', sep=' ')
+solutions[3] <- round(1-(pnorm(probc,pic,erropc)) ,3)
+type[3] <- 'num'
+ 
+@
+
+\begin{question}
+Um instituto de pesquisa de opinião sobre políticos está conduzindo uma análise de resultados de amostras de modo a fazer previsões na noite das eleições. Pressupondo uma disputa entre dois candidatos, se determinado candidato receber pelo menos \Sexpr{probc*100}\% dos votos na amostra, então esse candidato será tido como o vencedor da eleição. Se for tomada uma amostra aleatória de \Sexpr{n} eleitores, qual é a probabilidade de que um candidato seja anunciado como vencedor quando: 
+
+<<echo=FALSE, results=hide, results=tex>>=
+ answerlist(questions)
+@
+
+\end{question}
+
+\begin{solution}
+
+<<echo=FALSE, results=hide, results=tex>>=
+answerlist(format(solutions)) 
+@
+
+\end{solution}
+
+%% META-INFORMATION
+%% \extype{cloze}
+%% \exsolution{\Sexpr{paste(solutions, collapse = "|")}} 
+%% \exclozetype{num|num|num} 
+%% \exname{Distribuição amostral}  
+%% \extol{0.005} 
+      

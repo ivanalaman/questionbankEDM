@@ -1,0 +1,160 @@
+<<echo=FALSE,results=hide>>=
+## Pacotes necessários
+if(!require(MASS)){
+  install.packages('MASS') 
+}
+if(!require(xtable)){
+  install.packages('xtable') 
+}
+if(!require(gexp)){
+  install.packages('gexp') 
+}
+
+library(MASS)
+library(xtable)
+library(gexp)
+
+## Programando os dados
+
+e_pois <- as.matrix(rpois(n = 16,
+                          lam = 15))
+e_binom <- as.matrix(rbinom(n = 16, 
+                            size = 10, 
+                            prob = 0.333))
+erros <- list(e_pois,e_binom)
+sorterros <- sample(1:2,size=1)
+
+choiceerros <- erros[[sorterros]]
+
+crd <- gexp(mu = 20,
+ err = choiceerros,
+ r = 4,
+ fl = list(racao = LETTERS[1:4]),
+ fe = list(f1 = c(1.3, 4.1, 1.8, 2.2)))
+
+dad <- crd$dfm 
+
+variancias <- with(dad, tapply(Y1, list(racao),var)) 
+mini <- min(variancias)
+
+mod <- aov(Y1 ~ racao,dad)
+
+normali <- shapiro.test(mod$res)$p.value
+
+Fmax <- max(variancias)/min(variancias)
+homovar <- pf(Fmax,3,3,lower.tail=FALSE)
+
+alpha <- 0.01
+while(normali > alpha | homovar > alpha | mini == 0){
+  e_pois <- as.matrix(rpois(n = 16,
+                            lam = 15))
+  e_binom <- as.matrix(rbinom(n = 16, 
+                              size = 10, 
+                              prob = 0.333))  
+  erros <- list(e_pois,e_binom)
+  sorterros <- sample(1:2,size=1)
+
+  choiceerros <- erros[[sorterros]]
+
+  crd <- gexp(mu = 20,
+              err = choiceerros,
+              r = 4,
+              fl = list(racao = LETTERS[1:4]),
+              fe = list(f1 = c(1.3, 4.1, 1.8, 2.2)))
+
+  dad <- crd$dfm
+  mod <- aov(Y1 ~ racao,dad)
+
+  normali <- shapiro.test(mod$res)$p.value
+  variancias <- with(dad, tapply(Y1, list(racao),var))
+  mini <- min(variancias)
+  Fmax <- max(variancias)/mini
+  homovar <- pf(Fmax,3,3,lower.tail=FALSE)
+}
+
+dadorig <- dad
+dad$yraiz <- sqrt(dad$Y1)
+dad$ylog  <- log10(dad$Y1) 
+
+bx <- boxcox(mod,
+             plotit = FALSE)
+arbx <- do.call('cbind',bx)
+ind <- which(arbx == max(arbx[,2]),arr.ind = TRUE)
+val <- arbx[ind[1,1]]
+dad$ybox <- (dad$Y1^val - 1)/val
+
+modtrans <- apply(dad[,-c(1:3)],2,function(x)aov(x ~ racao,
+                                                 data = dad))
+
+normtest <- lapply(modtrans,function(x)shapiro.test(x$res)$p.value)
+homotrans <- list()
+
+for(i in 1:3){
+  variancias <- with(dad, 
+                     tapply(dad[,-c(1:3)][,i], 
+                            list(racao),
+                            var))
+  Fmax <- max(variancias)/min(variancias)
+  homovar <- pf(Fmax,2,2,lower.tail=FALSE)
+  homotrans[[i]] <- homovar
+}
+names(homotrans) <- names(normtest)
+
+boolnorm <- unlist(lapply(normtest,function(x)x>=0.01))
+boolhomo <- unlist(lapply(homotrans,function(x)x>=0.01))
+
+## Programando as questões
+questions <- solutions <- NULL
+questions[1] <- "Nenhuma transformação resolveu o problema dos pressupostos."
+solutions[1] <- all(c(boolnorm,boolhomo)==FALSE)
+questions[2] <- "As transformações raiz quadrática, logarítmica (na base 10) e boxcox resolveram o problema dos pressupostos."
+solutions[2] <- all(c(boolnorm,boolhomo)==TRUE) 
+questions[3] <- "A transformação boxcox resolveu o problema dos pressupostos."
+solutions[3] <- all(c(boolnorm[3],boolhomo[3])==TRUE)
+questions[4] <- "A transformação logarítmica (na base 10) resolveu o problema dos pressupostos."
+solutions[4] <- all(c(boolnorm[2],boolhomo[2])==TRUE)
+questions[5] <- "A transformação raiz quadrada resolveu o problema dos pressupostos."
+solutions[5] <- all(c(boolnorm[1],boolhomo[1])==TRUE)
+questions[6] <- "A transformação logarítmica (na base 10) resolveu apenas o problema  de normalidade."
+solutions[6] <- ifelse(boolnorm[2]==TRUE & boolhomo[2]==FALSE,TRUE,FALSE)
+questions[7] <- "A transformação raiz quadrada resolveu apenas o problema de homocedasticidade."
+solutions[7] <- ifelse(boolnorm[1]==FALSE & boolhomo[1]==TRUE,TRUE,FALSE) 
+o <- sample(1:7)
+questions <- questions[o]
+solutions <- solutions[o]
+@ 
+
+\begin{question}
+Uma análise de resíduos nos dados a seguir apontou desvio de um dos pressupostos. A respeito das transformações assinale com x as alternativas verdadeiras.
+
+<<echo=FALSE,results=tex>>=
+print(xtable(dadorig),
+      include.rownames = FALSE)    
+@
+
+\begin{answerlist}
+\item \Sexpr{questions[1]}
+\item \Sexpr{questions[2]}
+\item \Sexpr{questions[3]}
+\item \Sexpr{questions[4]}
+\item \Sexpr{questions[5]}
+\item \Sexpr{questions[6]}
+\item \Sexpr{questions[7]}
+\end{answerlist}
+\end{question}
+   
+\begin{solution}
+\begin{answerlist}
+\item \Sexpr{mchoice2text(solutions[1])}
+\item \Sexpr{mchoice2text(solutions[2])}
+\item \Sexpr{mchoice2text(solutions[3])}
+\item \Sexpr{mchoice2text(solutions[4])}
+\item \Sexpr{mchoice2text(solutions[5])}
+\item \Sexpr{mchoice2text(solutions[6])}
+\item \Sexpr{mchoice2text(solutions[7])}
+\end{answerlist}
+\end{solution}
+
+%% META-INFORMATION
+%% \extype{mchoice}
+%% \exsolution{\Sexpr{mchoice2string(solutions,single=FALSE)}}

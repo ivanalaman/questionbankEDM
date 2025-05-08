@@ -1,0 +1,112 @@
+<<echo=FALSE,results=hide>>= 
+## Pacotes necessários
+#---------------------
+
+## Programando os dados
+prob_aux <- runif(4)#gerando quatro números quaisquer
+prob_aux2 <- round(prob_aux/sum(prob_aux),3)#restringindo a 1
+prob_interseccao <- min(prob_aux2)
+
+prob_Aexclusivo <- sample(prob_aux2[prob_aux2!=prob_interseccao],1)
+
+prob_Bexclusivo <- sample(prob_aux2[prob_aux2!=prob_interseccao & prob_aux2!=prob_Aexclusivo],1)
+
+prob_ABcomplementar <- prob_aux2[prob_aux2!=prob_interseccao & prob_aux2!=prob_Aexclusivo & prob_aux2!=prob_Bexclusivo]
+
+prob_A <- prob_Aexclusivo + prob_interseccao
+prob_B <- prob_Bexclusivo + prob_interseccao
+prob_AuniB <- prob_A + prob_B - prob_interseccao
+## Programando as questões
+#-------------------------
+
+aux_texto <- c(prob_interseccao,prob_AuniB,prob_ABcomplementar)
+names(aux_texto) <- 1:3
+
+texto <- sample(aux_texto,1)
+
+if(names(texto) == "1"){
+   expr_texto <- paste("P(A \\\\\\cap B) = ",prob_interseccao)
+}else if(names(texto) == "2"){
+   expr_texto <- paste("P(A \\\\\\cup B) = ",prob_AuniB)   
+}else{
+   expr_texto <- paste("P(\\\\\\overline{A \\\\\\cap B}) = ",prob_ABcomplementar)  
+}
+
+aux_pergunta <- c(prob_Aexclusivo,prob_Bexclusivo,aux_texto[names(aux_texto)!=names(texto)])
+
+names(aux_pergunta) <- c('A','B',names(aux_pergunta)[3:4])
+aux_pergunta2 <- sample(aux_pergunta,1)
+
+pergunta <- switch(names(aux_pergunta2),
+                   "A" = "P(A \\\\\\cap \\\\\\bar{B})",
+                   "B" = "P(\\\\\\bar{A} \\\\\\cap B)",
+                   "1" = "P(A \\\\\\cap B)",
+                   "2" = "P(A \\\\\\cup B)",
+                   "3" = "P(\\\\\\overline{A \\\\\\cap B})",
+                   )
+
+resp <- switch(names(aux_pergunta2),
+                   "A" = {resp <- prob_A - prob_interseccao},
+                   "B" = {resp <- prob_B - prob_interseccao},
+                   "1" = {resp <- - prob_AuniB + prob_A + prob_B},
+                   "2" = {resp <- prob_A + prob_B - prob_interseccao},
+                   "3" = {resp <- 1 - prob_AuniB},
+                   )
+
+@ 
+
+\begin{question} 
+Uma empresa de eletricidade oferece uma taxa vitalícia de energia a qualquer lar cuja utilização de energia esteja abaixo de 240 kWh durante um determinado mês. Represente por A o evento de um lar selecionado aleatoriamente em uma comunidade que não excede a utilização da taxa vitalícia em janeiro e por B o evento análogo para o mês de julho (A e B se referem ao mesmo lar). Suponha que P(A) = \Sexpr{prob_A}, P(B) = \Sexpr{prob_B} e $\Sexpr{expr_texto}$. Calcule $\Sexpr{pergunta}$. 
+
+\end{question}  
+ 
+\begin{solution} 
+ 
+<<echo=FALSE,results=tex>>= 
+#solucao <- list(
+#                paste("$P(A \\cap \\bar{B}) = P(A) - P(A \\cap B)$\\\\"),
+#                paste("$P(A \\cap \\bar{B}) =",prob_A,"-",prob_interseccao,"$\\\\"),
+#                paste("$P(A \\cap \\bar{B}) =", resp,"$")
+#                )
+solucao <- switch(names(aux_pergunta2),
+                   "A" = {
+                          list(
+                            paste("$P(A \\cap \\bar{B}) = P(A) - P(A \\cap B)$\\\\"),
+                            paste("$P(A \\cap \\bar{B}) =",prob_A,"-",prob_interseccao,"$\\\\"),
+                            paste("$P(A \\cap \\bar{B}) =", resp,"$")
+                            )
+                          },
+                   "B" = {
+                          list(
+                            paste("$P(\\bar{A} \\cap B) = P(B) - P(A \\cap B)$\\\\"),
+                            paste("$P(\\bar{A} \\cap B) =",prob_B,"-",prob_interseccao,"$\\\\"),
+                            paste("$P(\\bar{A} \\cap B) =", resp,"$"))
+                          },
+                   "1" = {
+                          list(
+                            paste("$P(A \\cap B) = - P(A \\cup B) + P(A) + P(B)$\\\\"),
+                            paste("$P(A \\cap B) = -" ,prob_AuniB,"+",prob_A,"+",prob_B,"$\\\\"),
+                            paste("$P(A \\cap B) = -" , resp,"$"))
+                          },
+                   "2" = {
+                          list(
+                            paste("$P(A \\cup B) = P(A) + P(B) - P(A \\cap B)$\\\\"),
+                            paste("$P(A \\cup B) = ",prob_A,"+",prob_B,"-",prob_interseccao,"$\\\\"),
+                            paste("$P(A \\cup B) = ",resp,"$"))
+                          },
+                   "3" = {
+                          list(
+                            paste("$P(\\overline{A \\cap B}) = 1 - P(A \\cup B)$\\\\"),
+                            paste("$P(\\overline{A \\cap B}) = ",1,"-",prob_AuniB,"$\\\\"),
+                            paste("$P(\\overline{A \\cap B}) = ",resp,"$"))
+                          },
+                   )
+invisible(lapply(solucao,function(x)cat(x)))
+@ 
+ 
+\end{solution} 
+ 
+%% META-INFORMATION 
+%% \extype{num} 
+%% \exsolution{\Sexpr{resp}}  
+%% \extol{0.01}

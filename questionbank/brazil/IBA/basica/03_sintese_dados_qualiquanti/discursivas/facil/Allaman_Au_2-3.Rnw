@@ -11,17 +11,17 @@ library(xtable)
 library(fdth)
 
 ## Programando os dados
-Nprof <- floor(runif(1, 20, 30))
+Nprof <- floor(runif(1, 5, 10))
 profe <- sample(c('particular','pública'),
                       Nprof,
                       replace=T) 
 
-Nserv <- floor(runif(1, 10, 30))
+Nserv <- floor(runif(1, 5, 10))
 serv  <- sample(c('particular','pública'),
                       Nserv,
                       replace=T) 
 
-Nalu <- floor(runif(1, 40, 50))
+Nalu <- floor(runif(1, 5, 10))
 alu  <- sample(c('particular','pública'),
                Nalu,
                replace=T) 
@@ -34,10 +34,9 @@ dados <- data.frame(Comunidade = rep(c('Professores','Servidores','Alunos'),
                                      c(Nprof,Nserv,Nalu)),
                     Escola = c(profe,serv,alu))
 
-n <- floor(runif(1,25,41))
-
 tam_ext <- lapply(pop, length)
 N <- sum(unlist(tam_ext))
+n <- floor(0.5*N)
 
 perc <- lapply(tam_ext,function(x) round(x/N * 100,2)) 
 

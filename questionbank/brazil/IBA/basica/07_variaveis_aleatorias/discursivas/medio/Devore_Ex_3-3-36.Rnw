@@ -1,0 +1,54 @@
+<<echo=FALSE,results=hide>>= 
+## Pacotes necessários
+#---------------------
+
+## Programando os dados
+#----------------------
+
+## Programando as questões
+#-------------------------
+aux_pergunta  <- c("E(X)","VAR(X)")
+names(aux_pergunta) <- 1:2
+
+pergunta <- sample(aux_pergunta,size=1)
+
+if(names(pergunta)==1){
+  solucao = list(
+              paste("$E(X) = \\sum{p\\cdot x} = 1/n \\cdot \\sum x = 1/n \\cdot n(n+1)/2 = (n+1)/2$")
+              )
+}else{
+  solucao = list(
+              paste("$E(X) = \\sum{p\\cdot x} = 1/n \\cdot \\sum x = 1/n \\cdot n(n+1)/2 = (n+1)/2$\\\\"), 
+              paste("$E(X^2) = \\sum{p\\cdot x^2} = 1/n \\cdot \\sum x^2 = 1/n \\cdot n(n+1)(2n+1)/6 = ((n+1)(2n+1))/6$\\\\"),
+              paste("$VAR(X) = E(X^2) - {E(X)}^2 = (n^2-1)/12$") 
+              )
+}
+
+@ 
+ 
+\begin{question} 
+Os n candidatos a uma vaga foram classificados como 1, 2, 3,..., n. Seja X a classificação de um candidato selecionado aleatoriamente, de forma que X tenha fmp
+
+\begin{equation}
+p(x) = \begin{cases}
+    1/n \quad x = 1,2,3,\cdots,n \\
+    0 \quad \texttt{caso contrário}
+\end{cases}
+\end{equation}
+
+Calcule $\Sexpr{pergunta}$. Sugestão: a soma dos primeiros $n$ inteiros positivos é $n(n+1)/2$, enquanto a soma de seus quadrados é $n(n+1)(2n+1)/6$.
+
+\end{question}  
+ 
+\begin{solution} 
+
+<<echo=FALSE,results=tex>>= 
+invisible(lapply(solucao,function(x)cat(x)))
+@ 
+
+\end{solution} 
+ 
+%% META-INFORMATION 
+%% \extype{string} 
+%% \exsolution{"Aberta"}  
+

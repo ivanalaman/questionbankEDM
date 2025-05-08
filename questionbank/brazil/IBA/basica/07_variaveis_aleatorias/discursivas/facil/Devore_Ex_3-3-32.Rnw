@@ -1,0 +1,29 @@
+<<echo=FALSE,results=hide>>= 
+## Pacotes necessários
+#---------------------
+
+## Programando os dados
+#-------------------------
+
+
+## Programando as questões
+#-------------------------
+pergunta <- paste("E(X^{",trunc(runif(1,min=50,max=95)),"})")
+resp <- "p"
+
+@ 
+
+\begin{question} 
+ Seja X uma va de Bernoulli calcule $\Sexpr{pergunta}$.
+
+\end{question}  
+ 
+\begin{solution} 
+ 
+Não importa o valor de X, o valor esperado sempre será \textbf{p}.
+ 
+\end{solution} 
+ 
+%% META-INFORMATION 
+%% \extype{string} 
+%% \exsolution{\Sexpr{resp}} 

@@ -37,7 +37,7 @@ type[3] <- "string"
   Uma quantidade de \Sexpr{n} trabalhadores de plataformas de petróleo \textit{offshore} participaram de um exercício de fuga simulado, resultando nos dados a seguir (em segundos) para concluir a fuga (``Oxygen consumption  and ventilation during escape from an offshore platform"):
 
 <<echo=FALSE>>=
-var
+x
 @
 
 <<echo=FALSE, results=hide, results=tex>>= 

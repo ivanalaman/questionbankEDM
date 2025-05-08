@@ -1,0 +1,79 @@
+<<echo=FALSE,results=hide>>= 
+## Pacotes necessários
+#---------------------
+
+## Programando os dados
+raizes <- function(a,b,cc){
+       delta = b^2 - 4*a*cc
+       x1 = (-b + sqrt(delta))/(2*a)
+       x2 = (-b - sqrt(delta))/(2*a)
+       res = c(x1,x2)
+       res
+}
+
+
+prob_aux <- runif(2)#gerando quatro números quaisquer
+prob_aux2 <- round(prob_aux/sum(prob_aux),3)#restringindo a 1
+prob_ABcomplementar <- min(prob_aux2)
+
+prob_AuniB <- max(prob_aux2)
+
+prob_interseccao <- 0.1*prob_AuniB #0 valor 0,1 é arbitrário!
+## Programando as questões
+#-------------------------
+
+aux_texto <- c(prob_interseccao,prob_AuniB)
+names(aux_texto) <- 1:2
+
+uniao <- paste("P(A \\\\\\cup B) = ",prob_AuniB)
+inter <- paste("P(A \\\\\\cap B) = ",prob_interseccao)
+
+sinal  <- sample(c(">","<"),size=1)
+
+coefb <- prob_AuniB + prob_interseccao
+coefc <- prob_interseccao
+
+aux_resp <- round(raizes(1,-coefb,coefc),3)
+
+
+aux_pergunta <- c("P(A)","P(B)")
+names(aux_pergunta) <- 1:2
+pergunta <- sample(aux_pergunta,size=1)
+
+if(sinal == ">"){
+   resp <- switch(names(pergunta),
+                  "1" = max(aux_resp),
+                  "2" = min(aux_resp)
+                  )   
+}else{
+   resp <- switch(names(pergunta),
+                  "1" = min(aux_resp),
+                  "2" = max(aux_resp)
+                  )
+}
+
+@ 
+
+\begin{question} 
+Um satélite tem seu lançamento previsto do cabo Canaveral, na Flórida, e o outro da Base Aérea de Vandenberg, na Califórnia. Sejam A o evento do lançamento de Vandenberg ser feito na data e B o evento análogo do cabo Canaveral. Se A e B forem eventos independentes com P(A) $\Sexpr{sinal}$ P(B) e $\Sexpr{uniao}$, $\Sexpr{inter}$, determine o valor de \Sexpr{pergunta}.
+
+\end{question}  
+ 
+\begin{solution} 
+ 
+<<echo=FALSE,results=tex>>= 
+solucao <- list(
+            paste("$P(A \\cap B) = P(A) \\cdot P(B)$\\\\"),
+            paste("$P(A \\cup B) = P(A) + P(B) - P(A \\cap B)$\\\\"),
+            paste("$P(B)^2 -",prob_AuniB + prob_interseccao,"P(B) + ",prob_interseccao,"$\\\\"),
+            paste(pergunta,"=",resp)
+                            )
+invisible(lapply(solucao,function(x)cat(x)))
+@ 
+ 
+\end{solution} 
+ 
+%% META-INFORMATION 
+%% \extype{num} 
+%% \exsolution{\Sexpr{resp}}  
+%% \extol{0.01}

@@ -1,0 +1,30 @@
+<<echo=FALSE, results=hide>>=  
+questions <- solutions <- NULL 
+questions[1] <- "Qual delineamento o pesquisador deverá utilizar para controlar as três fontes de variação em sua pesquisa?"
+solutions[1] <- "Delineamento graeco-latino."
+questions[2] <- "Escreva o modelo estatístico do delineamento escolhido." 
+solutions[2] <- "Aberta."
+questions[3] <- "Escreva o quadro da análise de variância."
+solutions[3] <- "Aberta."
+questions[4] <- "Apresente passo a passo como o pesquisador deverá atribuir os tratamentos nas unidades esperimentais. Finalize com um croqui do delineamento escolhido."
+solutions[4] <- "Aberta."
+@ 
+ 
+\begin{question} 
+Um pesquisador deseja avaliar quatro tipos de suplementos na produção de leite de vacas leiteiras. Tal pesquisador tem a sua disposição apenas quatro vacas que não produzem a mesma quantidade média de leite. Ainda, por uma questão de espaço, os animais deverão passar por quatro piquetes, tendo cada um destes piquetes um tipo diferente de capim. Também, quatro funcionários deverão ajudar na ordenha das vacas. A partir deste cenário, pergunta-se:
+
+<<echo=FALSE, results=hide, results=tex>>= 
+ answerlist(questions) 
+@  
+\end{question}  
+
+\begin{solution} 
+<<echo=FALSE, results=hide, results=tex>>=  
+ answerlist(format(solutions))  
+@  
+\end{solution}  
+  
+%% META-INFORMATION  
+%% \extype{cloze}  
+%% \exsolution{\Sexpr{paste(solutions, collapse = "|")}}   
+%% \exclozetype{string|string|string|string} 

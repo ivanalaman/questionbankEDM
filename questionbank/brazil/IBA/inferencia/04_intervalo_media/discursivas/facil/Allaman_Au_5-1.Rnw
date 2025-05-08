@@ -14,19 +14,26 @@ me <- round(abs(qt(alpha/2,n-1)) * erropad,2)
 @ 
  
 \begin{question} 
- Uma amostra aleatória simples de \Sexpr{n} pacientes foi extraída com intuito de determinar a dosagem média mínima em miligramas de um determinado anestésico em uma intervenção cirúrgica. Considerando uma confiança de \Sexpr{(1-alpha) * 100}\%, qual é o intervalo de confiança para a média?
+ Uma amostra aleatória simples de \Sexpr{n} pacientes foi extraída com intuito de determinar a dosagem média mínima em miligramas de um determinado anestésico em uma intervenção cirúrgica. Considerando uma confiança de \Sexpr{(1-alpha) * 100}\%, responda as seguintes alterantivas!
 
 <<>>= 
  amo
-@  
+@ 
+
+\begin{answerlist}
+  \item Qual é o erro padrão da média?
+  \item Qual é a margem de erro?
+  \item Qual é o limite inferior do intervalo de confiança?
+\end{answerlist}
 \end{question}  
  
 \begin{solution} 
+
 Primeiramente iremos retirar toda a informação da amostra.
 \begin{itemize} 
  \item Média = \Sexpr{xbarra}
-\item Desvio padrão = \Sexpr{desvio}
-\item Erro padrão da média = \Sexpr{erropad}
+ \item Desvio padrão = \Sexpr{desvio}
+ \item Erro padrão da média = \Sexpr{erropad}
 \end{itemize}
 
 Vamos calcular a margem de erro.
@@ -37,8 +44,18 @@ Vamos calcular a margem de erro.
 \end{eqnarray*}
 
 Portanto, o intervalo de confiança de \Sexpr{(1-alpha) * 100}\% é de (\Sexpr{xbarra - me}, \Sexpr{xbarra+me}).
+
+\begin{answerlist}
+  \item \Sexpr{round(erropad,3)}.
+  \item \Sexpr{round(me,3)}.
+  \item \Sexpr{round(xbarra - me,3)}.
+\end{answerlist}
+
  \end{solution}  
- 
-%% META-INFORMATION  
-%% \extype{string}  
-%% \exsolution{\Sexpr{paste('(',xbarra-me,',',xbarra+me,')',sep='')}}     
+
+%% META-INFORMATION
+%% \extype{cloze}
+%% \exsolution{\Sexpr{round(erropad,3)}|\Sexpr{round(me,3)}|\Sexpr{round(xbarra - me,3)}}   
+%% \exclozetype{num|num|num} 
+%% \exname{Distribuição amostral}  
+%% \extol{0.05}

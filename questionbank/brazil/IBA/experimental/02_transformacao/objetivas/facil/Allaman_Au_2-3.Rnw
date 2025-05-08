@@ -1,0 +1,103 @@
+<<echo=FALSE,results=hide>>=
+## Pacotes necessários
+if(!require(nortest)){
+  install.packages('nortest') 
+}
+if(!require(xtable)){
+  install.packages('xtable') 
+}
+if(!require(gexp)){
+  install.packages('gexp') 
+}
+
+library(nortest)
+library(xtable)
+library(gexp)
+
+## Programando os dados
+e_pois <- as.matrix(rpois(n = 12,
+   lam = 10))
+e_binom <- as.matrix(rbinom(n = 12, 
+                            size = 5, 
+                            prob = 0.1))
+e_norm <- as.matrix(rnorm(n = 12, 
+                          mean = 0, 
+                          sd = 1)) 
+erros <- list(e_pois,e_binom,e_norm)
+sorterros <- sample(1:3,size=1)
+
+choiceerros <- erros[[sorterros]]
+
+crd <- gexp(mu = 20,
+ err = choiceerros,
+ r = 3,
+ fl = list(racao = LETTERS[1:4]),
+ fe = list(f1 = c(1, 3, 1, 2)))
+
+dad <- crd$dfm
+mod <- aov(Y1 ~ racao,dad)
+
+normali <- shapiro.test(mod$res)$p.value
+variancias <- with(dad, tapply(Y1, list(racao),var))
+Fmax <- max(variancias)/min(variancias)
+homovar <- pf(Fmax,2,2,lower.tail=FALSE)
+
+alta <- altb <- altc <- altd <- FALSE
+if(normali > 0.01 & homovar > 0.01){
+  alta <- TRUE
+} else if(normali < 0.01 & homovar > 0.01){
+  altb <- TRUE
+} else if(normali > 0.01 & homovar < 0.01){
+  altc <- TRUE
+} else{
+  altd <- TRUE
+}
+
+## Programando as questões
+questions <- solutions <- NULL
+questions[1] <- "Os pressupostos foram todos satisfeitos."
+solutions[1] <- alta
+questions[2] <- "Houve desvio de normalidade mais não de  homocedasticidade."
+solutions[2] <- altb
+questions[3] <- "Houve desvio de homocedasticidade mais não de normalidade."
+solutions[3] <- altc
+questions[4] <- "Todos os pressupostos foram violados."
+solutions[4] <- altd
+questions[5] <- "Não é possível avaliar os pressupostos nas condições apresentadas."
+solutions[5] <- FALSE
+o <- sample(1:5)
+questions <- questions[o]
+solutions <- solutions[o]
+@ 
+
+\begin{question}
+Um experimento foi feito com o intuito de avaliar 4 tipos de ração no desempenho de ganho de peso de suínos. O delineamento utilizado foi o inteiramente casualizado. Os dados estão apresentados na tabela abaixo. Se considerarmos o teste de shapiro.wilk e o F máximo de Hartley e um nível de significância de 0,01 podemos afirmar que:
+
+<<echo=FALSE,results=tex>>=
+print(xtable(dad),
+      include.rownames = FALSE)    
+@
+
+\begin{answerlist}
+\item \Sexpr{questions[1]}
+\item \Sexpr{questions[2]}
+\item \Sexpr{questions[3]}
+\item \Sexpr{questions[4]}
+\item \Sexpr{questions[5]}
+\end{answerlist}
+\end{question}
+   
+\begin{solution}
+\begin{answerlist}
+\item \Sexpr{mchoice2text(solutions[1])}
+\item \Sexpr{mchoice2text(solutions[2])}
+\item \Sexpr{mchoice2text(solutions[3])}
+\item \Sexpr{mchoice2text(solutions[4])}
+\item \Sexpr{mchoice2text(solutions[5])}
+\end{answerlist}
+\end{solution}
+   
+
+%% META-INFORMATION
+%% \extype{schoice}
+%% \exsolution{\Sexpr{mchoice2string(solutions,single=TRUE)}}

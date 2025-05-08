@@ -1,0 +1,92 @@
+```{r echo=FALSE}
+## Pacotes necessários
+#---------------------
+
+## Programando os dados
+tinf <- round(seq(-4,0,l=30),
+              2)
+tsup <- round(seq(0.01,4,l=30),
+              2)
+              
+gliber <- trunc(sample(10:20,size=1))              
+
+question1a <- c(sample(tinf,size = 1),sample(tsup,size = 1))
+results1a <- pt(question1a[2],df=gliber) - pt(question1a[1],df=gliber)
+
+question1b <- sample(tinf[-30],size = 1)
+results1b <- 0.5 - pt(question1b,df=gliber)
+ 
+question1c <- sample(tsup[-1], size = 1)
+results1c <- pt(question1c,df=gliber) - 0.5
+ 
+question1d <- sample(tsup, size = 1)
+results1d <- 1 - pt(question1d,df=gliber)
+ 
+question1e <- sample(tinf, size = 1)
+results1e <- 1 - pt(question1e, df=gliber)
+
+question1f <- sample(tinf, size = 1)
+results1f <-  pt(question1f, df=gliber)
+
+question1g <- sample(tsup, size = 1)
+results1g <-  pt(question1g,df=gliber)
+ 
+## Programando as questões
+questions <- solutions <- NULL
+
+questions[1] <- paste("P(",question1a[1], '< t <', question1a[2] ,")")
+solutions[1] <- round(results1a,3)
+
+questions[2] <- paste("P(",question1b, '< t <', 0 ,")")
+solutions[2] <- round(results1b,3)
+
+questions[3] <- paste("P(",0, '< t <', question1c ,")")
+solutions[3] <- round(results1c,3)
+
+questions[4] <- paste("P(t >",question1d,")")
+solutions[4] <- round(results1d,3)
+
+questions[5] <- paste("P(t >",question1e,")")
+solutions[5] <- round(results1e,3)
+
+questions[6] <- paste("P(t <",question1f,")")
+solutions[6] <- round(results1f,3)
+
+questions[7] <- paste("P(t <",question1g,")")
+solutions[7] <- round(results1g,3)
+```
+
+Question
+========
+ Dado que $t$ é uma variável aleatória com distribuição $t$ de student com `r gliber` graus de liberdade, calcule as seguintes probabilidades:
+
+Answerlist
+----------
+* `r questions[1]`
+* `r questions[2]`
+* `r questions[3]`
+* `r questions[4]`
+* `r questions[5]`
+* `r questions[6]`
+* `r questions[7]`
+
+Solution
+========
+
+Answerlist
+----------
+* `r solutions[1]`
+* `r solutions[2]`
+* `r solutions[3]`
+* `r solutions[4]`
+* `r solutions[5]`
+* `r solutions[6]`
+* `r solutions[7]`
+
+
+Meta-information
+================
+extype: cloze
+exsolution: `r paste(solutions, collapse = "|")`
+exclozetype: num|num|num|num|num|num|num 
+extol: 0.01
